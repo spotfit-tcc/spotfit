@@ -3,12 +3,12 @@
 namespace App;
 
 class DbConnection {
-	private $user = "root";
-	private $password = "";
-	private $host = "localhost";
-	private $db_name = "spotfit";
-
 	public static function getDb() {
+		$user = "root";
+		$password = "";
+		$host = "localhost";
+		$db_name = "spotfit";
+
 		try {
 			return new \PDO(
 				"mysql:host=$host;dbname=$db_name;",
