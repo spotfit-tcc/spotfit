@@ -2,7 +2,7 @@
 
 namespace MF\Model;
 
-use App\Connection;
+use App\DbConnection;
 
 class Container {
 

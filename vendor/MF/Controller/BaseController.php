@@ -2,7 +2,7 @@
 
 namespace MF\Controller;
 
-abstract class Action {
+abstract class BaseController {
 
 	protected $view;
 
@@ -10,11 +10,11 @@ abstract class Action {
 		$this->view = new \stdClass();
 	}
 
-	protected function render($view, $layout) {
+	protected function render($view, $layout = "default") {
 		$this->view->page = $view;
 
-		if(file_exists("../App/Views/".$layout.".phtml")) {
-			require_once "../App/Views/".$layout.".phtml";
+		if(file_exists("../App/Views/layouts/".$layout.".phtml")) {
+			require_once "../App/Views/layouts/".$layout.".phtml";
 		} else {
 			$this->content();
 		}

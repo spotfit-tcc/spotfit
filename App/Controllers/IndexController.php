@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 //os recursos do miniframework
-use MF\Controller\Action;
+use App\Controllers\ApplicationController;
 use MF\Model\Container;
 
 
@@ -12,17 +12,12 @@ use App\Models\Produto;
 use App\Models\Info;
 
 
-class IndexController extends Action {
+class IndexController extends ApplicationController {
 
 	public function index() {
+		$this->view->test_sum = $this->sum_numbers(1,5);
 
-		$produto = Container::getModel('Produto');
-
-		$produtos = $produto->getProdutos();
-
-		@$this->view->dados = $produtos;
-
-		$this->render('index', 'layout1');
+		$this->render('index');
 	}
 
 	public function sobreNos() {
@@ -33,7 +28,7 @@ class IndexController extends Action {
 		
 		@$this->view->dados = $informacoes;
 
-		$this->render('sobreNos', 'layout1');
+		$this->render('sobreNos');
 	}
 
 }
