@@ -4,10 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Spotfit</title>
+
+	<link rel="stylesheet" href="/assets/stylesheets/application.css">
+	<?= $this->load_controller_css() ?>
+
+	<script src="/assets/javascripts/application.js" defer></script>
+	<?= $this->load_controller_js() ?>
 </head>
 <body>
 	menu...
 
 	<?= $this->content() ?>
+
+	<?= $this->resource_name() ?>
 </body>
 </html>
