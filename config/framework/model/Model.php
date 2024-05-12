@@ -1,6 +1,6 @@
 <?php
 
-namespace MF\Model;
+namespace Framework\model;
 
 use App\DbConnection;
 

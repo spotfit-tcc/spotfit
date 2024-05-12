@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers;
 
-use App\Controllers\ApplicationController;
+use App\controllers\ApplicationController;
 
 class ConsultingController extends ApplicationController{
     public function index(){

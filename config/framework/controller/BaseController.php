@@ -1,6 +1,6 @@
 <?php
 
-namespace MF\Controller;
+namespace Framework\controller;
 
 abstract class BaseController {
 
@@ -13,8 +13,8 @@ abstract class BaseController {
 	protected function render($view, $layout = "default") {
 		$this->view->page = $view;
 
-		if(file_exists("../App/Views/layouts/".$layout.".phtml")) {
-			require_once "../App/Views/layouts/".$layout.".phtml";
+		if(file_exists("../App/views/layouts/".$layout.".phtml")) {
+			require_once "../App/views/layouts/".$layout.".phtml";
 		} else {
 			$this->content();
 		}
@@ -23,11 +23,11 @@ abstract class BaseController {
 	protected function content() {
 		$classAtual = get_class($this);
 
-		$classAtual = str_replace('App\\Controllers\\', '', $classAtual);
+		$classAtual = str_replace('App\\controllers\\', '', $classAtual);
 
 		$classAtual = strtolower(str_replace('Controller', '', $classAtual));
 
-		require_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
+		require_once "../App/views/".$classAtual."/".$this->view->page.".phtml";
 	}
 }
 

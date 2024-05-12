@@ -1,6 +1,6 @@
 <?php
 
-namespace MF\Init;
+namespace Framework\initializer;
 
 abstract class Bootstrap {
 	private $routes;
@@ -23,7 +23,7 @@ abstract class Bootstrap {
 	protected function run($url) {
 		foreach ($this->getRoutes() as $key => $route) {
 			if($url == $route['route']) {
-				$class = "App\\Controllers\\".ucfirst($route['controller']);
+				$class = "App\\controllers\\".ucfirst($route['controller']);
 
 				$controller = new $class;
 				

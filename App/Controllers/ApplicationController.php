@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers;
 
 //os recursos do miniframework
-use MF\Controller\BaseController;
+use Framework\controller\BaseController;
 
 
 class ApplicationController extends BaseController {

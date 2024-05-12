@@ -2,7 +2,7 @@
 
 namespace App;
 
-use MF\Init\Bootstrap;
+use Framework\initializer\Bootstrap;
 
 class Route extends Bootstrap {
 
