@@ -32,6 +32,18 @@ class Route extends Bootstrap {
 			'action' => 'new'
 		);
 
+		$routes['/landing_page/index'] = array(
+			'route' => '/landing_page/index',
+			'controller' => 'LandingPageController',
+			'action' => 'index'
+		);
+
+		$routes['/landing_page'] = array(
+			'route' => '/landing_page',
+			'controller' => 'LandingPageController',
+			'action' => 'index'
+		);
+
 		$this->setRoutes($routes);
 	}
 
