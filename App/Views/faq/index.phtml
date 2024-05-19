@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
+  
+  <style>
+    .card-body {
+      display: none;
+    }
+
+    .fa-plus, .fa-minus {
+      right: 0.1rem;
+      color: orange;
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <div class="container mt-5">
+    <h3 class="text-center mb-4">Perguntas Frequentes</h3>
+
+    <!-- Pergunta 1 -->
+    <div class="card">
+      <div class="card-header" tabindex="0">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark">Como faço para começar?</strong>
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="card-body">
+        Para começar, você pode seguir os seguintes passos...
+      </div>
+    </div>
+
+    <!-- Pergunta 2 -->
+    <div class="card mt-3">
+      <div class="card-header" tabindex="0">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark">Qual é a política de reembolso?</strong>
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="card-body">
+        Nossa política de reembolso permite que você...
+      </div>
+    </div>
+
+    <!-- Pergunta 3 -->
+    <div class="card mt-3">
+      <div class="card-header" tabindex="0">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark">Como posso entrar em contato?</strong>
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="card-body">
+        Você pode entrar em contato conosco através do...
+      </div>
+    </div>
+
+    <form class="form-signin">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Envie sua dúvida</h1>
+      </div>
+
+      <div class="form-label-group">
+        <label for="inputText">Nome</label>
+        <input type="text" id="inputText" class="form-control" placeholder="Seu nome" required autofocus>
+      </div>
+
+      <div class="form-label-group">
+        <label for="inputEmail">E-mail</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Seu e-mail" required>
+      </div>
+
+      <div class="form-label-group">
+        <label for="inputSubject">Assunto</label>
+        <input type="password" id="inputSubject" class="form-control" placeholder="Sua dúvida" required>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+    </form>
+  </div>
+
+  <!-- jQuery e Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+   $(document).ready(function(){
+      $('.fa-plus').click(function(){
+        var $cardBody = $(this).closest('.card').find('.card-body');
+        $cardBody.toggle();
+        $(this).toggleClass('fa-plus fa-minus');
+      });
+    });
+ </script>
+</body>
+</html>

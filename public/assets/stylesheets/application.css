@@ -1,1 +1,17 @@
 /*Css padrão para toda a aplicação*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar .btn {
+    margin-right: 10px; 
+}
+
+.footer .footer-link{
+    color: #939393;
+    text-decoration: none;
+}
+
+.footer .footer-link:hover {
+    color: #fff; 
+}

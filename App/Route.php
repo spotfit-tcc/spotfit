@@ -49,6 +49,12 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['/faq'] = array(
+			'route' => '/faq',
+			'controller' => 'FaqController',
+			'action' => 'index'
+		);
+
 		$this->setRoutes($routes);
 	}
 
