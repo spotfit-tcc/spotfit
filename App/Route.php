@@ -43,6 +43,12 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['/sign_in'] = array(
+			'route' => '/sign_in',
+			'controller' => 'SignInController',
+			'action' => 'index'
+		);
+
 		$this->setRoutes($routes);
 	}
 
