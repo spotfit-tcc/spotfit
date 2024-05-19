@@ -7,13 +7,6 @@ use Framework\initializer\Bootstrap;
 class Route extends Bootstrap {
 
 	protected function initRoutes() {
-
-		$routes['/consulting/index'] = array(
-			'route' => '/consulting/index',
-			'controller' => 'ConsultingController',
-			'action' => 'index'
-		);
-
 		$routes['/consulting'] = array(
 			'route' => '/consulting',
 			'controller' => 'ConsultingController',
@@ -32,27 +25,9 @@ class Route extends Bootstrap {
 			'action' => 'new'
 		);
 
-		$routes['/landing_page/index'] = array(
-			'route' => '/landing_page/index',
-			'controller' => 'LandingPageController',
-			'action' => 'index'
-		);
-
 		$routes['/landing_page'] = array(
 			'route' => '/landing_page',
 			'controller' => 'LandingPageController',
-			'action' => 'index'
-		);
-
-		$routes['/landing_page'] = array(
-			'route' => '/landing_page',
-			'controller' => 'LandingPageController',
-			'action' => 'index'
-		);
-
-		$routes['/profile'] = array(
-			'route' => '/profile',
-			'controller' => 'ProfileController',
 			'action' => 'index'
 		);
 
