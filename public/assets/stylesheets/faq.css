@@ -1,0 +1,43 @@
+.card{
+    background-color: var(--secondary-bg-color);
+    color:white;
+}
+.card-body {
+    display: none;
+    font-size: small;
+}
+
+.fa-plus, .fa-minus {
+    right: 0.1rem;
+    color: var(--orange-color);
+}
+
+.container-fluid, .form-faq {
+    margin-top: 5%;
+}
+
+.form-control{
+    background-color: transparent;
+    color: var(--white-color);
+    font-size: small;
+}
+
+.form-control:focus {
+    background-color: var(--secondary-bg-color);
+    color: var(--white-color);
+    font-size: small;
+}
+
+.h3{
+    color: var(--orange-color);
+}
+
+.btn-block{
+    width: 100%;
+    margin-top: 5%;
+    font-size: medium;
+}
+
+.img-fluid{
+    height: 100%;
+}

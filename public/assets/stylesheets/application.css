@@ -1,9 +1,27 @@
 /*Css padrão para toda a aplicação*/
+:root {
+    --primary-bg-color: #080707; 
+    --secondary-bg-color: #0D0D0D; 
+    --orange-color: #FF6100; 
+    --white-color:#FFF;
+}
+
 *{
     font-family: 'Poppins', sans-serif;
 }
 
-.navbar .btn {
+.body {
+    background-color: var(--primary-bg-color); 
+    color: var(--white-color);
+    padding-top: 56px;
+}
+
+.navbar {
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 1px 8px rgb(0, 0, 0);
+}
+
+.navbar .btn-outline-light {
     margin-right: 10px; 
 }
 
@@ -13,5 +31,5 @@
 }
 
 .footer .footer-link:hover {
-    color: #fff; 
+    color: var(--white-color); 
 }
