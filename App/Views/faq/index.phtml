@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/assets/stylesheets/faq.css">
   
   <script src="/assets/javascripts/faq.js" defer></script>
+  <script src="/assets/javascripts/formValidation.js" defer></script>
   
 </head>
 
@@ -75,38 +76,35 @@
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <form class="col-md-6 form-faq">
-          <div class="mb-4">
-            <h1 class="h3 mb-3 font-weight">Envie sua dúvida</h1>
-          </div>
-
-          <div class="form-label-group">
-            <label for="inputText">Nome</label>
-            <input type="text" id="inputText" class="form-control" required autofocus>
-          </div>
-
-          <div class="form-label-group">
-            <label for="inputEmail">E-mail</label>
-            <input type="email" id="inputEmail" class="form-control" required>
-          </div>
-
-          <div class="form-label-group">
-            <label for="inputSubject">Assunto</label>
-            <textarea id="inputSubject" class="form-control" required></textarea>
-          </div>
-
-          <button class="btn btn-primary btn-block" type="submit">Enviar</button>
-
-        </form>
-        <div class="col d-none d-md-block">
-          <img src="/assets/img/muscle-vegetables.png" alt="Imagem" class="img-fluid" >
+    <!--form faq-->
+    <div class="row">
+      <form class="col-md-6 needs-validation form-faq" novalidate>
+        <div class="mb-4">
+          <h1 class="h3 mb-3 font-weight">Envie sua dúvida</h1>
         </div>
+
+        <div class="form-label-group mb-3">
+          <label for="inputText">Nome</label>
+          <input type="text" id="inputText" class="form-control " required autofocus>
+        </div>
+ 
+        <div class="form-label-group mb-3">
+          <label for="inputEmail">E-mail</label>
+          <input type="email" id="inputEmail" class="form-control " required>
+        </div>
+ 
+        <div class="form-label-group mb-3">
+          <label for="inputSubject">Assunto</label>
+          <textarea id="inputSubject" class="form-control" required></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+
+      </form>
+      <div class="col d-none d-md-block">
+        <img src="/assets/img/muscle-vegetables.png" alt="Imagem" class="img-fluid" >
       </div>
     </div>
-
-
   
 </body>
 </html>
