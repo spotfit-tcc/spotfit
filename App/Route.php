@@ -30,6 +30,11 @@ class Route extends Bootstrap {
 			'controller' => 'LandingPageController',
 			'action' => 'index'
 		);
+		$routes['/'] = array(
+			'route' => '/',
+			'controller' => 'LandingPageController',
+			'action' => 'index'
+		);
 
 		$routes['/profile'] = array(
 			'route' => '/profile',
