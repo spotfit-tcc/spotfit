@@ -14,7 +14,7 @@ class ApplicationController extends BaseController {
 
     
 	public function resource_name(){
-		$class_name = str_replace("App\Controllers\\", '', get_class($this));
+		$class_name = str_replace("App\controllers\\", '', get_class($this));
 
 		return strtolower(str_replace("Controller", '', $class_name));
 	}
