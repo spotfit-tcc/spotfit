@@ -2,17 +2,25 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 50px;
-
+    top: 30px;
     font-weight: 800;
     font-size: 100px;
     color: #cccccc3d;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.cards{
+    margin-top: 5%;
 }
 
 .card{
     background-color: var(--secondary-bg-color);
     color:white;
 }
+
 .card-body {
     display: none;
     font-size: small;

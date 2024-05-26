@@ -1,99 +1,87 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container mt-5">
+  <span class="over-flow-atras">CADASTRO</span>
+
+  <h1 class="mb-4"><strong>Cadastro</strong></h1>
   
-   <!-- Página ainda em desenvolvimento -->
+  <div class="row">
+    <form class="col-md-6 needs-validation form-signUp" novalidate>
+      <div class="form-row">
 
-  <script src="/assets/javascripts/formValidation.js" defer></script>
-  
-</head>
+        <div class="form-group mb-3">
+          <label for="name">Nome Completo</label>
+          <input type="text" class="form-control" id="name" autocomplete="name" required>
+        </div>
 
-<body>
-  <div class="container mt-5">
+        <div class="form-group mb-3">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" autocomplete="email"  required>
+        </div>
 
-    <h3 class="mb-4">Cadastro</h3>
+        <div class="row">
+          <div class="form-group col mb-3">
+            <label for="password">Senha</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="password" required>
+              <div class="invalid-feedback">
+                Deve que ter ....
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col mb-3">
+            <label for="passwordConfirm">Confirmar senha</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="passwordConfirm" required>
+              <div class="invalid-feedback">
+                Senha diferentes! 
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="cpf_or_cnpj">CPF ou CNPJ</label>
+          <input type="number" class="form-control" id="cpf_or_cnpj" autocomplete="cpf_or_cnpj" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="phone">Telefone ou Celular</label>
+          <input type="number" class="form-control" id="phone" autocomplete="phone" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="profile_photo">Foto de Perfil</label>
+          <input type="file" class="form-control" id="profile_photo" autocomplete="profile_photo" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="professional">Profissional</label>
+          <select class="form-control" id="professional" required>
+            <option selected>Sim, sou profissional</option>
+            <option>Não, busco um profissional</option>
+          </select>
+        </div>
+      
+        <div class="form-group mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">Concordo com os termos e condições</label>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">Enviar</button>
     
-    <div class="row">
-      <form class="col-md-6 needs-validation form-signUp" novalidate>
-        <div class="form-row">
 
-          <div class="form-group mb-3">
-            <label for="">Nome Completo</label>
-            <input type="text" class="form-control" id="" required>
-          </div>
+    </form>
 
-          <div class="form-group mb-3">
-            <label for="">E-mail</label>
-            <input type="email" class="form-control" id=""  required>
-          </div>
-
-          <div class="row">
-            <div class="form-group col mb-3">
-              <label for="">Senha</label>
-              <div class="input-group">
-                <input type="password" class="form-control" id="" required>
-                <div class="invalid-feedback">
-                  Deve que ter ....
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group col mb-3">
-              <label for="">Confirmar senha</label>
-              <div class="input-group">
-                <input type="passwordConfirm" class="form-control" id="" required>
-                <div class="invalid-feedback">
-                  Senha diferentes! 
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="">CPF ou CNPJ</label>
-            <input type="number" class="form-control" id=""  required>
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="">Telefone ou Celular</label>
-            <input type="number" class="form-control" id=""  required>
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="">Foto de Perfil</label>
-            <input type="file" class="form-control" id="" required>
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="inputEstado">Profissional</label>
-            <select id="inputEstado" class="form-control" required>
-              <option selected>Sim, sou profissional</option>
-              <option>Não, busco um profissional</option>
-            </select>
-          </div>
-        
-          <div class="form-group mb-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-              <label class="form-check-label" for="invalidCheck">Concordo com os termos e condições</label>
-            </div>
-          </div>
-
-          <button class="btn btn-primary btn-block" type="submit">Enviar</button>
-      
-
-      </form>
-
-      
+    
+  </div>
+    <div class="col d-none d-md-block">
+      <img src="/assets/img/img_SignUp.png" alt="Imagem" class="img-fluid" width="100%">
     </div>
-      <div class="col d-none d-md-block">
-        <img src="/assets/img/imgSignUp.png" alt="Imagem" class="img-fluid" >
-      </div>
-    </div>
-
   </div>
 
-</body>
-</html>
+</div>
+
+<script src="/assets/javascripts/formValidation.js" defer></script>
+

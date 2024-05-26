@@ -33,3 +33,9 @@
 .footer .footer-link:hover {
     color: var(--white-color); 
 }
+
+.btn-block{
+    width: 100%;
+    margin-top: 5%;
+    font-size: medium;
+}

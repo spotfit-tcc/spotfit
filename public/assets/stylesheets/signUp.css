@@ -1,0 +1,21 @@
+.over-flow-atras{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70px;
+    font-weight: 800;
+    font-size: 65px;
+    color: #cccccc3d;
+}
+
+.form-control{
+    background-color: transparent;
+    color: var(--white-color);
+    font-size: small;
+}
+
+.form-control:focus {
+    background-color: var(--secondary-bg-color);
+    color: var(--white-color);
+    font-size: small;
+}
