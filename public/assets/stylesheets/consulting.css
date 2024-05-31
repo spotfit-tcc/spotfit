@@ -1,0 +1,21 @@
+.step-circle{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #3872FE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-info{
+    text-align: end;
+}
+
+.step-circle i{
+    font-size: 25px;
+}
+
+form textarea{
+    height: 100px;
+}
