@@ -1,0 +1,554 @@
+/* Button Styles */
+
+.spot-primary-btn {
+    background-color: var(--blue-color);
+    color: #fff;
+    padding: 3px 28px;
+    font-size: 18px;
+    line-height: 40px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+}
+
+.spot-secondary-btn{
+    background-color: transparent;
+    color: #fff;
+    padding: 3px 28px;
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: 400;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+
+}
+
+.spot-btn-dark {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  background-color: #1E1E1E;
+  color: #fff;
+  border: none;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-dark.onhover-broom {
+  background: linear-gradient(30deg, #1E1E1E, black) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-dark.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: black;
+}
+.spot-btn-dark.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-dark.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-blue {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: all ease 0.4s;
+  background-color: var(--blue-color);
+  color: #fff;
+  border: none;
+  content: "passou pelo create-color-class";
+}
+
+.spot-btn-blue.onhover-broom {
+  background: linear-gradient(30deg, var(--blue-color), var(--blue-color-broom-effect-adjustment)) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+
+.spot-btn-blue.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: var(--blue-color-broom-effect-adjustment);
+}
+
+.spot-btn-blue.onhover-broom:hover::before {
+  width: 140%;
+}
+
+.spot-btn-blue.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-green {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  background-color: #007089;
+  color: #fff;
+  border: none;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-green.onhover-broom {
+  background: linear-gradient(30deg, #007089, #043936) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-green.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #043936;
+}
+.spot-btn-green.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-green.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-darkgreen {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  background-color: #007089;
+  color: #fff;
+  border: none;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-darkgreen.onhover-broom {
+  background: linear-gradient(30deg, #007089, #043936) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-darkgreen.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #043936;
+}
+.spot-btn-darkgreen.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-darkgreen.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-purple {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  background-color: #6B0DAD;
+  color: #fff;
+  border: none;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-purple.onhover-broom {
+  background: linear-gradient(30deg, #6B0DAD, #2b0e5f) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-purple.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #2b0e5f;
+}
+.spot-btn-purple.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-purple.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-pure-red {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  background-color: #FF0000;
+  color: #fff;
+  border: none;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-pure-red.onhover-broom {
+  background: linear-gradient(30deg, #FF0000, #a80b2f) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-pure-red.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #a80b2f;
+}
+.spot-btn-pure-red.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-pure-red.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-white {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  background-color: white;
+  color: #004A61;
+  border: none;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-white.onhover-broom {
+  background: linear-gradient(30deg, white, #d9d9d9) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-white.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #d9d9d9;
+}
+.spot-btn-white.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-white.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-dark-outlined {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  color: #1E1E1E;
+  border-color: #1E1E1E;
+  background-color: #fff;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-dark-outlined.onhover-broom {
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-dark-outlined.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: black;
+}
+.spot-btn-dark-outlined.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-dark-outlined.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-green-outlined {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  color: #007089;
+  border-color: #007089;
+  background-color: #fff;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-green-outlined.onhover-broom {
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-green-outlined.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #043936;
+}
+.spot-btn-green-outlined.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-green-outlined.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-darkgreen-outlined {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  color: #007089;
+  border-color: #007089;
+  background-color: #fff;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-darkgreen-outlined.onhover-broom {
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-darkgreen-outlined.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #043936;
+}
+.spot-btn-darkgreen-outlined.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-darkgreen-outlined.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-purple-outlined {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  color: #6B0DAD;
+  border-color: #6B0DAD;
+  background-color: transparent;
+}
+.spot-btn-purple-outlined.onhover-broom {
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-purple-outlined.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #2b0e5f;
+}
+.spot-btn-purple-outlined.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-purple-outlined.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-pure-red-outlined {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  color: #FF0000;
+  border-color: #FF0000;
+  background-color: #fff;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-pure-red-outlined.onhover-broom {
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-pure-red-outlined.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #a80b2f;
+}
+.spot-btn-pure-red-outlined.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-pure-red-outlined.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-white-outlined {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #004A61;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.4s;
+  color: white;
+  border-color: white;
+  background-color: #004A61;
+  content: "passou pelo create-clor-calss";
+}
+.spot-btn-white-outlined.onhover-broom {
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+.spot-btn-white-outlined.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: #d9d9d9;
+}
+.spot-btn-white-outlined.onhover-broom:hover::before {
+  width: 140%;
+}
+.spot-btn-white-outlined.onhover-broom * {
+  position: relative;
+}
