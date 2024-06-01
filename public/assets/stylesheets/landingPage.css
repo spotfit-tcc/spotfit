@@ -1,0 +1,71 @@
+.lp-landing-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+.lp-content-row {
+    z-index: 2;
+}
+
+.lp-landing-text--title {
+    font-size: 64px;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-family: "Urbanist", sans-serif;
+    margin: 0;
+
+}
+.lp-landing-text--title > span {
+    color: var(--orange-color);
+    font-weight: 600;
+}
+
+.lp-landing-image-area {
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.lp-water-mark-floatting-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    z-index: -1;
+}
+
+.lp-watter-mark--fitness {
+    color: rgba(255, 255, 255, 0.11);
+    font-size: 142px;
+    font-weight: bold;
+    position: absolute;
+    transform-origin: center;
+    top: 23%;
+    left : 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+}
+.lp-landing-text--content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.lp-landing-text--message {
+    color: #ffffff7a;
+    font-size: 18px;
+    margin: 0;
+}
+.lp-landing-text-area {
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lp-landing-text--action-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
