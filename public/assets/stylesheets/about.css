@@ -1,0 +1,32 @@
+.over-flow-atras{
+    position: absolute;
+    bottom:-40px;
+    font-weight: 800;
+    font-size: 70px;
+    color: var(--gray-color);
+}
+
+.mission{
+    margin-bottom: 6%;
+}
+.bg-card{
+    background-color: var(--secondary-bg-color);
+}
+
+.about-card{
+    background-color: var(--white-color);
+}
+
+.card{
+    border: none;
+}
+
+.card-img-top{
+    width: 100px;
+    height: 100px;
+    object-fit: cover; 
+}
+
+.card-body, .card-footer{
+    background-color: var(--secondary-bg-color);
+}

@@ -1,9 +1,9 @@
 .over-flow-atras{
     position: absolute;
-    top: 70px;
+    top: 80px;
     font-weight: 800;
     font-size: 65px;
-    color: #cccccc3d;
+    color: var(--gray-color);
 }
 
 .form-control{
@@ -18,8 +18,25 @@
     font-size: small;
 }
 
+.forgotPassword{
+    text-decoration: none;
+    color: var(--white-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
 .btn-block{
     width: 100%;
     margin-top: 5%;
     font-size: medium;
+}
+
+.link{
+    display: flex;
+    justify-content: center; 
+}
+
+.linkSignUp{
+    text-decoration: none;
+    color: var(--orange-color);
 }

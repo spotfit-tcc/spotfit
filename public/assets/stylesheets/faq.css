@@ -5,7 +5,7 @@
     top: 30px;
     font-weight: 800;
     font-size: 100px;
-    color: #cccccc3d;
+    color: var(--gray-color);
 }
 
 .title{
@@ -16,9 +16,13 @@
     margin-top: 5%;
 }
 
+.card-header{
+    background-color: var(--secondary-bg-color);
+}
+
 .card{
     background-color: var(--secondary-bg-color);
-    color:white;
+    border: var(--secondary-bg-color);
 }
 
 .card-body {

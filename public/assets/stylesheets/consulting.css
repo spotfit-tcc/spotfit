@@ -2,7 +2,7 @@
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    background-color: #3872FE;
+    background-color: var(--blue-color);
     display: flex;
     justify-content: center;
     align-items: center;
