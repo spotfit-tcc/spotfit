@@ -82,12 +82,7 @@
         </div>
 
         <div class="col-7 ms-5">
-            <div class="text-center">
-                <h2 class="fs-3">Informações básicas</h2>
-                <small class="text-subtitle">Informações de identificação e contato com a consultoria </small>
-            </div>
-
-            <?php require "partials/form_step_1.phtml"?>
+            <?php require 'partials/form_step_' . $_GET['step'] . '.phtml' ?>
         </div>
     </div>
 </div>

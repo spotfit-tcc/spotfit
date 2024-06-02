@@ -1,0 +1,61 @@
+<div class="text-center">
+    <h2 class="fs-3">Imagens e categoria</h2>
+    <p class="text-light">Mostre a todos a logo da sua consultoria e indentifique ela por categorias para facilitar nas buscas </p>
+</div>
+
+<form action="#" class="mt-3">
+    <div class="mb-4">
+        <h5>Imagens</h5>
+        <div class="form-text text-subtitle">
+            <p>Dica: Deixe a logo da sua consultoria como primeira imagem. Nas demais você pode colocar fotos do time ou resultados de alunos</p>
+            <p>Máximo de 5 imagens</p>
+        </div>
+
+        <div class="images">
+            <input type="file" name="consulting_images" id="consulting_images" class="consulting_images" multiple>
+            <label for="consulting_images" class="btn btn-primary"><i class="fas fa-plus"></i> Escolher imagens</label>
+            <button type="button" class="btn btn-danger" id="clean_images_btn"><i class="fas fa-trash"></i> Limpar imagens</button>
+
+            <div id="images_preview"></div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <h5>Categorias</h5>
+        <div class="form-text text-subtitle">
+            Dica: Escolha as categorias que definam seu serviço em específico, de acordo com objetivos e público alvo
+        </div>
+
+        <div class="categories">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="categories_0" name="categories[0]">
+                <label class="form-check-label" for="categories_0">Emagrecimento</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="categories_1" name="categories[1]">
+                <label class="form-check-label" for="categories_1">Hipertrofia</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="categories_2" name="categories[2]">
+                <label class="form-check-label" for="categories_2">Trinamento de atletas</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="categories_3" name="categories[3]">
+                <label class="form-check-label" for="categories_3">Saúde</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="categories_4" name="categories[4]">
+                <label class="form-check-label" for="categories_4">Pressão alta</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form_actions mt-3">
+        <button type="submit" class="btn btn-primary">Salvar e continuar</button>
+        <button type="submit" class="btn btn-orange">Finalizar depois...</button>
+    </div>
+</form>
