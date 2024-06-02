@@ -77,6 +77,12 @@ class Route extends Bootstrap {
 			'controller' => 'ForgotPasswordController',
 			'action' => 'new'
 		);
+
+		$routes['/edit'] = array(
+			'route' => '/edit',
+			'controller' => 'EditController',
+			'action' => 'index'
+		);
 		
 
 		$this->setRoutes($routes);
