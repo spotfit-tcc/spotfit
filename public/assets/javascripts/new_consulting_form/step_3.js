@@ -5,9 +5,9 @@ document.getElementById('add_professional').addEventListener('click', e => {
     const container = document.getElementById('professionals')
 
     container.innerHTML += `
-        <fieldset class="new_professional mb-5" id="professional_${next_professional_idx}">
+        <fieldset class="custom_fieldset new_professional mb-5" id="professional_${next_professional_idx}">
             <legend>Profissional ${next_professional_idx + 1}</legend>
-            <i class="fas fa-trash delete_professional" onclick="remove_professional('${next_professional_idx}')"></i>
+            <i class="fas fa-trash delete_fieldset" onclick="remove_professional('${next_professional_idx}')"></i>
 
             <div class="consulting_professional">
                 <h6>Informações do profissional</h6>

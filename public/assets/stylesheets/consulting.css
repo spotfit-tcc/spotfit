@@ -61,7 +61,7 @@ form textarea{
     display: none;
 }
 
-.new_professional{
+.custom_fieldset{
     border: 1px solid var(--blue-color);
     border-radius: 7px;
     padding: 10px;
@@ -69,7 +69,7 @@ form textarea{
     padding-top: 20px;
 }
 
-.new_professional legend {
+.custom_fieldset legend {
     float: left;
     font-size: 14px;
     color: var(--blue-color);
@@ -87,7 +87,7 @@ form textarea{
     justify-content: center;
 }
 
-.delete_professional{
+.delete_fieldset{
     float: left;
     font-size: 14px;
     color: #dc3545;
