@@ -14,6 +14,7 @@ class ConsultingController extends ApplicationController{
     }
 
     public function new(){
+        $this->view->step = (int)$_GET['step'];
         $this->render('new');
     }
 }

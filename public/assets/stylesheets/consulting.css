@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+.step-circle.concluded{
+    background-color: var(--orange-color);
+}
+
 .step-info{
     text-align: end;
 }
