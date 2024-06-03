@@ -1,0 +1,68 @@
+<div class="text-center">
+    <h2 class="fs-3">Planos e preços</h2>
+    <p class="text-light">Planos, benefícios incluídos e mensalidades do respectivos planos.</p>
+</div>
+
+<form action="#" class="mt-3">
+    <div id="plans">
+        <fieldset class="custom_fieldset new_plan mb-5" id="plan_0">
+            <legend>Plano 1</legend>
+            <i class="fas fa-trash delete_fieldset" onclick="remove_plan('0')"></i>
+    
+            <div class="plan">
+                <div class="mb-4">
+                    <label for="plans_0_plan" class="form-label">Nome do plano *</label>
+                    <input type="text" class="form-control" id="plans_0_plan" name="plans[0][plan]">
+                </div>
+    
+                <div class="mb-4">
+                    <label for="plans_0_price" class="form-label">Preço *</label>
+                    <textarea class="form-control" id="plans_0_prive" name="plans[0][price]"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="plans_0_period" class="form-label">Duração *</label>
+                    <input type="text" class="form-control" id="plans_0_period" name="plans[0][period]">
+                </div>
+
+                <div class="mb-4">
+                    <label for="plans_0_desc" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="plans_0_desc" name="plans[0][desc]"></textarea>
+                </div>
+            </div>
+
+            
+            <div>
+                <h6>Escolha os benefícios incluídos nesse plano</h6>
+
+                <div class="plan_benefits">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="plans_0_benefits_1" name="plans[0][benefits][]" value="1">
+                        <label class="form-check-label" for="plans_0_benefits_1">Treino periodizado</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="plans_0_benefits_2" name="plans[0][benefits][]" value="2">
+                        <label class="form-check-label" for="plans_0_benefits_2">Dieta</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="plans_0_benefits_3" name="plans[0][benefits][]" value="3">
+                        <label class="form-check-label" for="plans_0_benefits_3">Prescrição de alongamentos</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <button type="button" class="btn btn-success" id="add_plan">
+        <i class="fas fa-plus"></i> Adicionar Plano
+    </button>
+
+    <div class="form_actions mt-3">
+        <button type="submit" class="btn btn-primary">Salvar e continuar</button>
+        <button type="submit" class="btn btn-orange">Finalizar depois...</button>
+    </div>
+</form>
+
+<script src="/assets/javascripts/new_consulting_form/step_5.js"></script>

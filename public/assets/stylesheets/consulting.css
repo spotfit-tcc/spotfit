@@ -43,7 +43,7 @@ form textarea{
     transition: .2s;
 }
 
-#images_preview, .categories{
+#images_preview, .categories, .plan_benefits{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
