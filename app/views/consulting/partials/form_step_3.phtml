@@ -3,7 +3,9 @@
     <p class="text-light">Registre os profissionais que trabalham com você </p>
 </div>
 
-<form action="#" class="mt-3">
+<form action="/consulting/create" method="post" class="mt-3">
+    <input type="hidden" name="form_step" value="3">
+
     <div id="professionals">
         <fieldset class="custom_fieldset new_professional mb-5" id="professional_0">
             <legend>Profissional 1</legend>
@@ -28,7 +30,7 @@
                 </div>
     
                 <div class="mb-4">
-                    <label for="professional_form_0_consulting_professional_email" class="form-label">Telefone/celular</label>
+                    <label for="professional_form_0_consulting_professional_email" class="form-label">Email de contato</label>
                     <input type="email" class="form-control" id="professional_form_0_consulting_professional_email" name="professional_form[0][consulting_professional][email]">
                 </div>
             </div>
@@ -78,7 +80,7 @@
 
     <div class="form_actions mt-3">
         <button type="submit" class="btn btn-primary">Salvar e continuar</button>
-        <button type="submit" class="btn btn-orange">Finalizar depois...</button>
+        <a href="/consulting" class="btn btn-orange">Finalizar depois...</a>
     </div>
 </form>
 

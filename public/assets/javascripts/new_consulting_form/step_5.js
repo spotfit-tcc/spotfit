@@ -1,10 +1,22 @@
+document.querySelectorAll('.price-input').forEach(input => {
+    let cleave = new Cleave(input, {
+        numeral: true,
+        numeralDecimalMark: ',',
+        delimiter: '.',
+        numeralDecimalScale: 2,
+        numeralIntegerScale: 5,  // Ajuste conforme necessário para permitir números grandes
+        rawValueTrimPrefix: true
+    });
+})
+
 let next_plan_idx = 1
 
 document.getElementById('add_plan').addEventListener('click', () => {
     const container = document.getElementById('plans')
 
-    container.innerHTML += `
-        <fieldset class="custom_fieldset new_plan mb-5" id="plan_${next_plan_idx}">
+    container.insertAdjacentHTML(
+        'beforeend',
+        `<fieldset class="custom_fieldset new_plan mb-5" id="plan_${next_plan_idx}">
             <legend>Plano ${next_plan_idx + 1}</legend>
             <i class="fas fa-trash delete_fieldset" onclick="remove_plan('${next_plan_idx}')"></i>
 
@@ -16,12 +28,18 @@ document.getElementById('add_plan').addEventListener('click', () => {
 
                 <div class="mb-4">
                     <label for="plans_${next_plan_idx}_price" class="form-label">Preço *</label>
-                    <textarea class="form-control" id="plans_${next_plan_idx}_prive" name="plans[${next_plan_idx}][price]"></textarea>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input type="text" class="form-control price-input" id="plans_${next_plan_idx}_price" name="plans[${next_plan_idx}][price]"></input>
+                    </div>
                 </div>
 
                 <div class="mb-4">
-                    <label for="plans_${next_plan_idx}_period" class="form-label">Duração *</label>
-                    <input type="text" class="form-control" id="plans_${next_plan_idx}_period" name="plans[${next_plan_idx}][period]">
+                    <label for="plans_${next_plan_idx}_period" class="form-label">Duração (meses) *</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="plans_${next_plan_idx}_period" name="plans[${next_plan_idx}][period]">
+                        <span class="input-group-text">meses</span>
+                    </div>
                 </div>
 
                 <div class="mb-4">
@@ -51,8 +69,17 @@ document.getElementById('add_plan').addEventListener('click', () => {
                     </div>
                 </div>
             </div>
-        </fieldset>
-    `
+        </fieldset>`
+    )
+
+    let cleave = new Cleave(`#plans_${next_plan_idx}_price`, {
+        numeral: true,
+        numeralDecimalMark: ',',
+        delimiter: '.',
+        numeralDecimalScale: 2,
+        numeralIntegerScale: 5,  // Ajuste conforme necessário para permitir números grandes
+        rawValueTrimPrefix: true
+    });
 
     next_plan_idx++
 })

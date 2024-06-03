@@ -25,6 +25,12 @@ class Route extends Bootstrap {
 			'action' => 'new'
 		);
 
+		$routes['/consulting/create'] = array(
+			'route' => '/consulting/create',
+			'controller' => 'ConsultingController',
+			'action' => 'create'
+		);
+
 		$routes['/landing_page'] = array(
 			'route' => '/landing_page',
 			'controller' => 'LandingPageController',

@@ -3,8 +3,9 @@ let next_benefit_idx = 1
 document.getElementById('add_benefit').addEventListener('click', () => {
     const container = document.getElementById('benefits')
 
-    container.innerHTML += `
-        <fieldset class="custom_fieldset new_benefit mb-5" id="benefit_${next_benefit_idx}">
+    container.insertAdjacentHTML(
+        'beforeend',
+        `<fieldset class="custom_fieldset new_benefit mb-5" id="benefit_${next_benefit_idx}">
             <legend>Benefício ${next_benefit_idx + 1}</legend>
             <i class="fas fa-trash delete_fieldset" onclick="remove_benefit('${next_benefit_idx}')"></i>
 
@@ -24,8 +25,8 @@ document.getElementById('add_benefit').addEventListener('click', () => {
                     <input type="file" class="form-control" id="benefits_${next_benefit_idx}_icon" name="benefits[${next_benefit_idx}][icon]">
                 </div>
             </div>
-        </fieldset>
-    `
+        </fieldset>`
+    )
 
     next_benefit_idx++
 })

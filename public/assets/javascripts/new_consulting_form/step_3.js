@@ -4,8 +4,9 @@ let next_professional_idx = 1
 document.getElementById('add_professional').addEventListener('click', e => {
     const container = document.getElementById('professionals')
 
-    container.innerHTML += `
-        <fieldset class="custom_fieldset new_professional mb-5" id="professional_${next_professional_idx}">
+    container.insertAdjacentHTML(
+        'beforeend',
+        `<fieldset class="custom_fieldset new_professional mb-5" id="professional_${next_professional_idx}">
             <legend>Profissional ${next_professional_idx + 1}</legend>
             <i class="fas fa-trash delete_fieldset" onclick="remove_professional('${next_professional_idx}')"></i>
 
@@ -28,7 +29,7 @@ document.getElementById('add_professional').addEventListener('click', e => {
                 </div>
 
                 <div class="mb-4">
-                    <label for="professional_form_${next_professional_idx}_consulting_professional_email" class="form-label">Telefone/celular</label>
+                    <label for="professional_form_${next_professional_idx}_consulting_professional_email" class="form-label">Email de contato</label>
                     <input type="email" class="form-control" id="professional_form_${next_professional_idx}_consulting_professional_email" name="professional_form[${next_professional_idx}][consulting_professional][email]">
                 </div>
             </div>
@@ -69,8 +70,8 @@ document.getElementById('add_professional').addEventListener('click', e => {
             <button type="button" class="btn btn-success" id="add_professional_${next_professional_idx}_register" onclick="add_professional_register('${next_professional_idx}')">
                 <i class="fas fa-plus"></i> Adicionar Registro
             </button>
-        </fieldset>
-    `
+        </fieldset>`
+    )
 
     next_professional_idx++
 })
@@ -78,8 +79,9 @@ document.getElementById('add_professional').addEventListener('click', e => {
 function add_professional_register(professional_idx) {
     const container = document.getElementById(`professional_registers_${professional_idx}`)
     
-    container.innerHTML += `
-        <div class="row mb-4 professional_register" id="professional_${professional_idx}_register_${next_register_idx}">
+    container.insertAdjacentHTML(
+        'beforeend',
+        `<div class="row mb-4 professional_register" id="professional_${professional_idx}_register_${next_register_idx}">
             <div class="col-md-3 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" class="form-label">Profissão *</label>
                 <select class="form-select" id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][profession]">
@@ -107,8 +109,8 @@ function add_professional_register(professional_idx) {
             <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
                 <button type="button" class="btn btn-danger remove_register" onclick="remove_register('${professional_idx}', '${next_register_idx}')"><i class="fas fa-trash"></i></button>
             </div>
-        </div>
-    `
+        </div>`
+    )
 
     next_register_idx++
 }
