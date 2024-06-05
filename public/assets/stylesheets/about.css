@@ -1,24 +1,28 @@
 .over-flow-atras{
     position: absolute;
-    bottom:-40px;
     font-weight: 800;
-    font-size: 70px;
+    
+    transform: translateY(-50%); 
+    font-size:70px; 
     color: var(--gray-color);
 }
 
 .mission{
     margin-bottom: 6%;
 }
+
 .bg-card{
     background-color: var(--secondary-bg-color);
 }
 
 .about-card{
     background-color: var(--white-color);
+    
 }
 
 .card{
     border: none;
+    border-radius: 10px;
 }
 
 .card-img-top{
@@ -29,4 +33,9 @@
 
 .card-body, .card-footer{
     background-color: var(--secondary-bg-color);
+    
+}
+
+.text-warning{
+    color: var(--orange-color) !important;
 }
