@@ -27,7 +27,7 @@
 .body {
     background-color: var(--primary-bg-color); 
     color: var(--white-color);
-    padding-top: 56px;
+    padding-top: 90px;
 }
 
 .navbar {
@@ -56,4 +56,10 @@
 
 .text-subtitle{
     color: #707070;
+}
+
+@media (min-width: 992px) { 
+    body {
+        padding-top: 56px;
+    }
 }
