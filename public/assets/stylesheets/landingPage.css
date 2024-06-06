@@ -292,6 +292,12 @@ ul.lp-welcome-content--list {
     object-fit: cover;
 }
 
+/* Banner Section */
+
+#lpYouAreAProfessionalBanner {
+    margin-top: 50px;
+}
+
 @media (min-width: 576px) { 
     .lp-model-image-cover {
         display: none;

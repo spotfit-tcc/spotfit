@@ -1,0 +1,71 @@
+.spot-banner-container {
+    background-color: var(--secondary-bg-color);
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 16px;
+}
+
+.spot-banner-text--title {
+    font-size: 20px;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    color: #fff;
+}
+
+.spot-banner-text--paragraph {
+    font-size: 13px;
+    font-family: 'Popins', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.spot-banner-action-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.spot-banner-action-container button {
+    width: 100% !important;
+    /* max-width: 210px; */
+    white-space: nowrap;
+}
+
+
+@media (min-width: 576px) { 
+    .spot-banner-text--title {
+        font-size: 30px;
+    }
+    
+    .spot-banner-text--paragraph {
+        font-size: 18px;
+    }
+    
+}
+
+@media (min-width: 768px) { 
+    .spot-banner-action-container {
+        margin: 0;
+    }
+    .spot-banner-action-container button {
+        width: 100% !important;
+        max-width: 210px;
+        white-space: nowrap;
+    }
+ }
+
+@media (min-width: 992px) { 
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1400px) {  }
+

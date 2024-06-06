@@ -7,6 +7,8 @@
 
 /* COMPONENTS */
 @import url('./components/button/buttonComponent.css');
+@import url('./components/text/textComponent.css');
+@import url('./components/banner/spotBanner.css');
 
 
 /*Css padrão para toda a aplicação*/
