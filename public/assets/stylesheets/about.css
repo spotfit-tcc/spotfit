@@ -1,7 +1,6 @@
 .over-flow-atras{
     position: absolute;
     font-weight: 800;
-    
     transform: translateY(-50%); 
     font-size:70px; 
     color: var(--gray-color);
@@ -17,7 +16,12 @@
 
 .about-card{
     background-color: var(--white-color);
-    
+}
+
+.textAbout{
+    padding:15% 10% 0 10%;
+    color: var(--secondary-bg-color);
+    text-align: justify;
 }
 
 .card{

@@ -18,6 +18,7 @@
     --secondary-bg-color: #0D0D0D; 
     --gray-color:#cccccc3d;
     --orange-color: #FF6100; 
+    --orange-color-broom-effect-adjustment: #e45700; 
     --blue-color: #0D6EFD;
     --blue-color-broom-effect-adjustment: #0649ac; 
     --white-color:#FFF;
@@ -59,6 +60,14 @@
 
 .text-subtitle{
     color: #707070;
+}
+
+.btn-orange{
+    background-color: var(--orange-color);
+}
+
+.btn-orange:hover{
+    background-color: var(--orange-color-broom-effect-adjustment);
 }
 
 @media (min-width: 992px) { 

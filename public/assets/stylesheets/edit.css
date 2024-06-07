@@ -1,0 +1,28 @@
+.over-flow-atras{
+    position: absolute;
+    font-weight: 800;
+    transform: translateY(-50%); 
+    font-size:60px; 
+    color: var(--gray-color);
+}
+
+.form-control{
+    background-color: transparent;
+    color: var(--white-color);
+    font-size: small;
+}
+
+.form-control:focus {
+    background-color: var(--secondary-bg-color);
+    color: var(--white-color);
+    font-size: small;
+}
+
+.consultancies{
+    color: var(--orange-color);
+}
+
+.card{
+    background-color: var(--secondary-bg-color);
+    border: none;
+}

@@ -25,6 +25,12 @@ class Route extends Bootstrap {
 			'action' => 'new'
 		);
 
+		$routes['/consulting/create'] = array(
+			'route' => '/consulting/create',
+			'controller' => 'ConsultingController',
+			'action' => 'create'
+		);
+
 		$routes['/landing_page'] = array(
 			'route' => '/landing_page',
 			'controller' => 'LandingPageController',
@@ -66,6 +72,24 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['/forgotPassword'] = array(
+			'route' => '/forgotPassword',
+			'controller' => 'ForgotPasswordController',
+			'action' => 'index'
+		);
+
+		$routes['/forgotPassword/new'] = array(
+			'route' => '/forgotPassword/new',
+			'controller' => 'ForgotPasswordController',
+			'action' => 'new'
+		);
+
+		$routes['/edit'] = array(
+			'route' => '/edit',
+			'controller' => 'EditController',
+			'action' => 'index'
+		);
+		
 
 		$this->setRoutes($routes);
 	}

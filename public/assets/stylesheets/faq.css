@@ -27,7 +27,7 @@
 
 .card-body {
     display: none;
-    font-size: small;
+    font-size: 14px;
 }
 
 .fa-plus, .fa-minus {
