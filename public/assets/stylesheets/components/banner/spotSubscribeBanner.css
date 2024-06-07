@@ -1,0 +1,102 @@
+.spot-subscribe-banner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 14px;
+    padding: 40px 20px;
+    background-color: var(--blue-color);
+}
+
+.spot-subscribe-banner--title {
+    text-align: center;
+    font-weight: 800;
+    font-size: 18px;
+    font-family: 'Urbanist', sans-serif;
+}
+.spot-subscribe-banner--text {
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.spot-subscribe-banner--email-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.spot-subscribe-banner--email-area input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: none;
+    background-color: white;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 7px;
+    margin-bottom: 7px;
+    outline: unset;
+}
+.spot-subscribe-banner--email-area input:focus {
+    border: none;
+    outline: unset;
+}
+
+.spot-subscribe-banner--email-area button {
+    width: 100% !important;
+}
+
+@media (min-width: 576px) { 
+    .spot-subscribe-banner--title {
+        font-size: 25px;
+    }
+}
+@media (min-width: 768px) {
+    .spot-subscribe-banner {
+        padding: 40px;
+    }
+    
+    .spot-subscribe-banner--title {
+        font-size: 25px;
+    }
+
+    .spot-subscribe-banner--email-area {
+        display: flex;
+        flex-direction: row;
+        background-color: white;
+        border-radius: 24px;
+        overflow: hidden;
+        padding: 8px;
+
+        max-width: 640px;
+        margin: 0 auto;
+
+    }
+
+    .spot-subscribe-banner--email-area form {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+    }
+    .spot-subscribe-banner--email-area input {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+    }
+
+    .spot-subscribe-banner--email-area button{
+        width: fit-content !important;
+        min-width: 200px;
+        white-space: nowrap;
+        align-self: flex-end;
+    }
+}
+
+@media (min-width: 992px) { 
+    .spot-subscribe-banner--title {
+        font-size: 32px;
+    }
+    .spot-subscribe-banner--text {
+        font-size: 18px;
+    }
+}

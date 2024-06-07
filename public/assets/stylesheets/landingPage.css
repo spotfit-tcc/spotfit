@@ -424,6 +424,12 @@ ul.lp-welcome-content--list {
     justify-content: center;
   }
 
+/* Subscribe Section */
+
+#lpSubscribeSection {
+    margin: 40px 0;
+}
+
 @media (min-width: 576px) { 
     .lp-model-image-cover {
         display: none;
@@ -484,6 +490,12 @@ ul.lp-welcome-content--list {
     #lpTestemonialsSection .lp-categories-title-area h1 {
         font-size: 40px;
         margin-bottom: 72px;
+    }
+
+    /* Subscribe Section */
+
+    #lpSubscribeSection {
+        margin: 96px 0;
     }
     
  }
