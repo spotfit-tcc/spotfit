@@ -1,0 +1,11 @@
+.spot-bt-selector {
+    width: 200px;
+}
+
+.spot-bt-selector .form-select {
+    background-color: transparent;
+    background-color: var(--primary-bg-color);
+    border-radius: 10px;
+    border: 1px solid #39383E;
+    padding: 20px;
+}
