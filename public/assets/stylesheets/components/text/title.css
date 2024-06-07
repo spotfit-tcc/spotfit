@@ -1,0 +1,60 @@
+.spot-text-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-family: "Urbanist", sans-serif;
+    margin: 0;
+    position: relative;
+}
+
+.spot-text-title--title {
+    margin-top: 50px;
+} 
+
+
+.spot-text-title--title {
+    margin-bottom: 15px;
+}
+
+
+.spot-text-title--title {
+    font-size: 35px;
+}
+
+.spot-text-title-watermark {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 142px;
+    color: rgba(255, 255, 255, .11);
+    position: absolute;
+    left: -50px;
+    font-weight: 800;
+    transform: translateY(-50%);
+    display: none;
+}
+
+@media (min-width: 768px) { 
+    .spot-text-title--title {
+        font-size: 50px;
+    }
+
+    .spot-text-title--title {
+        margin-top: 0px;
+    } 
+ 
+    
+    .spot-text-title--title {
+        font-size: 56px;
+    }
+
+    
+    .spot-text-title--title {
+        font-size: 64px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .spot-text-title-watermark {
+        display: flex;
+    }
+}
