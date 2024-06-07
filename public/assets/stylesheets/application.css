@@ -10,6 +10,7 @@
 @import url('./components/text/textComponent.css');
 @import url('./components/banner/spotBanner.css');
 @import url('./components/banner/spotSubscribeBanner.css');
+@import url('./components/selector/bt-selector.css');
 
 
 /*Css padrão para toda a aplicação*/

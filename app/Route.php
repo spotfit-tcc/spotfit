@@ -89,6 +89,12 @@ class Route extends Bootstrap {
 			'controller' => 'EditController',
 			'action' => 'index'
 		);
+
+		$routes['/professional'] = array(
+			'route' => '/professional',
+			'controller' => 'ProfessionalController',
+			'action' => 'index'
+		);
 		
 
 		$this->setRoutes($routes);
