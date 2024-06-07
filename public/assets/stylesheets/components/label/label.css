@@ -1,0 +1,16 @@
+.spot-label-orange {
+    padding: 6px 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    background-color: var(--orange-color);
+    border-radius: 6px;
+}
+.spot-label-green {
+    padding: 6px 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    background-color: var(--green-color);
+    border-radius: 6px;
+}

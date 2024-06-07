@@ -109,6 +109,92 @@
   position: relative;
 }
 
+.spot-btn-orange {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: all ease 0.4s;
+  background-color: var(--blue-color);
+  color: #fff;
+  border: none;
+  content: "passou pelo create-color-class";
+}
+
+.spot-btn-orange.onhover-broom {
+  background: linear-gradient(30deg, var(--orange-color), var(--orange-color-broom-effect-adjustment)) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+
+.spot-btn-orange.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: var(--orange-color-broom-effect-adjustment);
+}
+
+.spot-btn-orange.onhover-broom:hover::before {
+  width: 140%;
+}
+
+.spot-btn-orange.onhover-broom * {
+  position: relative;
+}
+
+.spot-btn-dark-orange {
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: all ease 0.4s;
+  background-color: var(--blue-color);
+  color: #fff;
+  border: none;
+  content: "passou pelo create-color-class";
+}
+
+.spot-btn-dark-orange.onhover-broom {
+  background: linear-gradient(30deg, var(--dark-orange-color), var(--dark-orange-color-broom-effect-adjustment)) !important;
+  overflow: hidden;
+  width: auto;
+  position: relative;
+}
+
+.spot-btn-dark-orange.onhover-broom::before {
+  content: "";
+  position: absolute;
+  z-index: 0 !important;
+  bottom: 0;
+  left: -15px;
+  width: 0;
+  height: 100%;
+  transition: 0.4s;
+  transform: skewX(30deg);
+  background: var(--dark-orange-color-broom-effect-adjustment);
+}
+
+.spot-btn-dark-orange.onhover-broom:hover::before {
+  width: 140%;
+}
+
+.spot-btn-dark-orange.onhover-broom * {
+  position: relative;
+}
+
 .spot-btn-green {
   padding: 12px 29px;
   font-style: normal;
