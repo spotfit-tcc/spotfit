@@ -7,6 +7,9 @@
 
 /* COMPONENTS */
 @import url('./components/button/buttonComponent.css');
+@import url('./components/text/textComponent.css');
+@import url('./components/banner/spotBanner.css');
+@import url('./components/banner/spotSubscribeBanner.css');
 
 
 /*Css padrão para toda a aplicação*/
@@ -28,7 +31,7 @@
 .body {
     background-color: var(--primary-bg-color); 
     color: var(--white-color);
-    padding-top: 56px;
+    padding-top: 90px;
 }
 
 .navbar {
@@ -65,4 +68,10 @@
 
 .btn-orange:hover{
     background-color: var(--orange-color-broom-effect-adjustment);
+}
+
+@media (min-width: 992px) { 
+    body {
+        padding-top: 56px;
+    }
 }
