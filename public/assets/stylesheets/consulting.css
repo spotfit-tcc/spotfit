@@ -1,3 +1,6 @@
+@import url('./consulting/listingConsulting.css');
+@import url('./consulting/specificProfessionalPage.css');
+
 .steps-show-column{
     background-color: var(--secondary-bg-color);
     margin-bottom: 5%;
