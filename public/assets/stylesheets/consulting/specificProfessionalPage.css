@@ -42,11 +42,9 @@
 .professional-service-slider--button-prev {
     opacity: 0;
     transition: opacity .6s ease;
-
     position: absolute;
     top: 0;
     height: 100%;
-
     background: rgba(37, 37, 37, 0.378);
     width: 100px;
     position: absolute;
@@ -128,7 +126,6 @@
 }
 
 .professional-service-feature--name {
-    font-size: 17px;
     font-weight: 700;
     color: #7F8085;
     margin: 0;
@@ -142,15 +139,14 @@
 
 .professional-service-feature--intensity-text {
     color: #EBEBED;
-    font-size: 17px;
     font-weight: 700;
     text-align: start;
 }
 
 .professional-service-info--text-description {
     color: #EBEBED;
-    font-size: 18px;
     margin: 0;
+    text-align: justify;
 }
 
 .professional-service-info--contact-container {
@@ -184,7 +180,6 @@
 }
 
 .fp-description-text {
-    font-size: 18px;
     color: #fff;
     font-weight: 400;
     text-align: justify;

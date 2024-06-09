@@ -1,35 +1,35 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <span class="over-flow-atras text-center">EDITAR CONTA</span>
-        <h1 class="mb-5 text-center"><strong>Editar Conta</strong></h1>
+        <span class="over-flow-atras text-center">MINHA CONTA</span>
+        <h1 class="mb-5 text-center"><strong>Minha Conta</strong></h1>
 
-        <div class="col-md-5">
-            <form class="needs-validation form-forgot" novalidate>
+        <div class="col-md-5 mb-5">
+            <form class=" form-forgot">
 
                 <div class="text-center mb-3">
                     <img class="img mx-auto d-block rounded-circle" src="https://via.placeholder.com/150" alt="Imagem de capa do card">
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="imagem">Selecionar Imagem para Editar</label>
-                    <input type="file" class="form-control-file" id="imagem" accept="image/*" required>
+                    <input type="text" class="form-control name" id="name" autocomplete="name" placeholder="Jhonathan Novais Lima" readonly>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="name">Nome Completo</label>
-                    <input type="text" class="form-control" id="name" autocomplete="name" required>
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="/profile/edit" class="btn btn-primary rounded-circle btn-edit-profile"><i class="fas fa-edit"></i></a>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control" id="email" autocomplete="email"  required>
+                    <input type="email" class="form-control" id="email" autocomplete="email" placeholder="jhonathan@gmail.com" readonly>
                 </div>
                 <div class="form-group mb-3">
                     <label for="phone">Telefone ou Celular</label>
-                    <input type="number" class="form-control" id="phone" autocomplete="phone" required>
+                    <input type="number" class="form-control" id="phone" autocomplete="phone" placeholder="11 94857-9273" readonly>
                 </div>
-
-                <button type="submit" class="btn btn-primary btn-block mb-5">Salvar Edição</button>
+                <div class="form-group mb-3">
+                    <label for="desc">Descrição</label>
+                    <textarea class="form-control" id="desc" readonly placeholder="Nosso serviço oferece um plano de desenvolvimento sob medida para atletas que buscam alcançar o mais alto nível de excelência em suas respectivas modalidades esportivas. Reconhecendo que cada atleta é único, nossa abordagem é holística e altamente personalizada, visando não apenas maximizar o desempenho atlético, mas também promover o bem-estar geral e o crescimento pessoal."></textarea>
+                </div>
             </form>
         </div>
     </div>
@@ -43,9 +43,16 @@
                 <div class="card-body">
                     <h5 class="card-title text-center">Consultoria 1</h5>
                     <p class="card-text text-center">Descrição 1</p>
-                    <div class="text-center"> 
-                        <a href="#" class="btn btn-primary btn-block">Editar</a>
+                   
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <a href="#" class="btn btn-primary btn-block btn-view">Visualizar</a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center">
+                            <a href="/profile/edit" ><i class="fas fa-edit"></i></a>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -56,8 +63,13 @@
                 <div class="card-body">
                     <h5 class="card-title text-center">Consultoria 2</h5>
                     <p class="card-text text-center">Descrição 2</p>
-                    <div class="text-center"> 
-                        <a href="#" class="btn btn-primary btn-block">Editar</a>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <a href="#" class="btn btn-primary btn-block btn-view">Visualizar</a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center">
+                            <a href="/profile/edit" ><i class="fas fa-edit"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,8 +81,13 @@
                 <div class="card-body">
                     <h5 class="card-title text-center">Consultoria 3</h5>
                     <p class="card-text text-center">Descrição 3</p>
-                    <div class="text-center"> 
-                        <a href="#" class="btn btn-primary btn-block">Editar</a>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <a href="#" class="btn btn-primary btn-block btn-view">Visualizar</a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center">
+                            <a href="/profile/edit" ><i class="fas fa-edit"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
