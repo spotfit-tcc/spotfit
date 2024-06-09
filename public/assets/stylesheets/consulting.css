@@ -99,3 +99,37 @@ form textarea{
     background: var(--primary-bg-color);
     cursor: pointer;
 }
+
+.floating-btn-container{
+    position: fixed;
+    padding: 20px;
+}
+
+#toggle-steps-show {
+    background-color: transparent;
+    border: none;
+    color: #007BFF;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 40px;
+    height: 40px;
+    line-height: 20px;
+}
+
+#toggle-steps-icon:hover{
+    transform: scale(1.1);
+}
+
+#toggle-steps-icon {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+#toggle-steps-show #toggle-steps-icon.toggled {
+    transform: rotate(90deg);
+}
