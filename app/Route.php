@@ -85,12 +85,6 @@ class Route extends Bootstrap {
 			'controller' => 'ForgotPasswordController',
 			'action' => 'new'
 		);
-
-		$routes['/professional'] = array(
-			'route' => '/professional',
-			'controller' => 'ProfessionalController',
-			'action' => 'index'
-		);
 		
 
 		$this->setRoutes($routes);

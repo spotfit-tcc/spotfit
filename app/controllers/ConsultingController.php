@@ -6,9 +6,17 @@ use App\controllers\ApplicationController;
 
 class ConsultingController extends ApplicationController{
     public function index(){
-        $this->render('index');
-    }
 
+        $searchingEspecificProfessional = !empty($_GET["prof"]) && is_numeric($_GET["prof"]) && $_GET['prof'] > 0;
+
+        if ($searchingEspecificProfessional) {
+            $this->show();
+            return;
+        }
+
+        $this->render('index');
+
+    }
     public function show(){
         $this->render('show');
     }

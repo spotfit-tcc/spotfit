@@ -1,3 +1,6 @@
+@import url('./consulting/listingConsulting.css');
+@import url('./consulting/specificProfessionalPage.css');
+
 .step-circle{
     width: 75px;
     height: 75px;
