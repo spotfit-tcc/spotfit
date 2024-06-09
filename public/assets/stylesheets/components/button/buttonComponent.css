@@ -13,7 +13,7 @@
 }
 
 .spot-secondary-btn{
-    background-color: transparent;
+    background-color: var(--primary-bg-color);
     text-decoration: none;
     color: #fff;
     padding: 3px 28px;
@@ -40,7 +40,6 @@
   background-color: #1E1E1E;
   color: #fff;
   border: none;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-dark.onhover-broom {
   background: linear-gradient(30deg, #1E1E1E, black) !important;
@@ -120,8 +119,7 @@
   transition: all ease 0.4s;
   background-color: var(--blue-color);
   color: #fff;
-  border: none;
-  content: "passou pelo create-color-class";
+  border: none; 
 }
 
 .spot-btn-orange.onhover-broom {
@@ -164,11 +162,10 @@
   background-color: var(--blue-color);
   color: #fff;
   border: none;
-  content: "passou pelo create-color-class";
 }
 
 .spot-btn-dark-orange.onhover-broom {
-  background: linear-gradient(30deg, var(--dark-orange-color), var(--dark-orange-color-broom-effect-adjustment)) !important;
+  background: linear-gradient(30deg, var(--orange-color), var(--orange-color-broom-effect-adjustment)) !important;
   overflow: hidden;
   width: auto;
   position: relative;
@@ -184,7 +181,7 @@
   height: 100%;
   transition: 0.4s;
   transform: skewX(30deg);
-  background: var(--dark-orange-color-broom-effect-adjustment);
+  background: var(--orange-color-broom-effect-adjustment);
 }
 
 .spot-btn-dark-orange.onhover-broom:hover::before {
@@ -209,7 +206,6 @@
   background-color: #007089;
   color: #fff;
   border: none;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-green.onhover-broom {
   background: linear-gradient(30deg, #007089, #043936) !important;
@@ -250,7 +246,6 @@
   background-color: #007089;
   color: #fff;
   border: none;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-darkgreen.onhover-broom {
   background: linear-gradient(30deg, #007089, #043936) !important;
@@ -291,7 +286,6 @@
   background-color: #6B0DAD;
   color: #fff;
   border: none;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-purple.onhover-broom {
   background: linear-gradient(30deg, #6B0DAD, #2b0e5f) !important;
@@ -332,7 +326,6 @@
   background-color: #FF0000;
   color: #fff;
   border: none;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-pure-red.onhover-broom {
   background: linear-gradient(30deg, #FF0000, #a80b2f) !important;
@@ -373,7 +366,6 @@
   background-color: white;
   color: #004A61;
   border: none;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-white.onhover-broom {
   background: linear-gradient(30deg, white, #d9d9d9) !important;
@@ -414,7 +406,6 @@
   color: #1E1E1E;
   border-color: #1E1E1E;
   background-color: #fff;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-dark-outlined.onhover-broom {
   overflow: hidden;
@@ -454,7 +445,6 @@
   color: #007089;
   border-color: #007089;
   background-color: #fff;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-green-outlined.onhover-broom {
   overflow: hidden;
@@ -494,7 +484,6 @@
   color: #007089;
   border-color: #007089;
   background-color: #fff;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-darkgreen-outlined.onhover-broom {
   overflow: hidden;
@@ -573,7 +562,6 @@
   color: #FF0000;
   border-color: #FF0000;
   background-color: #fff;
-  content: "passou pelo create-clor-calss";
 }
 .spot-btn-pure-red-outlined.onhover-broom {
   overflow: hidden;
@@ -613,7 +601,7 @@
   color: white;
   border-color: white;
   background-color: #004A61;
-  content: "passou pelo create-clor-calss";
+
 }
 .spot-btn-white-outlined.onhover-broom {
   overflow: hidden;

@@ -1,3 +1,8 @@
+.steps-show-column{
+    background-color: var(--secondary-bg-color);
+    margin-bottom: 5%;
+}
+
 .step-circle{
     width: 75px;
     height: 75px;
@@ -22,6 +27,10 @@
 
 form textarea{
     height: 100px;
+}
+
+input, textarea, select{
+    background-color: var(--primary-bg-color) !important;
 }
 
 .add-image-btn{
@@ -108,7 +117,7 @@ form textarea{
 #toggle-steps-show {
     background-color: transparent;
     border: none;
-    color: #007BFF;
+    color: var(--blue-color);
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -133,3 +142,4 @@ form textarea{
 #toggle-steps-show #toggle-steps-icon.toggled {
     transform: rotate(90deg);
 }
+

@@ -9,3 +9,7 @@
     border: 1px solid #39383E;
     padding: 20px;
 }
+
+.search{
+    background-color: var(--primary-bg-color);
+}
