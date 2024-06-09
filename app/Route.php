@@ -48,6 +48,8 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+
+
 		$routes['/sign_up'] = array(
 			'route' => '/sign_up',
 			'controller' => 'SignUpController',
@@ -82,12 +84,6 @@ class Route extends Bootstrap {
 			'route' => '/forgotPassword/new',
 			'controller' => 'ForgotPasswordController',
 			'action' => 'new'
-		);
-
-		$routes['/edit'] = array(
-			'route' => '/edit',
-			'controller' => 'EditController',
-			'action' => 'index'
 		);
 
 		$routes['/professional'] = array(

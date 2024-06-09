@@ -187,6 +187,7 @@
     font-size: 18px;
     color: #fff;
     font-weight: 400;
+    text-align: justify;
 }
 
 @media (min-width: 768px) {
