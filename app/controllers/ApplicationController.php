@@ -14,13 +14,13 @@ class ApplicationController extends BaseController {
 
     
 	public function resource_name(){
-		$class_name = str_replace('App\controllers\\', '', get_class($this));
+		$class_name = str_replace('App\\controllers\\', '', get_class($this));
 
-		return strtolower(str_replace("Controller", '', $class_name));
+		return lcfirst(str_replace("Controller", '', $class_name));
 	}
 
     public function load_controller_css(){
-        $file = "/assets/stylesheets/".$this->resource_name().".css";
+        $file = "/public/assets/stylesheets/".$this->resource_name().".css";
         if (file_exists($_SERVER['DOCUMENT_ROOT'].$file)){
             return "<link rel='stylesheet' href='$file'>";
         }
@@ -30,7 +30,7 @@ class ApplicationController extends BaseController {
     }
 
     public function load_controller_js(){
-        $file = "/assets/javascripts/".$this->resource_name().".js";
+        $file = "/public/assets/javascripts/".$this->resource_name().".js";
         if (file_exists($_SERVER['DOCUMENT_ROOT'].$file)){
             return "<script src='$file' defer></script>";
         }

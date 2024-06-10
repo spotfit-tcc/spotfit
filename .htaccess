@@ -1,0 +1,17 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect all traffic to /public
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+# Ensure requests are not for existing files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route all other requests to index.php
+RewriteRule ^ index.php [L]
+
+# Optionally, handle PHP settings (if needed)
+php_value display_errors On
+php_value date.timezone America/Sao_Paulo

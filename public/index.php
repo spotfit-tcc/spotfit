@@ -1,10 +1,10 @@
 <?php
 
-	//ini_set('error_reporting', 'E_STRICT');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-	require_once "../vendor/autoload.php";
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+require_once $autoloadPath;
 
-	$route = new \App\Route;
-	
-
-?>
+$route = new \App\Route;
