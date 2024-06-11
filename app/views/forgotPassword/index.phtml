@@ -2,10 +2,18 @@
     <div class="row">
 
     <form class="col-md-6 needs-validation form-forgot" novalidate>
-        <span class="over-flow-atras">ESQUECI SENHA</span>
-        <h1 class="mb-5"><strong>Esqueci a Senha</strong></h1>
+        <span class="over-flow-atras d-block d-md-inline d-none ">ESQUECI SENHA</span>
+        
+        <div class="row">
+          <div class="col">
+            <h1 class="mb-5"><strong>Esqueci a Senha</strong></h1>
+          </div>
+          <div class="col-auto ml-auto">
+            <a href="/landing_page" style="color:var(--white-color)"><i class="fas fa-home"></i></a> 
+          </div>
+        </div>
 
-        <div class="col d-none d-md-block">
+        <div class="col d-md-block">
             <p>Esqueceu sua senha? Não se preocupe, estamos aqui para ajudar.</p>
             <p>Por favor, insira seu endereço de e-mail abaixo e nós enviaremos instruções para redefinir sua senha.</p>
         </div>
@@ -16,11 +24,11 @@
                 <input type="email" class="form-control" id="email" autocomplete="email" required>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block mb-3">Enviar</button>
+            <button type="submit" class="btn btn-primary btn-block mb-3"><a href="/forgotPassword/new">Enviar</a></button>
         </div>
 
         <div class="link">
-            <p>Lembrou da Senha? <a href="/sign_in" class="linkSignUp">  Faça o Login </a></p>
+            <p>Lembrou da Senha? <a href="/sign_in" class="linkSignUp">Faça o Login</a></p>
         </div>
     
     </form>

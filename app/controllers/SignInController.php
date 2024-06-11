@@ -16,7 +16,7 @@ class SignInController extends ApplicationController{
 
     public function logout(){
         session_destroy();
-        header('Location: /sign_in');
+        header('Location: /landing_page');
     }
 }
 
