@@ -5,6 +5,8 @@ namespace App\controllers;
 use App\controllers\ApplicationController;
 
 class ConsultingController extends ApplicationController{
+    protected $authenticate = true;
+
     public function index(){
 
         $searchingEspecificProfessional = !empty($_GET["prof"]) && is_numeric($_GET["prof"]) && $_GET['prof'] > 0;
@@ -17,6 +19,7 @@ class ConsultingController extends ApplicationController{
         $this->render('index');
 
     }
+
     public function show(){
         $this->render('show');
     }
