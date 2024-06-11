@@ -7,6 +7,20 @@ use Framework\controller\BaseController;
 
 
 class ApplicationController extends BaseController {
+    protected $authenticate = false;
+
+    function __construct(){
+        session_start();
+
+        parent::__construct();
+
+        if($this->authenticate){
+            if(!isset($_SESSION['auth']) || !$_SESSION['auth']){
+                header('Location: /sign_in');
+                return;
+            }
+        }
+    }
 
 	public function sum_numbers($num1, $num2){
         return $num1 + $num2;

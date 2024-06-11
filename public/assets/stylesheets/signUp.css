@@ -2,9 +2,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 70px;
+    top: 30px;
     font-weight: 800;
-    font-size: 65px;
+    font-size: 80px;
     color: var(--gray-color);
 }
 
@@ -34,4 +34,18 @@
 .linkSignIn{
     text-decoration: none;
     color: var(--orange-color);
+}
+
+
+.login-container {
+    display: flex;
+    align-items: center;
+}
+
+.login-title {
+    margin-right: auto; /* Empurra o título para a esquerda */
+}
+
+.login-icon {
+    margin-left: 10px; /* Espaçamento entre o título e o ícone */
 }

@@ -1,8 +1,8 @@
 .over-flow-atras{
     position: absolute;
-    top: 70px;
+    top: 80px;
     font-weight: 800;
-    font-size: 65px;
+    font-size: 80px;
     color: var(--gray-color);
 }
 
@@ -40,3 +40,4 @@
     text-decoration: none;
     color: var(--orange-color);
 }
+

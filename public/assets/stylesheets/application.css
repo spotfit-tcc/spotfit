@@ -63,6 +63,14 @@
     margin-right: 10px; 
 }
 
+.btn-danger{
+    background-color:var(--orange-color);
+}
+
+.btn-danger:hover{
+    background-color:var(--orange-color-broom-effect-adjustment);
+}
+
 .footer .footer-link{
     color: #939393;
     text-decoration: none;

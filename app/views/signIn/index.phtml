@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mb-5 mt-5">
  
   <div class="row">
     
@@ -6,13 +6,21 @@
         <img src="/assets/img/img_SignIn.png" alt="Imagem" class="img-fluid" width="100%">
     </div>
   
-    <form class="col-md-6 needs-validation form-signIn" novalidate>
+    <form class="col-md-6 needs-validation form-signIn" novalidate method="POST" action="/sign_in/authenticate">
       
       <div class="form-row">
 
         <span class="over-flow-atras">LOGIN</span>
 
-        <h1 class="mb-4"><strong>Login</strong></h1>
+        <div class="row">
+          <div class="col">
+              <h1 class="mb-4"><strong>Login</strong></h1>
+          </div>
+          <div class="col-auto ml-auto">
+             <a href="/landing_page" style="color:var(--white-color)"><i class="fas fa-home"></i></a> 
+          </div>
+        </div>
+
 
         <div class="form-group mb-3">
             <label for="email">E-mail</label>
@@ -28,7 +36,7 @@
         <button type="submit" class="btn btn-primary btn-block mb-3">Entrar</button>
 
         <div class="link">
-          <p>Ainda não tem conta? <a href="" class="linkSignUp">  Cadastra-se </a></p>
+          <p>Ainda não tem conta? <a href="/sign_up" class="linkSignUp">  Cadastra-se </a></p>
         </div>
        
 

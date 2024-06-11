@@ -6,7 +6,7 @@ use App\controllers\ApplicationController;
 
 class SignUpController extends ApplicationController{
     public function index(){
-        $this->render('index');
+        $this->render('index', 'no_menu');
     }
 }
 
