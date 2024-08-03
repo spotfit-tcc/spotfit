@@ -9,3 +9,14 @@ var swiper = new Swiper(".mySwiper", {
     keyboard: true,
     loop: true
 });
+
+var plan_swiper = new Swiper(".plans-swiper", {
+  slidesPerView: "auto",
+  spaceBetween: 30,
+  loop: true,
+
+  navigation: {
+      nextEl: ".lp-control-swiper-categorie-button-next",
+      prevEl: ".lp-control-swiper-categorie-button-prev",
+    },
+});
