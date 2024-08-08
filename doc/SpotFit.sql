@@ -1,7 +1,5 @@
-DROP DATABASE IF EXISTS spotfit_tcc;
-CREATE DATABASE IF NOT EXISTS hospital;
-
-USE hospital;
+CREATE DATABASE IF NOT EXISTS spotfit;
+USE spotfit;
 
 CREATE TABLE IF NOT EXISTS EmailContact (
     email_contact_id INT AUTO_INCREMENT PRIMARY KEY,
