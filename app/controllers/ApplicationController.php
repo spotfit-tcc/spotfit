@@ -30,7 +30,7 @@ class ApplicationController extends BaseController {
 	public function resource_name(){
 		$class_name = str_replace('App\controllers\\', '', get_class($this));
 
-		return strtolower(str_replace("Controller", '', $class_name));
+		return lcfirst(str_replace("Controller", '', $class_name));
 	}
 
     public function load_controller_css(){

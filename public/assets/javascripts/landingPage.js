@@ -1,6 +1,6 @@
 window.onload = (event) => {
     var swiper = new Swiper(".lp-categories-swiper", {
-        slidesPerView: "auto",
+        slidesPerView: 5,
         spaceBetween: 30,
         loop: true,
 
