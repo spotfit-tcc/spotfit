@@ -103,6 +103,12 @@ class Route extends Bootstrap {
 			'action' => 'new'
 		);
 		
+		$routes['/planview'] = array(
+			'route' => '/planview',
+			'controller' => 'PlanViewController',
+			'action' => 'index'
+		);
+
 
 		$this->setRoutes($routes);
 	}
