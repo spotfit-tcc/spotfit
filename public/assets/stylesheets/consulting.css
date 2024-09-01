@@ -28,6 +28,22 @@
     font-size: 25px;
 }
 
+.step{
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.step:hover{
+    cursor: pointer;
+    background-color: var(--secondary-bg-broom-effect-adjustment);
+    transition: .2x;
+}
+
+.unformatted_link{
+    text-decoration: none;
+    color: unset;
+}
+
 form textarea{
     height: 100px;
 }

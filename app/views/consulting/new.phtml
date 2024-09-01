@@ -10,110 +10,120 @@
                 <p class="text-light">Crie e configure sua consultoria nos seguintes passos:</p>
                 <hr>
                 <div id="steps">
-                    <div class="step mb-5">
-                        <div class="row">
-                            <div class="col-8 step-info">
-                                <h3 class="fs-5">Informações básicas</h3>
-                                <small class="text-subtitle">
-                                    Informações de identificação e contato com a consultoria
-                                </small>
-                            </div>
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <?php if($this->view->step > 1) {?>
-                                    <div class="step-circle concluded">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                <?php }else{ ?>
-                                    <div class="step-circle">
-                                        <i class="fas fa-info"></i>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step mb-5">
-                        <div class="row">
-                            <div class="col-8 step-info">
-                                <h3 class="fs-5">Imagens e categoria</h3>
-                                <small class="text-subtitle">
-                                    Mostre a todos a logo da sua consultoria e indentifique ela por categorias para facilitar nas buscas
-                                </small>
-                            </div>
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <?php if($this->view->step > 2) {?>
-                                    <div class="step-circle concluded">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                <?php }else{ ?>
-                                    <div class="step-circle">
-                                        <i class="fas fa-images"></i>
-                                    </div>
-                                <?php } ?>
+                    <a href="/consulting/new?step=1" class="unformatted_link">
+                        <div class="step mb-3">
+                            <div class="row">
+                                <div class="col-8 step-info">
+                                    <h3 class="fs-5">Informações básicas</h3>
+                                    <small class="text-subtitle">
+                                        Informações de identificação e contato com a consultoria
+                                    </small>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <?php if($this->view->step > 1) {?>
+                                        <div class="step-circle concluded">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    <?php }else{ ?>
+                                        <div class="step-circle">
+                                            <i class="fas fa-info"></i>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="step mb-5">
-                        <div class="row">
-                            <div class="col-8 step-info">
-                                <h3 class="fs-5">Profissionais atuantes</h3>
-                                <small class="text-subtitle">Registre os profissionais que trabalham com você</small>
-                            </div>
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <?php if($this->view->step > 3) {?>
-                                    <div class="step-circle concluded">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                <?php }else{ ?>
-                                    <div class="step-circle">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                <?php } ?>
+                    <a href="/consulting/new?step=2" class="unformatted_link">
+                        <div class="step mb-3">
+                            <div class="row">
+                                <div class="col-8 step-info">
+                                    <h3 class="fs-5">Imagens e categoria</h3>
+                                    <small class="text-subtitle">
+                                        Mostre a todos a logo da sua consultoria e indentifique ela por categorias para facilitar nas buscas
+                                    </small>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <?php if($this->view->step > 2) {?>
+                                        <div class="step-circle concluded">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    <?php }else{ ?>
+                                        <div class="step-circle">
+                                            <i class="fas fa-images"></i>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="step mb-5">
-                        <div class="row">
-                            <div class="col-8 step-info">
-                                <h3 class="fs-5">Benefícios</h3>
-                                <small class="text-subtitle">O que sua consultoria oferece ao cliente?</small>
-                            </div>
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-
-                                <?php if($this->view->step > 4) {?>
-                                    <div class="step-circle concluded">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                <?php }else{ ?>
-                                    <div class="step-circle">
-                                        <i class="fas fa-dumbbell"></i>
-                                    </div>
-                                <?php } ?>
+                    <a href="/consulting/new?step=3" class="unformatted_link">
+                        <div class="step mb-3">
+                            <div class="row">
+                                <div class="col-8 step-info">
+                                    <h3 class="fs-5">Profissionais atuantes</h3>
+                                    <small class="text-subtitle">Registre os profissionais que trabalham com você</small>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <?php if($this->view->step > 3) {?>
+                                        <div class="step-circle concluded">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    <?php }else{ ?>
+                                        <div class="step-circle">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="step">
-                        <div class="row">
-                            <div class="col-8 step-info">
-                                <h3 class="fs-5">Planos e preços</h3>
-                                <small class="text-subtitle">Planos, benefícios incluídos e mensalidade</small>
-                            </div>
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <?php if($this->view->step > 5) {?>
-                                    <div class="step-circle concluded">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                <?php }else{ ?>
-                                    <div class="step-circle">
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </div>
-                                <?php } ?>
+                    <a href="/consulting/new?step=4" class="unformatted_link">
+                        <div class="step mb-3">
+                            <div class="row">
+                                <div class="col-8 step-info">
+                                    <h3 class="fs-5">Benefícios</h3>
+                                    <small class="text-subtitle">O que sua consultoria oferece ao cliente?</small>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+
+                                    <?php if($this->view->step > 4) {?>
+                                        <div class="step-circle concluded">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    <?php }else{ ?>
+                                        <div class="step-circle">
+                                            <i class="fas fa-dumbbell"></i>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
+
+                    <a href="/consulting/new?step=5" class="unformatted_link">
+                        <div class="step">
+                            <div class="row">
+                                <div class="col-8 step-info">
+                                    <h3 class="fs-5">Planos e preços</h3>
+                                    <small class="text-subtitle">Planos, benefícios incluídos e mensalidade</small>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <?php if($this->view->step > 5) {?>
+                                        <div class="step-circle concluded">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    <?php }else{ ?>
+                                        <div class="step-circle">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
