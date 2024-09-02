@@ -1,3 +1,9 @@
+<?php if(isset($_GET['errors'])){ ?>
+    <div class="alert alert-warning" role="alert">
+        <?= $_GET['errors'] ?>
+    </div>
+<?php } ?>
+
 <div class="floating-btn-container d-lg-none">
     <button type="btn" id="toggle-steps-show"><i class="fas fa-chevron-circle-right" id="toggle-steps-icon"></i></button>
 </div>
