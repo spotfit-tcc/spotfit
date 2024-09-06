@@ -1,8 +1,12 @@
 <div class="container mb-5 mt-5">
- 
   <div class="row">
     
     <div class="col d-none d-md-block">
+      <?php if(isset($_GET['new_user']) && $_GET['new_user'] == '1'){ ?>
+          <div class="alert alert-success" role="alert">
+              Bem vindo! Faça login usando o email e a senha que você acabou de criar
+          </div>
+      <?php } ?>
         <img src="/assets/img/img_SignIn.png" alt="Imagem" class="img-fluid" width="100%">
     </div>
   

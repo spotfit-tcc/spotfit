@@ -61,6 +61,12 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['/sign_up/create'] = array(
+			'route' => '/sign_up/create',
+			'controller' => 'SignUpController',
+			'action' => 'create'
+		);
+
 		$routes['/sign_in'] = array(
 			'route' => '/sign_in',
 			'controller' => 'SignInController',
