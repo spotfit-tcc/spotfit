@@ -4,7 +4,7 @@ namespace App\models;
 use App\DbConnection;
 
 class BaseModel {
-	protected function get_connection(){
+	protected static function get_connection(){
         $con = DbConnection::getDb();
         $con->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 

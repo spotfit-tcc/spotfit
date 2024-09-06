@@ -57,7 +57,7 @@ class User extends BaseModel {
     public function create_record(){
         if (!$this->valid_record()) return false;
 
-        $con = $this->get_connection();
+        $con = self::get_connection();
 
         try{
             $stmt = $con->prepare(
