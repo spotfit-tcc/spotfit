@@ -2,7 +2,8 @@
     "name": "spotfit/spotfit",
     "require": {
         "php": ">= 8.0",
-        "guzzlehttp/guzzle": "^7.8"
+        "guzzlehttp/guzzle": "^7.8",
+        "jeffersoncechinel/php-brdocs": "^1.0"
     },
     "authors": [
         {
