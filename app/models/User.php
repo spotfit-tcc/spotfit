@@ -69,7 +69,9 @@ class User extends BaseModel {
             $stmt->execute(array(
                 ':user_name' => $this->user_name,
                 ':email' => $this->email,
-                ':user_password' => password_hash($this->user_password, PASSWORD_DEFAULT),
+                ':user_password' => password_hash(
+                    $this->user_password, PASSWORD_DEFAULT
+                ),
                 ':cpf_or_cnpj' => $this->cpf_or_cnpj,
                 ':profile_photo' => $this->profile_photo,
                 ':professional' => $this->getProfessional(),
@@ -79,6 +81,29 @@ class User extends BaseModel {
         } catch(PDOException $e) {
             $this->errors[] = $e->getMessage();
             return false;
+        }
+    }
+
+    public static function findByEmailAndPassword($email, $password){
+        $con = self::get_connection();
+
+        try{
+            $stmt = $con->prepare(
+                'SELECT * FROM user WHERE '.
+                'email = :email'
+            );
+            $stmt->bindParam(':email', $email); 
+            $stmt->execute();
+
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if(password_verify($password, $user['user_password'])){
+                return $user;
+            } else{
+                return [];
+            }
+        } catch(PDOException $e) {
+            return [];
         }
     }
 }

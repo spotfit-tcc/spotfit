@@ -3,6 +3,7 @@
 namespace App\controllers;
 
 use App\controllers\ApplicationController;
+use App\models\User;
 
 class SignInController extends ApplicationController{
     public function index(){
@@ -10,8 +11,20 @@ class SignInController extends ApplicationController{
     }
 
     public function authenticate(){
-        $_SESSION["auth"] = true;
-        header('Location: /');
+        $user = User::findByEmailAndPassword(
+            $_POST['email'],
+            $_POST['password']
+        );
+        if(empty($user)){
+            header('Location: /sign_in?logged=0');
+        } else {
+            $_SESSION["user_id"] = $user['id'];
+            $_SESSION["user_name"] = $user['user_name'];
+            $_SESSION["email"] = $user['email'];
+            $_SESSION["profile_photo"] = $user['profile_photo'];
+            $_SESSION["auth"] = true;
+            header('Location: /');
+        }
     }
 
     public function logout(){
