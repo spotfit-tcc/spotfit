@@ -6,8 +6,6 @@ use App\controllers\ApplicationController;
 use App\models\Consulting;
 
 class ConsultingController extends ApplicationController{
-    protected $authenticate = true;
-
     public function index(){
 
         $searchingEspecificProfessional = !empty($_GET["prof"]) && is_numeric($_GET["prof"]) && $_GET['prof'] > 0;
