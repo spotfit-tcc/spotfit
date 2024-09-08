@@ -1,0 +1,44 @@
+.over-flow-atras{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30px;
+    font-weight: 800;
+    font-size: 100px;
+    color: var(--gray-color);
+}
+
+.card{
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+}
+
+.card-header{
+    background-color: var(--gray-color);
+}
+
+.text-muted{
+    font-size: small;
+}
+
+.card-body{
+    background-color: var(--secondary-bg-color);
+   
+}
+
+.bloq{
+    color: var(--gray-color);
+}
+
+.btn-premium{
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+.btn-premium:hover{
+    background-color: var(--orange-color-broom-effect-adjustment);
+    border-color: var(--orange-color-broom-effect-adjustment);
+}
