@@ -132,28 +132,27 @@
 
   <!--form faq-->
   <div class="row">
-    <form class="col-md-6 needs-validation form-faq" novalidate>
+    <form class="col-md-6 needs-validation form-faq" id="contact-form" novalidate>
       <div class="mb-4">
-        <h3 class="h3 mb-3">Envie sua dúvida</h3>
+          <h3 class="h3 mb-3">Envie sua dúvida</h3>
       </div>
 
       <div class="form-label-group mb-3">
-        <label for="inputText">Nome</label>
-        <input type="text" id="inputText" class="form-control " required autofocus>
+          <label for="inputText">Nome</label>
+          <input type="text" id="inputText" name="user_name" class="form-control" required autofocus>
       </div>
 
       <div class="form-label-group mb-3">
-        <label for="inputEmail">E-mail</label>
-        <input type="email" id="inputEmail" class="form-control " required>
+          <label for="inputEmail">E-mail</label>
+          <input type="email" id="inputEmail" name="user_email" class="form-control" required>
       </div>
 
       <div class="form-label-group mb-3">
-        <label for="inputSubject">Assunto</label>
-        <textarea id="inputSubject" class="form-control" required></textarea>
+          <label for="inputSubject">Assunto</label>
+          <textarea id="inputSubject" name="message" class="form-control" required></textarea>
       </div>
 
       <button class="btn btn-primary btn-block" type="submit">Enviar</button>
-
     </form>
     <div class="col d-none d-md-block">
       <img src="/assets/img/muscle-vegetables.png" alt="Imagem" class="img-fluid" >
@@ -161,4 +160,8 @@
   </div>
 
 <script src="/assets/javascripts/formValidation.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 

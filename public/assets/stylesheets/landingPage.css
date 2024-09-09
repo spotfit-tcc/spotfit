@@ -115,9 +115,14 @@
 
 /* CATEGORIES SECTION */
 
-.lp-categories-swiper {
-    width: 100%;
-    height: 100%;
+.swiper-slide {
+    width: 30%; 
+    height: 20%;
+    transition: background-color 0.3s ease;
+}
+
+.swiper-slide:hover{
+    background-color: var(--blue-color);
 }
 
 .lp-swiper-slide--item-container {
@@ -147,9 +152,9 @@
     color: rgba(255, 255, 255, 1);
 }
 
-.lp-swiper-slide--item-icon {
-    height: 32px;
-    object-fit: contain;
+.icon-categories {
+    font-size: 30px;
+    color: var(--white-color);
 }
 
 .lp-categories-swiper--item a {
@@ -221,6 +226,24 @@
 .lp-categories-slider-row {
     margin-top: 50px;
     max-height: 50vh;
+}
+
+@media (max-width: 1024px) {
+    .swiper-slide {
+        width: 30%; 
+    }
+}
+
+@media (max-width: 768px) {
+    .swiper-slide {
+        width: 20%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .swiper-slide {
+        width: 15%;
+    }
 }
 
 /* Welcome Section */
@@ -438,6 +461,7 @@ ul.lp-welcome-content--list {
     align-items: center;
     justify-content: center;
 }
+
 
 /* Subscribe Section */
 
