@@ -59,6 +59,42 @@ class Consulting extends BaseModel {
             return false;
         }
     }
+    public function list_records($search = null)
+    {
+        $con = self::get_connection();
+    
+        try {
+            $query = 'SELECT * FROM consulting con
+                     INNER JOIN consulting_image ci 
+                        ON ci.consulting_id = con.consulting_id
+                     INNER JOIN consulting_professional cp 
+                        ON cp.consulting_id = con.consulting_id  
+                     INNER JOIN consulting_category cc 
+                        ON cc.consulting_id = con.consulting_id
+                     INNER JOIN category cat
+                        ON cat.category_id = cc.category_id';
+    
+            if ($search) {
+                $query .= ' WHERE con.consulting_name LIKE :search';
+            }
+    
+            $stmt = $con->prepare($query);
+    
+            if ($search) {
+                $searchParam = "%{$search}%";
+                $stmt->bindParam(':search', $searchParam, \PDO::PARAM_STR);
+            }
+    
+            $stmt->execute();
+            $records = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $records;
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+    }
+    
+    
 }
 
 ?>
