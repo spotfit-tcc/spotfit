@@ -14,6 +14,11 @@ class ConsultingController extends ApplicationController{
             $this->show();
             return;
         }
+        $search = $_GET["search"];
+
+        $parametros = $this->get_consulting($search);
+
+        $this->view->parametros = json_decode(json_encode($parametros), true);
 
         $this->render('index');
 
@@ -51,6 +56,11 @@ class ConsultingController extends ApplicationController{
             header('Location: /consulting/new?step=1&&errors=' . $consulting->get_errors());
             exit;
         }
+    }
+
+    private function get_consulting ($search) {
+        $consulting = new Consulting([]);
+        return $consulting->list_records($search);
     }
 }
 
