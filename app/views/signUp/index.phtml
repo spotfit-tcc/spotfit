@@ -3,11 +3,12 @@
   <h1 class="mb-4"><strong>Cadastro</strong></h1>
   
   <div class="row">
-    <?php if(isset($_GET['errors'])){ ?>
+    <?php if($this->view->user->get_errors()){ ?>
       <div class="alert alert-danger" role="alert">
-          <?= $_GET['errors'] ?>
+          <?= $this->view->user->get_errors() ?>
       </div>
     <?php } ?>
+
     <form class="col-md-6 needs-validation form-signUp" novalidate method="post" action="/sign_up/create">
       <div class="form-row">
 
@@ -17,19 +18,19 @@
 
         <div class="form-group mb-3">
           <label for="user_name">Nome Completo</label>
-          <input type="text" class="form-control" id="user_name" name="user_name" autocomplete="name" required>
+          <input type="text" class="form-control" id="user_name" name="user_name" autocomplete="name" required value="<?= $this->view->user->__get('user_name') ?>">
         </div>
 
         <div class="form-group mb-3">
           <label for="email">E-mail</label>
-          <input type="email" class="form-control" id="email" name="email" autocomplete="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" required>
+          <input type="email" class="form-control" id="email" name="email" autocomplete="email" value="<?= $this->view->user->__get('email') ?>" required>
         </div>
 
         <div class="row">
           <div class="form-group col mb-3">
             <label for="user_password">Senha</label>
             <div class="input-group">
-              <input type="password" class="form-control" id="user_password" name="user_password" required>
+              <input type="password" class="form-control" id="user_password" name="user_password" required value="<?= $this->view->user->__get('user_password') ?>">
               <div class="invalid-feedback">
                 Deve ter ....
               </div>
@@ -39,7 +40,7 @@
           <div class="form-group col mb-3">
             <label for="passwordConfirm">Confirmar senha</label>
             <div class="input-group">
-              <input type="password" class="form-control" id="passwordConfirm" required>
+              <input type="password" class="form-control" id="passwordConfirm" required value="<?= $this->view->user->__get('user_password') ?>">
               <div class="invalid-feedback">
                 Senha diferentes! 
               </div>
@@ -49,12 +50,12 @@
 
         <div class="form-group mb-3">
           <label for="cpf_or_cnpj">CPF ou CNPJ</label>
-          <input type="number" class="form-control" id="cpf_or_cnpj" autocomplete="cpf_or_cnpj" name="cpf_or_cnpj" required>
+          <input type="number" class="form-control" id="cpf_or_cnpj" autocomplete="cpf_or_cnpj" name="cpf_or_cnpj" required value="<?= $this->view->user->__get('cpf_or_cnpj') ?>">
         </div>
 
         <div class="form-group mb-3">
           <label for="phone">Telefone ou Celular</label>
-          <input type="number" class="form-control" id="phone" name="phone" autocomplete="phone">
+          <input type="number" class="form-control" id="phone" name="phone" autocomplete="phone" value="<?= $this->view->user->__get('phone') ?>">
         </div>
 
         <div class="form-group mb-3">
@@ -62,11 +63,12 @@
           <input type="file" class="form-control" id="profile_photo" name="profile_photo" autocomplete="profile_photo">
         </div>
 
+        <?= $this->view->user->__get('professional') ?>
         <div class="form-group mb-3">
           <label for="professional">Profissional</label>
           <select class="form-control" id="professional" name="professional" required>
-            <option selected value="true">Sim, sou profissional</option>
-            <option value="false">Não, busco um profissional</option>
+            <option <?= $this->view->user->__get('professional') == "true" ? "selected" : "" ?> value="true">Sim, sou profissional</option>
+            <option <?= $this->view->user->__get('professional') == "false" ? "selected" : "" ?> value="false">Não, busco um profissional</option>
           </select>
         </div>
       

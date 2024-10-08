@@ -7,6 +7,7 @@ use App\models\User;
 
 class SignUpController extends ApplicationController{
     public function index(){
+        $this->view->user = new User($_POST);
         $this->render('index', 'no_menu');
     }
 
@@ -16,7 +17,8 @@ class SignUpController extends ApplicationController{
         if($user->create_record()){
             header('Location: /sign_in?new_user=1');
         } else {
-            header('Location: /sign_up?errors=' . $user->get_errors());
+            $this->view->user = $user;
+            $this->render('index', 'no_menu');
         }
     }
 }

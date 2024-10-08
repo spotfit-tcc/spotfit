@@ -30,6 +30,7 @@ class User extends BaseModel {
     }
 
     public function getProfessional(){
+        if(is_null($this->professional)) return true;
         (bool)$this->professional;
     }
 
@@ -49,6 +50,14 @@ class User extends BaseModel {
             !BrDoc::cnpj($this->cpf_or_cnpj)->isValid()
         ){
             $this->errors[] = "Preencha um CPF ou CNPJ válido";
+        }
+
+        if(!empty(self::findByAttribute('email', $this->email))){
+            $this->errors[] = "Já existe um usuário cadastrado com esse email";
+        }
+
+        if(!empty(self::findByAttribute('cpf_or_cnpj', $this->cpf_or_cnpj))){
+            $this->errors[] = "Já existe um usuário cadastrado com esse CPF ou CNPJ";
         }
 
         return empty($this->errors);
