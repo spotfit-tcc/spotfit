@@ -9,7 +9,7 @@
       </div>
     <?php } ?>
 
-    <form class="col-md-6 needs-validation form-signUp" novalidate method="post" action="/sign_up/create">
+    <form class="col-md-6 needs-validation form-signUp" novalidate method="post" action="/sign_up/create" enctype="multipart/form-data">
       <div class="form-row">
 
         <div class="d-flex justify-content-end">
@@ -63,7 +63,6 @@
           <input type="file" class="form-control" id="profile_photo" name="profile_photo" autocomplete="profile_photo">
         </div>
 
-        <?= $this->view->user->__get('professional') ?>
         <div class="form-group mb-3">
           <label for="professional">Profissional</label>
           <select class="form-control" id="professional" name="professional" required>

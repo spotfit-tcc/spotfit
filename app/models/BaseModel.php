@@ -4,6 +4,7 @@ namespace App\models;
 use App\DbConnection;
 
 class BaseModel {
+
 	protected static function get_connection(){
         $con = DbConnection::getDb();
         $con->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -54,6 +55,19 @@ class BaseModel {
         } catch(PDOException $e) {
             return [];
         }
+    }
+
+    public static function file_upload_dir(){
+        $dir = dirname(__DIR__, 3) . '/spotfit_uploads/';
+
+        //create directory if it doesn't exists
+        if (!is_dir($dir)) {
+            if (!mkdir($dir, 0777, true) && !is_dir($dir)) {
+                die('Falha ao criar diretório ' . $dir);
+            }
+        }
+        
+        return $dir;
     }
 
 }

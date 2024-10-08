@@ -10,9 +10,11 @@ class User extends BaseModel {
 	private $email;
 	private $user_password;
 	private $cpf_or_cnpj;
-	private $profile_photo;
 	private $professional;
 	private $phone;
+    private $file_params;
+    private $profile_photo;
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
     public function __construct($params){
         $this->user_id = $params['user_id'] ?? null;
@@ -20,9 +22,9 @@ class User extends BaseModel {
         $this->email = $params['email'] ?? null;
         $this->user_password = $params['user_password'] ?? null;
         $this->cpf_or_cnpj = $params['cpf_or_cnpj'] ?? null;
-        $this->profile_photo = $params['profile_photo'] ?? null;
         $this->professional = $params['professional'] ?? null;
         $this->phone = $params['phone'] ?? null;
+        $this->profile_photo = $params['profile_photo'] ?? null;
     }
 
     public function __get($attr){
@@ -32,6 +34,10 @@ class User extends BaseModel {
     public function getProfessional(){
         if(is_null($this->professional)) return true;
         (bool)$this->professional;
+    }
+
+    public function setFileParams($file_params){
+        $this->file_params = $file_params;
     }
 
     public function valid_record(){
@@ -60,37 +66,73 @@ class User extends BaseModel {
             $this->errors[] = "Já existe um usuário cadastrado com esse CPF ou CNPJ";
         }
 
+        if($this->has_file_params()){
+            if($this->file_params["size"] > self::MAX_FILE_SIZE){
+                $this->errors[] = "A imagem de perfil enviada ultrapassa 5 MB";
+            }
+
+            if(
+                $this->file_params["type"] != "image/jpeg" &&
+                $this->file_params["type"] != "image/png"
+            ){
+                $this->errors[] = "A imagem de perfil deve ser jpeg ou png";
+            }
+        }
+
         return empty($this->errors);
     }
 
     public function create_record(){
         if (!$this->valid_record()) return false;
 
-        $con = self::get_connection();
+        if($this->save_profile_image()){
+            $con = self::get_connection();
 
-        try{
-            $stmt = $con->prepare(
-                'INSERT INTO user(user_name, email, user_password,'.
-                'cpf_or_cnpj, profile_photo, professional, phone) '.
-                'VALUE (:user_name, :email, :user_password,'.
-                ':cpf_or_cnpj, :profile_photo, :professional, :phone)'
-            );
-            $stmt->execute(array(
-                ':user_name' => $this->user_name,
-                ':email' => $this->email,
-                ':user_password' => password_hash(
-                    $this->user_password, PASSWORD_DEFAULT
-                ),
-                ':cpf_or_cnpj' => $this->cpf_or_cnpj,
-                ':profile_photo' => $this->profile_photo,
-                ':professional' => $this->getProfessional(),
-                ':phone' => $this->phone
-            ));
-            return true;
-        } catch(PDOException $e) {
-            $this->errors[] = $e->getMessage();
+            try{
+                $stmt = $con->prepare(
+                    'INSERT INTO user(user_name, email, user_password,'.
+                    'cpf_or_cnpj, profile_photo, professional, phone) '.
+                    'VALUE (:user_name, :email, :user_password,'.
+                    ':cpf_or_cnpj, :profile_photo, :professional, :phone)'
+                );
+                $stmt->execute(array(
+                    ':user_name' => $this->user_name,
+                    ':email' => $this->email,
+                    ':user_password' => password_hash(
+                        $this->user_password, PASSWORD_DEFAULT
+                    ),
+                    ':cpf_or_cnpj' => $this->cpf_or_cnpj,
+                    ':professional' => $this->getProfessional(),
+                    ':phone' => $this->phone,
+                    ':profile_photo' => $this->profile_photo
+                ));
+
+                return true;
+            } catch(PDOException $e) {
+                $this->errors[] = $e->getMessage();
+                return false;
+            }
+        } else {
+            $this->errors[] = "Erro ao fazer upload da imagem. Tente outra";
             return false;
         }
+    }
+
+    public function save_profile_image(){
+        if(!$this->has_file_params()){
+            return true;
+        }else {
+            $imageFileType = strtolower(pathinfo($this->file_params["name"], PATHINFO_EXTENSION));
+            $this->profile_photo = $this->cpf_or_cnpj . uniqid('', true) . '.' . $imageFileType;
+    
+            return move_uploaded_file($this->file_params["tmp_name"], self::file_upload_dir() . $this->profile_photo);
+        }
+    }
+
+    private function has_file_params(){
+        if(!isset($this->file_params)) return true;
+
+        return !empty($this->file_params["tmp_name"]);
     }
 
     public static function findByEmailAndPassword($email, $password){

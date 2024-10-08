@@ -14,6 +14,10 @@ class SignUpController extends ApplicationController{
     public function create(){
         $user = new User($_POST);
 
+        if(isset($_FILES["profile_photo"])){
+            $user->setFileParams($_FILES["profile_photo"]);
+        }
+
         if($user->create_record()){
             header('Location: /sign_in?new_user=1');
         } else {
