@@ -5,7 +5,7 @@ namespace App;
 class DbConnection {
 	public static function getDb() {
 		$user = "root";
-		$password = "root";
+		$password = "";
 		$host = "localhost";
 		$db_name = "spotfit";
 		
@@ -23,7 +23,9 @@ class DbConnection {
 				$password 
 			);
 		} catch (\PDOException $e) {
-			//.. tratar de alguma forma ..//
+			echo("<pre>");
+			print_r($e);
+			echo("</pre>");
 		}
 	}
 }
