@@ -29,6 +29,16 @@ class ConsultingController extends ApplicationController{
     }
 
     public function new(){
+        $consulting = new Consulting([]);
+
+        if(isset($_GET["consulting_id"])){
+            $params = Consulting::findByAttribute('consulting_id', $_GET["consulting_id"], 'fetch', '');
+            if(!empty($params)){
+                $consulting->set_attributes($params);
+            }
+        }
+
+        $this->view->consulting = $consulting;
         $this->view->step = isset($_GET['step']) ? (int)$_GET['step'] : 1;
         $this->render('new');
     }

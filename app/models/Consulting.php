@@ -12,11 +12,15 @@ class Consulting extends BaseModel {
 	private $adm_user_id;
 
     public function __construct($params){
+        $this->set_attributes($params);
+    }
+
+    public function set_attributes($params){
         $this->consulting_id = $params['consulting_id'] ?? null;
         $this->consulting_name = $params['consulting_name'] ?? null;
         $this->description = $params['description'] ?? null;
         $this->contact_email = $params['contact_email'] ?? null;
-        $this->adm_user_id = 1;
+        $this->adm_user_id = $params['adm_user_id'] ?? self::logged_user(true);
         $this->contact_phone = $params['contact_phone'] ?? null;
     }
 
@@ -93,8 +97,6 @@ class Consulting extends BaseModel {
             return false;
         }
     }
-    
-    
 }
 
 ?>

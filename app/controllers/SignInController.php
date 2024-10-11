@@ -18,7 +18,7 @@ class SignInController extends ApplicationController{
         if(empty($user)){
             header('Location: /sign_in?logged=0');
         } else {
-            $_SESSION["user_id"] = $user['id'];
+            $_SESSION["user_id"] = $user['user_id'];
             $_SESSION["user_name"] = $user['user_name'];
             $_SESSION["email"] = $user['email'];
             $_SESSION["profile_photo"] = $user['profile_photo'];

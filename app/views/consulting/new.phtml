@@ -16,7 +16,7 @@
                 <p class="text-light">Crie e configure sua consultoria nos seguintes passos:</p>
                 <hr>
                 <div id="steps">
-                    <a href="/consulting/new?step=1" class="unformatted_link">
+                    <div class="step-container">
                         <div class="step mb-3">
                             <div class="row">
                                 <div class="col-8 step-info">
@@ -26,21 +26,15 @@
                                     </small>
                                 </div>
                                 <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <?php if($this->view->step > 1) {?>
-                                        <div class="step-circle concluded">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    <?php }else{ ?>
-                                        <div class="step-circle">
-                                            <i class="fas fa-info"></i>
-                                        </div>
-                                    <?php } ?>
+                                    <div class="step-circle" id="step-1-circle">
+                                        <i class="fas fa-info"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/consulting/new?step=2" class="unformatted_link">
+                    <div class="step-container">
                         <div class="step mb-3">
                             <div class="row">
                                 <div class="col-8 step-info">
@@ -50,21 +44,15 @@
                                     </small>
                                 </div>
                                 <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <?php if($this->view->step > 2) {?>
-                                        <div class="step-circle concluded">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    <?php }else{ ?>
-                                        <div class="step-circle">
-                                            <i class="fas fa-images"></i>
-                                        </div>
-                                    <?php } ?>
+                                    <div class="step-circle" id="step-2-circle">
+                                        <i class="fas fa-images"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/consulting/new?step=3" class="unformatted_link">
+                    <div class="step-container">
                         <div class="step mb-3">
                             <div class="row">
                                 <div class="col-8 step-info">
@@ -72,21 +60,15 @@
                                     <small class="text-subtitle">Registre os profissionais que trabalham com você</small>
                                 </div>
                                 <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <?php if($this->view->step > 3) {?>
-                                        <div class="step-circle concluded">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    <?php }else{ ?>
-                                        <div class="step-circle">
-                                            <i class="fas fa-users"></i>
-                                        </div>
-                                    <?php } ?>
+                                    <div class="step-circle" id="step-3-circle">
+                                        <i class="fas fa-users"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/consulting/new?step=4" class="unformatted_link">
+                    <div class="step-container">
                         <div class="step mb-3">
                             <div class="row">
                                 <div class="col-8 step-info">
@@ -94,22 +76,15 @@
                                     <small class="text-subtitle">O que sua consultoria oferece ao cliente?</small>
                                 </div>
                                 <div class="col-4 d-flex justify-content-center align-items-center">
-
-                                    <?php if($this->view->step > 4) {?>
-                                        <div class="step-circle concluded">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    <?php }else{ ?>
-                                        <div class="step-circle">
-                                            <i class="fas fa-dumbbell"></i>
-                                        </div>
-                                    <?php } ?>
+                                    <div class="step-circle" id="step-4-circle">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/consulting/new?step=5" class="unformatted_link">
+                    <div class="step-container">
                         <div class="step">
                             <div class="row">
                                 <div class="col-8 step-info">
@@ -117,27 +92,34 @@
                                     <small class="text-subtitle">Planos, benefícios incluídos e mensalidade</small>
                                 </div>
                                 <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <?php if($this->view->step > 5) {?>
-                                        <div class="step-circle concluded">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    <?php }else{ ?>
-                                        <div class="step-circle">
-                                            <i class="fas fa-dollar-sign"></i>
-                                        </div>
-                                    <?php } ?>
+                                    <div class="step-circle" id="step-5-circle">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-7 ms-lg-5">
-            <?php require 'partials/form_step_' . $this->view->step . '.phtml' ?>
+            <form action="/consulting/create" method="post" class="mt-3">
+                <?php require 'partials/form_step_1.phtml' ?>
+                <?php require 'partials/form_step_2.phtml' ?>
+                <?php require 'partials/form_step_3.phtml' ?>
+                <?php require 'partials/form_step_4.phtml' ?>
+                <?php require 'partials/form_step_5.phtml' ?>
+
+                <div class="form_actions mt-3">
+                    <button type="button" class="btn btn-secondary d-none" id="previous-step">Voltar</button>
+                    <button type="button" class="btn btn-primary" id="next-step">Prosseguir</button>
+                    <button type="submit" class="btn btn-success d-none" id="submit-consulting">Criar consultoria</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <script src="/assets/javascripts/new_consulting_form/toggle_step_btn.js"></script>
+<script src="/assets/javascripts/new_consulting_form/control_form_step.js"></script>

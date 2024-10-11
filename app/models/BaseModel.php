@@ -40,18 +40,27 @@ class BaseModel {
         return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $current_class));
     }
 
-    public static function findByAttribute($attr, $value){
+    public static function findByAttribute($attr, $value, $mode = "fetchAll", $restrict_by_user_param = ""){
         $con = self::get_connection();
 
         try{
-            $stmt = $con->prepare(
-                'SELECT * FROM ' . self::table_name() . ' WHERE '.
-                $attr . ' = :value'
-            );
+            $query = 'SELECT * FROM ' . self::table_name() . ' WHERE '.
+                        $attr . ' = :value';
+
+            if(!empty($restrict_by_user_param)){
+                $query .= " AND $restrict_by_user_param = " . self::logged_user();
+            }
+
+            $stmt = $con->prepare($query);
             $stmt->bindParam(':value', $value); 
             $stmt->execute();
 
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if($mode == "fetchAll"){
+                return $stmt->fetchAll(\PDO::FETCH_ASSOC); #return all results in array
+            } else {
+                return $stmt->fetch(\PDO::FETCH_ASSOC); #return single result
+            }
+            
         } catch(PDOException $e) {
             return [];
         }
@@ -68,6 +77,18 @@ class BaseModel {
         }
         
         return $dir;
+    }
+
+    public static function logged_user($only_id = true){
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        if($_SESSION["user_id"] && $only_id){
+            return $_SESSION["user_id"];
+        } else if($_SESSION["user_id"] && !$only_id){
+            return User::findByAttribute('id', $_SESSION["user_id"]);
+        } else {
+            return null;
+        }
     }
 
 }

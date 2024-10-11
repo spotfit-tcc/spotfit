@@ -1,87 +1,84 @@
-<div class="text-center">
-    <h2 class="fs-3">Profissionais atuantes</h2>
-    <p class="text-light">Registre os profissionais que trabalham com você </p>
-</div>
-
-<form action="/consulting/create" method="post" class="mt-3">
-    <input type="hidden" name="form_step" value="3">
-
-    <div id="professionals">
-        <fieldset class="custom_fieldset new_professional mb-5" id="professional_0">
-            <legend>Profissional 1</legend>
-            <i class="fas fa-trash delete_fieldset" onclick="remove_professional('0')"></i>
-    
-            <div class="consulting_professional">
-                <h6>Informações do profissional</h6>
-    
-                <div class="mb-4">
-                    <label for="professional_form_0_consulting_professional_name" class="form-label">Nome *</label>
-                    <input type="text" class="form-control" id="professional_form_0_consulting_professional_name" name="professional_form[0][consulting_professional][name]">
-                </div>
-    
-                <div class="mb-4">
-                    <label for="professional_form_0_consulting_professional_instagram" class="form-label">Instagram</label>
-                    <input type="text" class="form-control" id="professional_form_0_consulting_professional_instagram" name="professional_form[0][consulting_professional][instagram]">
-                </div>
-    
-                <div class="mb-4">
-                    <label for="professional_form_0_consulting_professional_phone" class="form-label">Telefone/celular</label>
-                    <input type="text" class="form-control" id="professional_form_0_consulting_professional_phone" name="professional_form[0][consulting_professional][phone]">
-                </div>
-    
-                <div class="mb-4">
-                    <label for="professional_form_0_consulting_professional_email" class="form-label">Email de contato</label>
-                    <input type="email" class="form-control" id="professional_form_0_consulting_professional_email" name="professional_form[0][consulting_professional][email]">
-                </div>
-            </div>
-    
-            <div class="professional_registers" id="professional_registers_0">
-                <h6>Registros profissionais</h6>
-    
-                <div class="row mb-4 professional_register" id="professional_0_register_0">
-                    <div class="col-md-3 mb-4 mb-md-0">
-                        <label for="professional_form_0_professional_registers_0_profession" class="form-label">Profissão *</label>
-                        <select class="form-select" id="professional_form_0_professional_registers_0_profession" name="professional_form[0][professional_registers][0][profession]">
-                            <option value="0">Nutricionista</option>
-                            <option value="1">Educador físico</option>
-                            <option value="2">Fisioterapeuta</option>
-                            <option value="3">Influenciador</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-md-3 mb-4 mb-md-0">
-                        <label for="professional_form_0_professional_registers_0_register_type" class="form-label">Tipo *</label>
-                        <select class="form-select" id="professional_form_0_professional_registers_0_register_type" name="professional_form[0][professional_registers][0][register_type]">
-                            <option value="0">CREF</option>
-                            <option value="1">CFN</option>
-                            <option value="2">CRN</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-md-4 mb-4 mb-md-0">
-                        <label for="professional_form_0_professional_registers_0_register" class="form-label">Nº do registro *</label>
-                        <input type="text" class="form-control" id="professional_form_0_professional_registers_0_register" name="professional_form[0][professional_registers][0][register]">
-                    </div>
-    
-                    <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
-                        <button type="button" class="btn btn-danger remove_register" onclick="remove_register('0', '0')"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="btn btn-success" id="add_professional_0_register" onclick="add_professional_register('0')">
-                <i class="fas fa-plus"></i> Adicionar Registro
-            </button>
-        </fieldset>
+<fieldset id="form-step-3-container" class="form-step-container d-none">
+    <div class="text-center">
+        <h2 class="fs-3">Profissionais atuantes</h2>
+        <p class="text-light">Registre os profissionais que trabalham com você </p>
     </div>
 
-    <button type="button" class="btn btn-success" id="add_professional">
-        <i class="fas fa-user-plus"></i> Adicionar profissional
-    </button>
+    <div class="mt-3">
+        <input type="hidden" name="form_step" value="3">
 
-    <div class="form_actions mt-3">
-        <button type="submit" class="btn btn-primary">Salvar e continuar</button>
-        <a href="/consulting" class="btn btn-orange">Finalizar depois...</a>
+        <div id="professionals">
+            <fieldset class="custom_fieldset new_professional mb-5" id="professional_0">
+                <legend>Profissional 1</legend>
+                <i class="fas fa-trash delete_fieldset" onclick="remove_professional('0')"></i>
+        
+                <div class="consulting_professional">
+                    <h6>Informações do profissional</h6>
+        
+                    <div class="mb-4">
+                        <label for="professional_form_0_consulting_professional_name" class="form-label">Nome *</label>
+                        <input type="text" class="form-control" id="professional_form_0_consulting_professional_name" name="professional_form[0][consulting_professional][name]">
+                    </div>
+        
+                    <div class="mb-4">
+                        <label for="professional_form_0_consulting_professional_instagram" class="form-label">Instagram</label>
+                        <input type="text" class="form-control" id="professional_form_0_consulting_professional_instagram" name="professional_form[0][consulting_professional][instagram]">
+                    </div>
+        
+                    <div class="mb-4">
+                        <label for="professional_form_0_consulting_professional_phone" class="form-label">Telefone/celular</label>
+                        <input type="text" class="form-control" id="professional_form_0_consulting_professional_phone" name="professional_form[0][consulting_professional][phone]">
+                    </div>
+        
+                    <div class="mb-4">
+                        <label for="professional_form_0_consulting_professional_email" class="form-label">Email de contato</label>
+                        <input type="email" class="form-control" id="professional_form_0_consulting_professional_email" name="professional_form[0][consulting_professional][email]">
+                    </div>
+                </div>
+        
+                <div class="professional_registers" id="professional_registers_0">
+                    <h6>Registros profissionais</h6>
+        
+                    <div class="row mb-4 professional_register" id="professional_0_register_0">
+                        <div class="col-md-3 mb-4 mb-md-0">
+                            <label for="professional_form_0_professional_registers_0_profession" class="form-label">Profissão *</label>
+                            <select class="form-select" id="professional_form_0_professional_registers_0_profession" name="professional_form[0][professional_registers][0][profession]">
+                                <option value="0">Nutricionista</option>
+                                <option value="1">Educador físico</option>
+                                <option value="2">Fisioterapeuta</option>
+                                <option value="3">Influenciador</option>
+                            </select>
+                        </div>
+        
+                        <div class="col-md-3 mb-4 mb-md-0">
+                            <label for="professional_form_0_professional_registers_0_register_type" class="form-label">Tipo *</label>
+                            <select class="form-select" id="professional_form_0_professional_registers_0_register_type" name="professional_form[0][professional_registers][0][register_type]">
+                                <option value="0">CREF</option>
+                                <option value="1">CFN</option>
+                                <option value="2">CRN</option>
+                            </select>
+                        </div>
+        
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <label for="professional_form_0_professional_registers_0_register" class="form-label">Nº do registro *</label>
+                            <input type="text" class="form-control" id="professional_form_0_professional_registers_0_register" name="professional_form[0][professional_registers][0][register]">
+                        </div>
+        
+                        <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
+                            <button type="button" class="btn btn-danger remove_register" onclick="remove_register('0', '0')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" id="add_professional_0_register" onclick="add_professional_register('0')">
+                    <i class="fas fa-plus"></i> Adicionar Registro
+                </button>
+            </fieldset>
+        </div>
+
+        <button type="button" class="btn btn-success" id="add_professional">
+            <i class="fas fa-user-plus"></i> Adicionar profissional
+        </button>
     </div>
-</form>
 
-<script src="/assets/javascripts/new_consulting_form/step_3.js"></script>
+    <script src="/assets/javascripts/new_consulting_form/step_3.js"></script>
+</fieldset>
