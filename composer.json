@@ -3,7 +3,8 @@
     "require": {
         "php": ">= 8.0",
         "guzzlehttp/guzzle": "^7.8",
-        "jeffersoncechinel/php-brdocs": "^1.0"
+        "jeffersoncechinel/php-brdocs": "^1.0",
+        "stripe/stripe-php": "^16.1"
     },
     "authors": [
         {
