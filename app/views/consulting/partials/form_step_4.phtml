@@ -8,33 +8,10 @@
         <input type="hidden" name="form_step" value="4">
 
         <div id="benefits">
-            <fieldset class="custom_fieldset new_benefit mb-5" id="benefit_0">
-                <legend>Benefício 1</legend>
-                <i class="fas fa-trash delete_fieldset" onclick="remove_benefit('0')"></i>
-        
-                <div class="benefit">
-                    <div class="mb-4">
-                        <label for="benefits_0_benefit" class="form-label">Nome do benefício *</label>
-                        <input type="text" class="form-control" id="benefits_0_benefit" name="benefits[0][benefit]">
-                    </div>
-        
-                    <div class="mb-4">
-                        <label for="benefits_0_desc" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="benefits_0_desc" name="benefits[0][desc]"></textarea>
-                    </div>
-        
-                    <div class="mb-4">
-                        <label for="benefits_0_icon" class="form-label">Ícone</label>
-                        <input type="file" class="form-control" id="benefits_0_icon" name="benefits[0][icon]">
-                    </div>
-                </div>
-            </fieldset>
         </div>
 
         <button type="button" class="btn btn-success" id="add_benefit">
             <i class="fas fa-plus"></i> Adicionar Benefício
         </button>
     </div>
-
-    <script src="/assets/javascripts/new_consulting_form/step_4.js"></script>
 </fieldset>

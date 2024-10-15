@@ -9,9 +9,9 @@ document.querySelectorAll('.price-input').forEach(input => {
     });
 })
 
-let next_plan_idx = 1
+let next_plan_idx = 0
 
-document.getElementById('add_plan').addEventListener('click', () => {
+function build_plan(){
     const container = document.getElementById('plans')
 
     container.insertAdjacentHTML(
@@ -52,25 +52,13 @@ document.getElementById('add_plan').addEventListener('click', () => {
             <div>
                 <h6>Escolha os benefícios incluídos nesse plano</h6>
 
-                <div class="plan_benefits">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="plans_${next_plan_idx}_benefits_1" name="plans[${next_plan_idx}][benefits][]" value="1">
-                        <label class="form-check-label" for="plans_${next_plan_idx}_benefits_1">Treino periodizado</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="plans_${next_plan_idx}_benefits_2" name="plans[${next_plan_idx}][benefits][]" value="2">
-                        <label class="form-check-label" for="plans_${next_plan_idx}_benefits_2">Dieta</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="plans_${next_plan_idx}_benefits_3" name="plans[${next_plan_idx}][benefits][]" value="3">
-                        <label class="form-check-label" for="plans_${next_plan_idx}_benefits_3">Prescrição de alongamentos</label>
-                    </div>
+                <div class="plan_benefits" id="plan_${next_plan_idx}_benefits" data-plan-idx="${next_plan_idx}">
                 </div>
             </div>
         </fieldset>`
     )
+
+    build_benefits_options(next_plan_idx)
 
     let cleave = new Cleave(`#plans_${next_plan_idx}_price`, {
         numeral: true,
@@ -82,8 +70,29 @@ document.getElementById('add_plan').addEventListener('click', () => {
     });
 
     next_plan_idx++
-})
+}
+
+document.getElementById('add_plan').addEventListener('click', build_plan)
+
+build_plan()
 
 function remove_plan(idx){
     document.getElementById(`plan_${idx}`).remove()
+}
+
+function build_benefits_options(plan_idx){
+    let container = document.getElementById(`plan_${plan_idx}_benefits`)
+    let benefit_options = document.getElementsByClassName("benefit_option")
+
+    container.innerHTML = ""
+
+    for(i = 0; i < benefit_options.length; i++){
+        container.insertAdjacentHTML(
+            'beforeend',
+            `<div class="form-check">
+                <input class="form-check-input" type="checkbox" id="plans_${plan_idx}_benefits_${benefit_options[i].getAttribute('data-benefit-idx')}" name="plans[${plan_idx}][benefits][]" value="${benefit_options[i].getAttribute('data-benefit-idx')}">
+                <label class="form-check-label" for="plans_${plan_idx}_benefits_${benefit_options[i].getAttribute('data-benefit-idx')}">${benefit_options[i].value}</label>
+            </div>`
+        )
+    }
 }

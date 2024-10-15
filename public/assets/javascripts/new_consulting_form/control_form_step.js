@@ -12,8 +12,6 @@ let step_icons = {
 }
 
 function nextStep(){
-    console.log(next_step)
-
     if(next_step > 5){
         return
     }

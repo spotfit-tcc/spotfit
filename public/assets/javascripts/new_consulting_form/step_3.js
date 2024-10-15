@@ -1,7 +1,7 @@
 let next_register_idx = 1
-let next_professional_idx = 1
+let next_professional_idx = 0
 
-document.getElementById('add_professional').addEventListener('click', e => {
+function build_professional(){
     const container = document.getElementById('professionals')
 
     container.insertAdjacentHTML(
@@ -74,7 +74,9 @@ document.getElementById('add_professional').addEventListener('click', e => {
     )
 
     next_professional_idx++
-})
+}
+
+document.getElementById('add_professional').addEventListener('click', build_professional)
 
 function add_professional_register(professional_idx) {
     const container = document.getElementById(`professional_registers_${professional_idx}`)
@@ -122,3 +124,5 @@ function remove_professional(idx){
 function remove_register(professional_idx, idx){
     document.getElementById(`professional_${professional_idx}_register_${idx}`).remove()
 }
+
+build_professional()
