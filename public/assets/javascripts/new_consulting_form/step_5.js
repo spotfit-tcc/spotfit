@@ -23,21 +23,21 @@ function build_plan(){
             <div class="plan">
                 <div class="mb-4">
                     <label for="plans_${next_plan_idx}_plan" class="form-label">Nome do plano *</label>
-                    <input type="text" class="form-control" id="plans_${next_plan_idx}_plan" name="plans[${next_plan_idx}][plan]">
+                    <input type="text" class="form-control" required id="plans_${next_plan_idx}_plan" name="plans[${next_plan_idx}][plan]">
                 </div>
 
                 <div class="mb-4">
                     <label for="plans_${next_plan_idx}_price" class="form-label">Preço *</label>
                     <div class="input-group">
                         <span class="input-group-text">R$</span>
-                        <input type="text" class="form-control price-input" id="plans_${next_plan_idx}_price" name="plans[${next_plan_idx}][price]"></input>
+                        <input type="text" class="form-control price-input" required id="plans_${next_plan_idx}_price" name="plans[${next_plan_idx}][price]"></input>
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label for="plans_${next_plan_idx}_period" class="form-label">Duração (meses) *</label>
+                    <label for="plans_${next_plan_idx}_period" class="form-label">Duração *</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="plans_${next_plan_idx}_period" name="plans[${next_plan_idx}][period]">
+                        <input type="number" class="form-control" required id="plans_${next_plan_idx}_period" name="plans[${next_plan_idx}][period]">
                         <span class="input-group-text">meses</span>
                     </div>
                 </div>

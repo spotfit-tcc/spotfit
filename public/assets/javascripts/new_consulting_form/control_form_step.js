@@ -11,8 +11,30 @@ let step_icons = {
     "step-5-circle": "fas fa-dollar-sign"
 }
 
+function validate_form_step(){
+    let valid = true
+
+    if(next_step > 1 && next_step <= 5){
+        let form = document.querySelector(`#form-step-${next_step - 1}-container`)
+        let required_inputs = form.querySelectorAll('[required]')
+        
+        for(const input of required_inputs){
+            input.reportValidity()
+            if(!input.reportValidity()){
+                valid = false
+            }
+        }
+    }
+
+    return valid
+}
+
 function nextStep(){
     if(next_step > 5){
+        return
+    }
+
+    if (!validate_form_step()) {
         return
     }
 

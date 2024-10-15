@@ -15,7 +15,7 @@ function build_professional(){
 
                 <div class="mb-4">
                     <label for="professional_form_${next_professional_idx}_consulting_professional_name" class="form-label">Nome *</label>
-                    <input type="text" class="form-control" id="professional_form_${next_professional_idx}_consulting_professional_name" name="professional_form[${next_professional_idx}][consulting_professional][name]">
+                    <input type="text" class="form-control" required id="professional_form_${next_professional_idx}_consulting_professional_name" name="professional_form[${next_professional_idx}][consulting_professional][name]">
                 </div>
 
                 <div class="mb-4">
@@ -40,7 +40,7 @@ function build_professional(){
                 <div class="row mb-4 professional_register" id="professional_${next_professional_idx}_register_0">
                     <div class="col-md-3 mb-4 mb-md-0">
                         <label for="professional_form_${next_professional_idx}_professional_registers_0_profession" class="form-label">Profissão *</label>
-                        <select class="form-select" id="professional_form_${next_professional_idx}_professional_registers_0_profession" name="professional_form[${next_professional_idx}][professional_registers][0][profession]">
+                        <select class="form-select" required id="professional_form_${next_professional_idx}_professional_registers_0_profession" name="professional_form[${next_professional_idx}][professional_registers][0][profession]">
                             <option value="0">Nutricionista</option>
                             <option value="1">Educador físico</option>
                             <option value="2">Fisioterapeuta</option>
@@ -50,7 +50,7 @@ function build_professional(){
 
                     <div class="col-md-3 mb-4 mb-md-0">
                         <label for="professional_form_${next_professional_idx}_professional_registers_0_register_type" class="form-label">Tipo *</label>
-                        <select class="form-select" id="professional_form_${next_professional_idx}_professional_registers_0_register_type" name="professional_form[${next_professional_idx}][professional_registers][0][register_type]">
+                        <select class="form-select" required id="professional_form_${next_professional_idx}_professional_registers_0_register_type" name="professional_form[${next_professional_idx}][professional_registers][0][register_type]">
                             <option value="0">CREF</option>
                             <option value="1">CFN</option>
                             <option value="2">CRN</option>
@@ -59,7 +59,7 @@ function build_professional(){
 
                     <div class="col-md-4 mb-4 mb-md-0">
                         <label for="professional_form_${next_professional_idx}_professional_registers_0_register" class="form-label">Nº do registro *</label>
-                        <input type="text" class="form-control" id="professional_form_${next_professional_idx}_professional_registers_0_register" name="professional_form[${next_professional_idx}][professional_registers][0][register]">
+                        <input type="text" class="form-control" required id="professional_form_${next_professional_idx}_professional_registers_0_register" name="professional_form[${next_professional_idx}][professional_registers][0][register]">
                     </div>
 
                     <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
@@ -86,7 +86,7 @@ function add_professional_register(professional_idx) {
         `<div class="row mb-4 professional_register" id="professional_${professional_idx}_register_${next_register_idx}">
             <div class="col-md-3 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" class="form-label">Profissão *</label>
-                <select class="form-select" id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][profession]">
+                <select class="form-select" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][profession]">
                     <option value="0">Nutricionista</option>
                     <option value="1">Educador físico</option>
                     <option value="2">Fisioterapeuta</option>
@@ -96,7 +96,7 @@ function add_professional_register(professional_idx) {
 
             <div class="col-md-3 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" class="form-label">Tipo *</label>
-                <select class="form-select" id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register_type]">
+                <select class="form-select" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register_type]">
                     <option value="0">CREF</option>
                     <option value="1">CFN</option>
                     <option value="2">CRN</option>
@@ -105,7 +105,7 @@ function add_professional_register(professional_idx) {
 
             <div class="col-md-4 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" class="form-label">Nº do registro *</label>
-                <input type="text" class="form-control" id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register]">
+                <input type="text" class="form-control" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register]">
             </div>
 
             <div class="col-md-1 mb-4 mb-md-0 remove-item-container">

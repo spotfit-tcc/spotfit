@@ -9,13 +9,13 @@
 
         <div class="mb-4">
             <label for="consulting_name" class="form-label">Nome da consultoria *</label>
-            <input type="text" class="form-control" id="consulting_name" name="consulting_name" value="<?= $this->view->consulting->__get('consulting_name') ?>">
+            <input type="text" class="form-control" id="consulting_name" name="consulting_name" required value="<?= $this->view->consulting->__get('consulting_name') ?>">
             <div id="emailHelp" class="form-text text-subtitle">Nome da marca pela qual as pessoas te reconhecem</div>
         </div>
 
         <div class="mb-4">
             <label for="contact_email" class="form-label">Email de contato *</label>
-            <input type="email" class="form-control" id="contact_email" name="contact_email" value="<?= $this->view->consulting->__get('contact_email') ?>">
+            <input type="email" class="form-control" id="contact_email" name="contact_email" required value="<?= $this->view->consulting->__get('contact_email') ?>">
         </div>
 
         <div class="mb-4">

@@ -12,7 +12,7 @@ function build_benefit(){
             <div class="benefit">
                 <div class="mb-4">
                     <label for="benefits_${next_benefit_idx}_benefit" class="form-label">Nome do benefício *</label>
-                    <input type="text" class="form-control benefit_option" id="benefits_${next_benefit_idx}_benefit" name="benefits[${next_benefit_idx}][benefit]" data-benefit-idx="${next_benefit_idx}" onchange="reload_plan_benefits()">
+                    <input type="text" class="form-control benefit_option" required id="benefits_${next_benefit_idx}_benefit" name="benefits[${next_benefit_idx}][benefit]" data-benefit-idx="${next_benefit_idx}" onchange="reload_plan_benefits()">
                 </div>
 
                 <div class="mb-4">
