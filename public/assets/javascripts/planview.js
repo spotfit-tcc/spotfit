@@ -1,7 +1,5 @@
-
 var stripe = Stripe('pk_test_51Q9Dl6RxE3ZgGCwMLjbCz8VlKWSVWhDehKoBpFPzYu8cfNcHNXMyVxkyzjPcHolJcCmwhfL0Vnbe445jgZioTHNz00LK7PLF1q');  // Chave pública do Stripe
 
-// Função para redirecionar ao Stripe
 function redirectToStripe(plan) {
     fetch('/planview/checkout', {  
         method: 'POST',
@@ -27,6 +25,10 @@ function redirectToStripe(plan) {
     });
 }
 
+// Evento para o botão do Plano Grátis
+document.querySelector('.btn-free').addEventListener('click', function() {
+    window.location.href = '/sign_up'; 
+});
 
 // Evento para o botão do Plano Pro
 document.querySelector('.btn-pro').addEventListener('click', function() {

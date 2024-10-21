@@ -115,26 +115,23 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
-
 		$routes['/planview/checkout'] = array(
 			'route' => '/planview/checkout',
 			'controller' => 'PlanViewController',
 			'action' => 'checkout'
 		);
-
-		$routes['/success'] = array(
-			'route' => '/success',
+		
+		$routes['/planview/success'] = array(
+			'route' => '/planview/success',
 			'controller' => 'PlanViewController',
 			'action' => 'success'
 		);
-
-		$routes['/cancelado'] = array(
-			'route' => '/cancelado',
+		
+		$routes['/planview/cancel'] = array(
+			'route' => '/planview/cancel',
 			'controller' => 'PlanViewController',
 			'action' => 'cancel'
 		);
-
-
 
 		$this->setRoutes($routes);
 	}

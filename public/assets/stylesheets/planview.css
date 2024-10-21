@@ -42,3 +42,9 @@
     background-color: var(--orange-color-broom-effect-adjustment);
     border-color: var(--orange-color-broom-effect-adjustment);
 }
+
+.jumbotron{
+    padding: 5%;
+    background-color: var(--secondary-bg-color);
+    border-radius: 10px;
+}
