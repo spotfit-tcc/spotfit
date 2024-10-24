@@ -33,16 +33,10 @@ class ConsultingController extends ApplicationController{
     public function new(){
         $this->authenticate();
 
-        $consulting = new Consulting([]);
+        $consulting_form = new ConsultingForm([]);
 
-        if(isset($_GET["consulting_id"])){
-            $params = Consulting::findByAttribute('consulting_id', $_GET["consulting_id"], 'fetch', '');
-            if(!empty($params)){
-                $consulting->set_attributes($params);
-            }
-        }
+        $this->view->consulting_form = $consulting_form;
 
-        $this->view->consulting = $consulting;
         $this->view->categories = Category::get_all_categories();
         $this->render('new');
     }

@@ -9,23 +9,23 @@
 
         <div class="mb-4">
             <label for="consulting_name" class="form-label">Nome da consultoria *</label>
-            <input type="text" class="form-control" id="consulting_name" name="consulting_name" required value="<?= $this->view->consulting->__get('consulting_name') ?>">
+            <input type="text" class="form-control" id="consulting_name" name="consulting_name" required value="<?= $this->view->consulting_form->__get('consulting_name') ?>">
             <div id="emailHelp" class="form-text text-subtitle">Nome da marca pela qual as pessoas te reconhecem</div>
         </div>
 
         <div class="mb-4">
             <label for="contact_email" class="form-label">Email de contato *</label>
-            <input type="email" class="form-control" id="contact_email" name="contact_email" required value="<?= $this->view->consulting->__get('contact_email') ?>">
+            <input type="email" class="form-control" id="contact_email" name="contact_email" required value="<?= $this->view->consulting_form->__get('contact_email') ?>">
         </div>
 
         <div class="mb-4">
             <label for="contact_phone" class="form-label">Telefone de contato</label>
-            <input type="text" class="form-control" id="contact_phone" name="contact_phone" value="<?= $this->view->consulting->__get('contact_phone') ?>">
+            <input type="text" class="form-control" id="contact_phone" name="contact_phone" value="<?= $this->view->consulting_form->__get('contact_phone') ?>">
         </div>
 
         <div class="mb-4">
             <label for="description" class="form-label">Descrição</label>
-            <textarea class="form-control" placeholder="Explique brevemente como funciona sua consultoria" id="description" name="description"><?= $this->view->consulting->__get('description') ?></textarea>
+            <textarea class="form-control" placeholder="Explique brevemente como funciona sua consultoria" id="description" name="description"><?= $this->view->consulting_form->__get('description') ?></textarea>
         </div>
     </div>
 </fieldset>

@@ -41,19 +41,12 @@ function build_professional(){
                     <div class="col-md-3 mb-4 mb-md-0">
                         <label for="professional_form_${next_professional_idx}_professional_registers_0_profession" class="form-label">Profissão *</label>
                         <select class="form-select" required id="professional_form_${next_professional_idx}_professional_registers_0_profession" name="professional_form[${next_professional_idx}][professional_registers][0][profession]">
-                            <option value="0">Nutricionista</option>
-                            <option value="1">Educador físico</option>
-                            <option value="2">Fisioterapeuta</option>
-                            <option value="3">Influenciador</option>
                         </select>
                     </div>
 
                     <div class="col-md-3 mb-4 mb-md-0">
                         <label for="professional_form_${next_professional_idx}_professional_registers_0_register_type" class="form-label">Tipo *</label>
                         <select class="form-select" required id="professional_form_${next_professional_idx}_professional_registers_0_register_type" name="professional_form[${next_professional_idx}][professional_registers][0][register_type]">
-                            <option value="0">CREF</option>
-                            <option value="1">CFN</option>
-                            <option value="2">CRN</option>
                         </select>
                     </div>
 
@@ -82,6 +75,7 @@ function build_professional(){
     )
 
     build_professional_benefits_options(next_professional_idx)
+    build_options_for_professions_and_register_types(next_professional_idx, 0)
 
     next_professional_idx++
 }
@@ -97,19 +91,12 @@ function add_professional_register(professional_idx) {
             <div class="col-md-3 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" class="form-label">Profissão *</label>
                 <select class="form-select" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][profession]">
-                    <option value="0">Nutricionista</option>
-                    <option value="1">Educador físico</option>
-                    <option value="2">Fisioterapeuta</option>
-                    <option value="3">Influenciador</option>
                 </select>
             </div>
 
             <div class="col-md-3 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" class="form-label">Tipo *</label>
                 <select class="form-select" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register_type]">
-                    <option value="0">CREF</option>
-                    <option value="1">CFN</option>
-                    <option value="2">CRN</option>
                 </select>
             </div>
 
@@ -123,6 +110,8 @@ function add_professional_register(professional_idx) {
             </div>
         </div>`
     )
+
+    build_options_for_professions_and_register_types(professional_idx, next_register_idx)
 
     next_register_idx++
 }
@@ -150,6 +139,29 @@ function build_professional_benefits_options(professional_idx){
             </div>`
         )
     }
+}
+
+function build_options_for_professions_and_register_types(professional_idx, register_idx){
+    let profession_select = document.getElementById(`professional_form_${professional_idx}_professional_registers_${register_idx}_profession`)
+    let register_type_select = document.getElementById(`professional_form_${professional_idx}_professional_registers_${register_idx}_register_type`)
+
+    profession_select.innerHTML = ''
+    professions_collection.forEach((profession) => {
+        let option = document.createElement('option')
+        option.value = profession.id
+        option.text = profession.name
+        option.title = profession.desc
+        profession_select.appendChild(option)
+    })
+
+    register_type_select.innerHTML = ''
+    register_types_collection.forEach((register_type) => {
+        let option = document.createElement('option')
+        option.value = register_type.id
+        option.text = register_type.name
+        option.title = register_type.desc
+        register_type_select.appendChild(option)
+    })
 }
 
 build_professional()

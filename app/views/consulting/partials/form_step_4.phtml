@@ -15,3 +15,9 @@
         </button>
     </div>
 </fieldset>
+
+<script>
+    //load professions and register types to global js
+    const professions_collection = <?= json_encode($this->view->consulting_form->collection_for_professions()) ?>;
+    const register_types_collection = <?= json_encode($this->view->consulting_form->collection_for_register_types()) ?>;
+</script>
