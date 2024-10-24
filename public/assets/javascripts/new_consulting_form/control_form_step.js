@@ -6,12 +6,13 @@ let submit_btn = document.getElementById("submit-consulting")
 let step_icons = {
     "step-1-circle": "fas fa-info",
     "step-2-circle": "fas fa-images",
-    "step-3-circle": "fas fa-users",
-    "step-4-circle": "fas fa-dumbbell",
+    "step-3-circle": "fas fa-dumbbell",
+    "step-4-circle": "fas fa-users",
     "step-5-circle": "fas fa-dollar-sign"
 }
 
 function validate_form_step(){
+    return true;
     let valid = true
 
     if(next_step > 1 && next_step <= 5){
@@ -88,7 +89,7 @@ function previousStep(){
     let previous_step_circle = document.getElementById(`step-${next_step - 1}-circle`)
 
     if(previous_step_circle){
-        previous_step_circle.firstElementChild.className = step_icons[`step-${next_step}-circle`]
+        previous_step_circle.firstElementChild.className = step_icons[`step-${next_step - 1}-circle`]
         previous_step_circle.classList.remove('concluded')
     }
 

@@ -1,51 +1,155 @@
-let next_benefit_idx = 0
+let next_register_idx = 1
+let next_professional_idx = 0
 
-function build_benefit(){
-    const container = document.getElementById('benefits')
+function build_professional(){
+    const container = document.getElementById('professionals')
 
     container.insertAdjacentHTML(
         'beforeend',
-        `<fieldset class="custom_fieldset new_benefit mb-5" id="benefit_${next_benefit_idx}">
-            <legend>Benefício ${next_benefit_idx + 1}</legend>
-            <i class="fas fa-trash delete_fieldset" onclick="remove_benefit('${next_benefit_idx}')"></i>
+        `<fieldset class="custom_fieldset new_professional mb-5" id="professional_${next_professional_idx}">
+            <legend>Profissional ${next_professional_idx + 1}</legend>
+            <i class="fas fa-trash delete_fieldset" onclick="remove_professional('${next_professional_idx}')"></i>
 
-            <div class="benefit">
+            <div class="consulting_professional">
+                <h6>Informações do profissional</h6>
+
                 <div class="mb-4">
-                    <label for="benefits_${next_benefit_idx}_benefit" class="form-label">Nome do benefício *</label>
-                    <input type="text" class="form-control benefit_option" required id="benefits_${next_benefit_idx}_benefit" name="benefits[${next_benefit_idx}][benefit]" data-benefit-idx="${next_benefit_idx}" onchange="reload_plan_benefits()">
+                    <label for="professional_form_${next_professional_idx}_consulting_professional_name" class="form-label">Nome *</label>
+                    <input type="text" class="form-control" required id="professional_form_${next_professional_idx}_consulting_professional_name" name="professional_form[${next_professional_idx}][consulting_professional][name]">
                 </div>
 
                 <div class="mb-4">
-                    <label for="benefits_${next_benefit_idx}_desc" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="benefits_${next_benefit_idx}_desc" name="benefits[${next_benefit_idx}][desc]"></textarea>
+                    <label for="professional_form_${next_professional_idx}_consulting_professional_instagram" class="form-label">Instagram</label>
+                    <input type="text" class="form-control" id="professional_form_${next_professional_idx}_consulting_professional_instagram" name="professional_form[${next_professional_idx}][consulting_professional][instagram]">
                 </div>
 
                 <div class="mb-4">
-                    <label for="benefits_${next_benefit_idx}_icon" class="form-label">Ícone</label>
-                    <input type="file" class="form-control" id="benefits_${next_benefit_idx}_icon" name="benefits[${next_benefit_idx}][icon]">
+                    <label for="professional_form_${next_professional_idx}_consulting_professional_phone" class="form-label">Telefone/celular</label>
+                    <input type="text" class="form-control" id="professional_form_${next_professional_idx}_consulting_professional_phone" name="professional_form[${next_professional_idx}][consulting_professional][phone]">
+                </div>
+
+                <div class="mb-4">
+                    <label for="professional_form_${next_professional_idx}_consulting_professional_email" class="form-label">Email de contato</label>
+                    <input type="email" class="form-control" id="professional_form_${next_professional_idx}_consulting_professional_email" name="professional_form[${next_professional_idx}][consulting_professional][email]">
                 </div>
             </div>
+
+            <div class="professional_registers" id="professional_registers_${next_professional_idx}">
+                <h6>Registros profissionais</h6>
+
+                <div class="row mb-4 professional_register" id="professional_${next_professional_idx}_register_0">
+                    <div class="col-md-3 mb-4 mb-md-0">
+                        <label for="professional_form_${next_professional_idx}_professional_registers_0_profession" class="form-label">Profissão *</label>
+                        <select class="form-select" required id="professional_form_${next_professional_idx}_professional_registers_0_profession" name="professional_form[${next_professional_idx}][professional_registers][0][profession]">
+                            <option value="0">Nutricionista</option>
+                            <option value="1">Educador físico</option>
+                            <option value="2">Fisioterapeuta</option>
+                            <option value="3">Influenciador</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 mb-4 mb-md-0">
+                        <label for="professional_form_${next_professional_idx}_professional_registers_0_register_type" class="form-label">Tipo *</label>
+                        <select class="form-select" required id="professional_form_${next_professional_idx}_professional_registers_0_register_type" name="professional_form[${next_professional_idx}][professional_registers][0][register_type]">
+                            <option value="0">CREF</option>
+                            <option value="1">CFN</option>
+                            <option value="2">CRN</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <label for="professional_form_${next_professional_idx}_professional_registers_0_register" class="form-label">Nº do registro *</label>
+                        <input type="text" class="form-control" required id="professional_form_${next_professional_idx}_professional_registers_0_register" name="professional_form[${next_professional_idx}][professional_registers][0][register]">
+                    </div>
+
+                    <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
+                        <button type="button" class="btn btn-danger remove_register" onclick="remove_register('${next_professional_idx}', '0')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h6>Escolha os benefícios que esse profissional atua</h6>
+
+                <div class="professional_benefits" id="professional_${next_professional_idx}_benefits" data-professional-idx="${next_professional_idx}">
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-success" id="add_professional_${next_professional_idx}_register" onclick="add_professional_register('${next_professional_idx}')">
+                <i class="fas fa-plus"></i> Adicionar Registro
+            </button>
         </fieldset>`
     )
 
-    next_benefit_idx++
-    reload_plan_benefits()
+    build_professional_benefits_options(next_professional_idx)
+
+    next_professional_idx++
 }
 
-document.getElementById('add_benefit').addEventListener('click', build_benefit)
+document.getElementById('add_professional').addEventListener('click', build_professional)
 
-build_benefit();
+function add_professional_register(professional_idx) {
+    const container = document.getElementById(`professional_registers_${professional_idx}`)
+    
+    container.insertAdjacentHTML(
+        'beforeend',
+        `<div class="row mb-4 professional_register" id="professional_${professional_idx}_register_${next_register_idx}">
+            <div class="col-md-3 mb-4 mb-md-0">
+                <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" class="form-label">Profissão *</label>
+                <select class="form-select" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_profession" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][profession]">
+                    <option value="0">Nutricionista</option>
+                    <option value="1">Educador físico</option>
+                    <option value="2">Fisioterapeuta</option>
+                    <option value="3">Influenciador</option>
+                </select>
+            </div>
 
-function remove_benefit(idx){
-    document.getElementById(`benefit_${idx}`).remove()
-    reload_plan_benefits()
+            <div class="col-md-3 mb-4 mb-md-0">
+                <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" class="form-label">Tipo *</label>
+                <select class="form-select" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register_type" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register_type]">
+                    <option value="0">CREF</option>
+                    <option value="1">CFN</option>
+                    <option value="2">CRN</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-4 mb-md-0">
+                <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" class="form-label">Nº do registro *</label>
+                <input type="text" class="form-control" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register]">
+            </div>
+
+            <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
+                <button type="button" class="btn btn-danger remove_register" onclick="remove_register('${professional_idx}', '${next_register_idx}')"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>`
+    )
+
+    next_register_idx++
 }
 
-function reload_plan_benefits(){
-    let plan_benefits = document.getElementsByClassName('plan_benefits')
+function remove_professional(idx){
+    document.getElementById(`professional_${idx}`).remove()
+}
 
-    for(let i = 0; i < plan_benefits.length; i++){
-        plan_benefits[i].innerHTML = ''
-        build_benefits_options(plan_benefits[i].getAttribute('data-plan-idx'))
+function remove_register(professional_idx, idx){
+    document.getElementById(`professional_${professional_idx}_register_${idx}`).remove()
+}
+
+function build_professional_benefits_options(professional_idx){
+    let container = document.getElementById(`professional_${professional_idx}_benefits`)
+    let benefit_options = document.getElementsByClassName("benefit_option")
+
+    container.innerHTML = ""
+
+    for(i = 0; i < benefit_options.length; i++){
+        container.insertAdjacentHTML(
+            'beforeend',
+            `<div class="form-check">
+                <input class="form-check-input" type="checkbox" id="professional_form_${professional_idx}_benefits_${benefit_options[i].getAttribute('data-benefit-idx')}" name="professional_form[${professional_idx}][benefits][]" value="${benefit_options[i].getAttribute('data-benefit-idx')}">
+                <label class="form-check-label" for="professional_form_${professional_idx}_benefits_${benefit_options[i].getAttribute('data-benefit-idx')}">${benefit_options[i].value}</label>
+            </div>`
+        )
     }
 }
+
+build_professional()
