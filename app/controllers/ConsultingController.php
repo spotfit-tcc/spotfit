@@ -5,6 +5,7 @@ namespace App\controllers;
 use App\controllers\ApplicationController;
 use App\models\Consulting;
 use App\models\Category;
+use App\forms\consulting\ConsultingForm;
 
 class ConsultingController extends ApplicationController{
     public function index(){
@@ -30,6 +31,8 @@ class ConsultingController extends ApplicationController{
     }
 
     public function new(){
+        $this->authenticate();
+
         $consulting = new Consulting([]);
 
         if(isset($_GET["consulting_id"])){
@@ -45,6 +48,12 @@ class ConsultingController extends ApplicationController{
     }
 
     public function create(){
+        $consulting_form = new ConsultingForm($_POST, $_FILES);
+
+        echo "<pre>";
+        print_r($consulting_form);
+        echo "</pre>";
+
         echo "<pre>";
         print_r($_POST);
         echo "</pre>";

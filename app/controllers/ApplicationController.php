@@ -15,10 +15,14 @@ class ApplicationController extends BaseController {
         parent::__construct();
 
         if($this->authenticate){
-            if(!isset($_SESSION['auth']) || !$_SESSION['auth']){
-                header('Location: /sign_in');
-                return;
-            }
+            $this->authenticate();
+        }
+    }
+
+    function authenticate(){
+        if(!isset($_SESSION['auth']) || !$_SESSION['auth']){
+            header('Location: /sign_in');
+            return;
         }
     }
 

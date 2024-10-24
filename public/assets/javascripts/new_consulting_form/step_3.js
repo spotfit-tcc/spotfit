@@ -16,8 +16,8 @@ function build_benefit(){
                 </div>
 
                 <div class="mb-4">
-                    <label for="benefits_${next_benefit_idx}_desc" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="benefits_${next_benefit_idx}_desc" name="benefits[${next_benefit_idx}][desc]"></textarea>
+                    <label for="benefits_${next_benefit_idx}_description" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="benefits_${next_benefit_idx}_description" name="benefits[${next_benefit_idx}][description]"></textarea>
                 </div>
 
                 <div class="mb-4">

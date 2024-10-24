@@ -68,16 +68,16 @@ function build_professional(){
                 </div>
             </div>
 
-            <div>
+            <button type="button" class="btn btn-success" id="add_professional_${next_professional_idx}_register" onclick="add_professional_register('${next_professional_idx}')">
+                <i class="fas fa-plus"></i> Adicionar Registro
+            </button>
+
+            <div class="mt-4">
                 <h6>Escolha os benefícios que esse profissional atua</h6>
 
                 <div class="professional_benefits" id="professional_${next_professional_idx}_benefits" data-professional-idx="${next_professional_idx}">
                 </div>
             </div>
-
-            <button type="button" class="btn btn-success" id="add_professional_${next_professional_idx}_register" onclick="add_professional_register('${next_professional_idx}')">
-                <i class="fas fa-plus"></i> Adicionar Registro
-            </button>
         </fieldset>`
     )
 
