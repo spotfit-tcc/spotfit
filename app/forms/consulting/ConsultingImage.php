@@ -3,10 +3,13 @@
 namespace App\forms\consulting;
 
 class ConsultingImage {
-	private $name;
+	public $name;
 	private $type;
 	private $size;
 	private $tmp_name;
+    public $db_saved_name;
+    private $errors = [];
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
     public function __construct($params){
         $this->name = $params['name'] ?? null;
@@ -15,10 +18,26 @@ class ConsultingImage {
         $this->tmp_name = $params['tmp_name'] ?? null;
     }
 
-    public function path_name(){
+    public function save_image($dir){
+        $imageFileType = strtolower(pathinfo($this->name, PATHINFO_EXTENSION));
+        $this->db_saved_name = uniqid('', true) . '.' . $imageFileType;
+
+        return move_uploaded_file($this->tmp_name, $dir . $this->db_saved_name);
     }
 
-    public function valid_record(){
+    public function get_errors(){
+        if($this->size > self::MAX_FILE_SIZE){
+            $this->errors[] = "A imagem $name ultrapassa " . self::MAX_FILE_SIZE . 'MB';
+        }
+
+        if(
+            $this->type != "image/jpeg" &&
+            $this->type != "image/png"
+        ){
+            $this->errors[] = "A imagem $this->name deve ser jpeg ou png";
+        }
+
+        return $this->errors;
     }
 }
 

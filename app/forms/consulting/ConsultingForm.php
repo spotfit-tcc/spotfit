@@ -3,7 +3,7 @@
 namespace App\forms\consulting;
 use App\models\BaseModel;
 
-class ConsultingForm {
+class ConsultingForm extends BaseModel {
 	private $consulting_id;
 	private $consulting_name;
 	private $description;
@@ -11,6 +11,7 @@ class ConsultingForm {
 	private $contact_phone;
 	private $adm_user_id;
     private $consulting_images = [];
+    private $categories = [];
     private $consulting_benefits = [];
     private $consulting_professionals = [];
     private $consulting_plans = [];
@@ -23,6 +24,7 @@ class ConsultingForm {
         $this->contact_email = $params['contact_email'] ?? null;
         $this->adm_user_id = $params['adm_user_id'] ?? null;
         $this->contact_phone = $params['contact_phone'] ?? null;
+        $this->categories = $params['categories'] ?? null;
 
         //ConsultingImage
         if(isset($files_params["consulting_images"]) && count($files_params["consulting_images"]) > 0) {
@@ -59,14 +61,28 @@ class ConsultingForm {
                 $this->consulting_plans[] = new ConsultingPlan($plan);
             }
         }
+
+        $this->validate_record();
     }
 
     public function __get($attr){
         return $this->$attr;
     }
 
+    public function get_errors(){
+        $result = [];
+
+        array_walk_recursive($this->errors, function($value) use (&$result) {
+            $result[] = $value;
+        });
+
+        return array_filter($result, function($value){
+            return !empty($value);
+        });
+    }
+
     public function collection_for_professions(){
-        $con = BaseModel::get_connection();
+        $con = self::get_connection();
         $stmt = $con->query('SELECT * FROM profession');
         $result = $stmt->fetchALL(\PDO::FETCH_ASSOC);
 
@@ -80,7 +96,7 @@ class ConsultingForm {
     }
 
     public function collection_for_register_types(){
-        $con = BaseModel::get_connection();
+        $con = self::get_connection();
         $stmt = $con->query('SELECT * FROM register_type');
         $result = $stmt->fetchALL(\PDO::FETCH_ASSOC);
 
@@ -93,10 +109,100 @@ class ConsultingForm {
         }, $result);
     }
 
-    public function valid_record(){
+    public function validate_record(){
+        $this->errors = [];
+
+        if(empty($this->consulting_images)){
+            $this->errors[] = "É necessário escolher pelo menos 1 imagem para consultoria";
+        } else {
+            foreach ($this->consulting_images as $image) {
+                $this->errors[] = $image->get_errors();
+            }
+        }
+
+        if(empty($this->categories)){
+            $this->errors[] = "É necessário escolher pelo menos 1 categoria para consultoria";
+        }
+
+        if(empty($this->consulting_benefits)){
+            $this->errors[] = "É necessário criar ao menos 1 benefício para consultoria";
+        } else {
+            foreach ($this->consulting_benefits as $benefit) {
+                $this->errors[] = $benefit->get_errors();
+            }
+        }
+
+        if(empty($this->consulting_professionals)){
+            $this->errors[] = "A consultoria precisa de pelo menos 1 profissional";
+        } else {
+            foreach ($this->consulting_professionals as $professional) {
+                $this->errors[] = $professional->get_errors();
+            }
+        }
+
+        if(empty($this->consulting_plans)){
+            $this->errors[] = "A consultoria precisa de pelo menos 1 plano";
+        } else {
+            foreach ($this->consulting_plans as $plan) {
+                $this->errors[] = $plan->get_errors();
+            }
+        }
+
+        if (
+            empty(trim($this->consulting_name)) ||
+            empty(trim($this->contact_email))
+        ){
+            $this->errors[] = "Preencha todos os campos obrigatórios";
+        }
     }
 
     public function create_record(){
+        if(count($this->get_errors()) > 0) return false;
+
+        try{
+            $pdo = self::get_connection();
+            $pdo->beginTransaction();
+
+            //save consulting basic info
+            $stmt1 = $pdo->prepare(
+                'INSERT INTO consulting(consulting_name, description, contact_email, contact_phone, adm_user_id) '.
+                'VALUE(:consulting_name, :description, :contact_email, :contact_phone, :adm_user_id)'
+            );
+            $stmt1->execute([
+                ':consulting_name' => $this->consulting_name,
+                ':description' => $this->description,
+                ':contact_email' => $this->contact_email,
+                ':contact_phone' => $this->contact_phone,
+                ':adm_user_id' => self::logged_user(true)
+            ]);
+
+            $consulting_id = $pdo->lastInsertId();
+
+            foreach ($this->consulting_images as $image) {
+                if($image->save_image(self::file_upload_dir())){
+                    $img_stmt = $pdo->prepare(
+                        'INSERT INTO consulting_image(description, image_dir, consulting_id) '.
+                        'VALUE(:description, :image_dir, :consulting_id)'
+                    );
+                    $img_stmt->execute([
+                        ':description' => $image->name,
+                        ':image_dir' => $image->db_saved_name,
+                        ':consulting_id' => $consulting_id
+                    ]);
+                }else {
+                    $pdo->rollBack();
+                    return false;
+                }
+            }
+
+            $pdo->commit();
+        } catch(Exception $e){
+            $pdo->rollBack();
+            print_r($e);
+            die();
+            
+            //return false;
+        }
     }
 }
 

@@ -7,8 +7,9 @@ class ConsultingProfessional {
 	private $instagram;
 	private $phone;
 	private $email;
-	private $professional_registers;
+	private $professional_registers = [];
 	private $benefits;
+    private $errors;
 
     public function __construct($params){
         $this->name = $params['consulting_professional']['name'] ?? null;
@@ -18,13 +19,26 @@ class ConsultingProfessional {
 
         //consulting_professionals
         foreach($params["professional_registers"] as $key => $benefit){
-            $this->professional_registers = new ConsultingProfessionalRegister($benefit);
+            $this->professional_registers[] = new ConsultingProfessionalRegister($benefit);
         }
 
         $this->benefits = $params['benefits'] ?? null;
     }
 
-    public function valid_record(){
+    public function get_errors(){
+        if (empty(trim($this->name))){
+            $this->errors[] = "Profissional sem nome";
+        }
+
+        if(empty($this->professional_registers)){
+            $this->errors[] = "O profissional precisa de um registro profissional inserido";
+        } else {
+            foreach ($this->professional_registers as $register) {
+                $this->errors[] = $register->get_errors();
+            }
+        }
+
+        return $this->errors;
     }
 }
 

@@ -6,6 +6,7 @@ class ConsultingProfessionalRegister {
 	private $profession;
 	private $register_type;
 	private $register;
+    private $errors;
 
     public function __construct($params){
         $this->profession = $params['profession'] ?? null;
@@ -13,7 +14,16 @@ class ConsultingProfessionalRegister {
         $this->register = $params['register'] ?? null;
     }
 
-    public function valid_record(){
+    public function get_errors(){
+        if (
+            empty(trim($this->profession)) ||
+            empty(trim($this->register_type)) ||
+            empty(trim($this->register))
+        ){
+            $this->errors[] = "Preencha todas as informações do registro";
+        }
+
+        #verificar se registro é válido
     }
 }
 

@@ -45,16 +45,10 @@ class ConsultingController extends ApplicationController{
         $consulting_form = new ConsultingForm($_POST, $_FILES);
 
         echo "<pre>";
-        print_r($consulting_form);
+        print_r($consulting_form->get_errors());
         echo "</pre>";
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-
-        echo "<pre>";
-        print_r($_FILES);
-        echo "</pre>";
+        $consulting_form->create_record();
     }
 
     private function get_consulting ($search) {
