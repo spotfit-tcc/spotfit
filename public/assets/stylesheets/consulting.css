@@ -166,3 +166,11 @@ input, textarea, select{
 #toggle-steps-show #toggle-steps-icon.toggled {
     transform: rotate(90deg);
 }
+
+.table_for_show{
+}
+
+.table_for_show th{
+    max-width: 20px;
+    text-align: start;
+}

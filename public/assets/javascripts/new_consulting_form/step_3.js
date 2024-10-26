@@ -22,7 +22,20 @@ function build_benefit(){
 
                 <div class="mb-4">
                     <label for="benefits_${next_benefit_idx}_icon" class="form-label">Ícone</label>
-                    <input type="file" class="form-control" id="benefits_${next_benefit_idx}_icon" name="benefits[${next_benefit_idx}][icon]">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" id="benefits_${next_benefit_idx}_icon_show"></i></span>
+                        <select class="form-select icon_form" id="benefits_${next_benefit_idx}_icon" name="benefits[${next_benefit_idx}][icon]" onchange="show_benefit_select_icon(${next_benefit_idx}, this)">
+                            <option value=""></option>
+                            <option value="fa-solid fa-weight-scale">Balança</option>
+                            <option value="fa-solid fa-heart">Coração</option>
+                            <option value="fa-solid fa-person-walking">Corrida</option>
+                            <option value="fa-solid fa-user-nurse">Enfermeira</option>
+                            <option value="fa-solid fa-dumbbell">Halter</option>
+                            <option value="fa-solid fa-receipt">Receita</option>
+                            <option value="fa-solid fa-syringe">Siringa</option>
+                            <option value="fa-solid fa-utensils">Talheres</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </fieldset>`
@@ -54,4 +67,10 @@ function reload_plan_benefits(){
         professional_benefits[i].innerHTML = ''
         build_professional_benefits_options(professional_benefits[i].getAttribute('data-professional-idx'))
     }
+}
+
+function show_benefit_select_icon(benefit_idx, el){
+    let span = document.getElementById(`benefits_${benefit_idx}_icon_show`)
+    let icon = el.value
+    span.innerHTML = `<i class="${icon}"></i>`
 }

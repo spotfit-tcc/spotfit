@@ -2,6 +2,7 @@ let next_step = 1
 let next_btn = document.getElementById("next-step")
 let previous_btn = document.getElementById("previous-step")
 let submit_btn = document.getElementById("submit-consulting")
+let consulting_form = document.getElementById("consulting_form")
 
 let step_icons = {
     "step-1-circle": "fas fa-info",
@@ -12,6 +13,7 @@ let step_icons = {
 }
 
 function validate_form_step(){
+    return true;
     let valid = true
 
     if(next_step > 1 && next_step <= 5){
@@ -102,3 +104,17 @@ nextStep();
 next_btn.addEventListener('click', nextStep)
 
 previous_btn.addEventListener('click', previousStep)
+
+consulting_form.addEventListener('submit', e => {
+    e.preventDefault()
+
+    let modal = new bootstrap.Modal(document.getElementById('consulting_form_confirm_modal'), {
+        keyboard: false
+    });
+
+    modal.show();
+})
+
+document.getElementById("true_submit_form_btn").addEventListener('click', () => {
+    consulting_form.submit()
+})

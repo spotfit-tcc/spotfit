@@ -212,13 +212,14 @@ class ConsultingForm extends BaseModel {
             $benefits_ids = [];
             foreach ($this->consulting_benefits as $benefit) {
                 $ben_stmt = $pdo->prepare(
-                    'INSERT INTO consulting_benefit(benefit, description, consulting_id) '.
-                    'VALUE(:benefit, :description, :consulting_id)'
+                    'INSERT INTO consulting_benefit(benefit, description, icon, consulting_id) '.
+                    'VALUE(:benefit, :description, :icon, :consulting_id)'
                 );
 
                 $ben_stmt->execute([
                     ':benefit' => $benefit->__get('benefit'),
                     ':description' => $benefit->__get('description'),
+                    ':icon' => $benefit->__get('icon'),
                     ':consulting_id' => $this->consulting_id
                 ]);
 

@@ -104,7 +104,7 @@
         </div>
 
         <div class="col-lg-7 ms-lg-5">
-            <form action="/consulting/create" method="post" class="mt-3" enctype='multipart/form-data' novalidate>
+            <form action="/consulting/create" method="post" id="consulting_form" class="mt-3" enctype='multipart/form-data' novalidate>
                 <?php require 'partials/form_step_1.phtml' ?>
                 <?php require 'partials/form_step_2.phtml' ?>
                 <?php require 'partials/form_step_3.phtml' ?>
@@ -117,6 +117,30 @@
                     <button type="submit" class="btn btn-success d-none" id="submit-consulting">Criar consultoria</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-lg" tabindex="-1" id="consulting_form_confirm_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirme as informações da sua consultoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <div class="modal-body">
+            <p><i class="fa-solid fa-circle-exclamation"></i> Você está prestes a criar uma nova consultoria e publicá-la na Spotfit</p>
+            <p>Verifique se todas as informações estão corretas passando pelo formulário novamente</p>
+            <small>
+                Dica: Use os botões
+                <button type="button" class="btn btn-secondary btn-sm">Voltar</button>
+                <button type="button" class="btn btn-primary btn-sm">Prosseguir</button>
+            </small>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success"><i class="fas fa-check"></i> Confirmar e salvar</button>
+            </div>
         </div>
     </div>
 </div>
