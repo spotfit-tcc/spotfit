@@ -12,7 +12,6 @@ let step_icons = {
 }
 
 function validate_form_step(){
-    return true;
     let valid = true
 
     if(next_step > 1 && next_step <= 5){

@@ -168,6 +168,7 @@ class ConsultingForm extends BaseModel {
                 'INSERT INTO consulting(consulting_name, description, contact_email, contact_phone, adm_user_id) '.
                 'VALUE(:consulting_name, :description, :contact_email, :contact_phone, :adm_user_id)'
             );
+
             $stmt1->execute([
                 ':consulting_name' => $this->consulting_name,
                 ':description' => $this->description,
@@ -176,7 +177,7 @@ class ConsultingForm extends BaseModel {
                 ':adm_user_id' => self::logged_user(true)
             ]);
 
-            $consulting_id = $pdo->lastInsertId();
+            $this->consulting_id = $pdo->lastInsertId();
 
             foreach ($this->consulting_images as $image) {
                 if($image->save_image(self::file_upload_dir())){
@@ -184,10 +185,11 @@ class ConsultingForm extends BaseModel {
                         'INSERT INTO consulting_image(description, image_dir, consulting_id) '.
                         'VALUE(:description, :image_dir, :consulting_id)'
                     );
+
                     $img_stmt->execute([
-                        ':description' => $image->name,
-                        ':image_dir' => $image->db_saved_name,
-                        ':consulting_id' => $consulting_id
+                        ':description' => $image->__get('name'),
+                        ':image_dir' => $image->__get('db_saved_name'),
+                        ':consulting_id' => $this->consulting_id
                     ]);
                 }else {
                     $pdo->rollBack();
@@ -195,7 +197,108 @@ class ConsultingForm extends BaseModel {
                 }
             }
 
+            foreach ($this->categories as $category) {
+                $cat_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_category(consulting_id, category_id) '.
+                    'VALUE(:consulting_id, :category_id)'
+                );
+
+                $cat_stmt->execute([
+                    ':consulting_id' => $this->consulting_id,
+                    ':category_id' => $category,
+                ]);
+            }
+
+            $benefits_ids = [];
+            foreach ($this->consulting_benefits as $benefit) {
+                $ben_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_benefit(benefit, description, consulting_id) '.
+                    'VALUE(:benefit, :description, :consulting_id)'
+                );
+
+                $ben_stmt->execute([
+                    ':benefit' => $benefit->__get('benefit'),
+                    ':description' => $benefit->__get('description'),
+                    ':consulting_id' => $this->consulting_id
+                ]);
+
+                $benefits_ids[$benefit->idx] = $pdo->lastInsertId();
+            }
+
+            foreach ($this->consulting_professionals as $professional) {
+                $pro_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_professional(name, instagram, phone, email, consulting_id) '.
+                    'VALUE(:name, :instagram, :phone, :email, :consulting_id)'
+                );
+
+                $pro_stmt->execute([
+                    ':name' => $professional->__get('name'),
+                    ':instagram' => $professional->__get('instagram'),
+                    ':phone' => $professional->__get('phone'),
+                    ':email' => $professional->__get('email'),
+                    ':consulting_id' => $this->consulting_id
+                ]);
+
+                $cur_professional_id = $pdo->lastInsertId();
+
+                foreach ($professional->professional_registers as $register) {
+                    $reg_stmt = $pdo->prepare(
+                        'INSERT INTO professional_register(profession_id, register_type_id, register, consulting_professional_id) '.
+                        'VALUE(:profession_id, :register_type_id, :register, :consulting_professional_id)'
+                    );
+    
+                    $reg_stmt->execute([
+                        ':profession_id' => $register->__get('profession'),
+                        ':register_type_id' => $register->__get('register_type'),
+                        ':register' => $register->__get('register'),
+                        ':consulting_professional_id' => $cur_professional_id
+                    ]);
+                }
+
+                foreach ($professional->benefits as $pro_benefit) {
+                    $pb_stmt = $pdo->prepare(
+                        'INSERT INTO consulting_benefit_professional(consulting_benefit_id, consulting_professional_id) '.
+                        'VALUE(:consulting_benefit_id, :consulting_professional_id)'
+                    );
+    
+                    $pb_stmt->execute([
+                        ':consulting_benefit_id' => $benefits_ids[$pro_benefit],
+                        ':consulting_professional_id' => $cur_professional_id
+                    ]);
+                }
+            }
+
+            foreach ($this->consulting_plans as $plan) {
+                $plan_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_plan(plan, price, description, period, consulting_id) '.
+                    'VALUE(:plan, :price, :description, :period, :consulting_id)'
+                );
+
+                $plan_stmt->execute([
+                    ':plan' => $plan->__get('plan'),
+                    ':price' => $plan->__get('price'),
+                    ':description' => $plan->__get('description'),
+                    ':period' => $plan->__get('period'),
+                    ':consulting_id' => $this->consulting_id
+                ]);
+
+                $cur_plan_id = $pdo->lastInsertId();
+
+                foreach ($plan->benefits as $plan_benefit) {
+                    $plb_stmt = $pdo->prepare(
+                        'INSERT INTO consulting_plan_benefit(consulting_plans_id, id_beneficio_consultoria) '.
+                        'VALUE(:consulting_plans_id, :id_beneficio_consultoria)'
+                    );
+    
+                    $plb_stmt->execute([
+                        ':id_beneficio_consultoria' => $benefits_ids[$plan_benefit],
+                        ':consulting_plans_id' => $cur_plan_id
+                    ]);
+                }
+            }
+
             $pdo->commit();
+            return true;
         } catch(Exception $e){
             $pdo->rollBack();
             print_r($e);

@@ -18,6 +18,10 @@ class ConsultingPlan {
         $this->benefits = $params['benefits'] ?? null;
     }
 
+    public function __get($attr){
+        return $this->$attr;
+    }
+
     public function get_errors(){
         if (
             empty(trim($this->plan)) ||

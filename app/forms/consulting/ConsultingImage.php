@@ -3,11 +3,11 @@
 namespace App\forms\consulting;
 
 class ConsultingImage {
-	public $name;
+	private $name;
 	private $type;
 	private $size;
 	private $tmp_name;
-    public $db_saved_name;
+    private $db_saved_name;
     private $errors = [];
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -16,6 +16,10 @@ class ConsultingImage {
         $this->type = $params['type'] ?? null;
         $this->size = $params['size'] ?? null;
         $this->tmp_name = $params['tmp_name'] ?? null;
+    }
+
+    public function __get($attr){
+        return $this->$attr;
     }
 
     public function save_image($dir){

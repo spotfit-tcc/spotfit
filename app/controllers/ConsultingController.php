@@ -43,12 +43,16 @@ class ConsultingController extends ApplicationController{
 
     public function create(){
         $consulting_form = new ConsultingForm($_POST, $_FILES);
-
-        echo "<pre>";
         print_r($consulting_form->get_errors());
-        echo "</pre>";
 
-        $consulting_form->create_record();
+        if($consulting_form->create_record()){
+            header('Location: /consulting?prof=' . $consulting_form->__get('consulting_id'));
+        } else {
+            $this->view->consulting_form = $consulting_form;
+            $this->view->categories = Category::get_all_categories();
+
+            $this->render('new');
+        }
     }
 
     private function get_consulting ($search) {

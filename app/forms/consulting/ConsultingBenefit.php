@@ -14,6 +14,10 @@ class ConsultingBenefit {
         $this->idx = $idx ?? null;
     }
 
+    public function __get($attr){
+        return $this->$attr;
+    }
+
     public function get_errors(){
         if (empty(trim($this->benefit))){
             $this->errors[] = "Preencha todos os campos obrigatórios";

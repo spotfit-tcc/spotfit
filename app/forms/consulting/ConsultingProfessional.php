@@ -25,6 +25,10 @@ class ConsultingProfessional {
         $this->benefits = $params['benefits'] ?? null;
     }
 
+    public function __get($attr){
+        return $this->$attr;
+    }
+
     public function get_errors(){
         if (empty(trim($this->name))){
             $this->errors[] = "Profissional sem nome";
