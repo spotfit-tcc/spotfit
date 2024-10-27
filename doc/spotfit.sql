@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02/09/2024 às 01:36
+-- Tempo de geração: 27/10/2024 às 02:15
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -87,6 +87,7 @@ CREATE TABLE `consulting_access` (
 
 CREATE TABLE `consulting_benefit` (
   `consulting_benefit_id` int(11) NOT NULL,
+  `consulting_id` int(11) NOT NULL,
   `benefit` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL
@@ -233,6 +234,36 @@ CREATE TABLE `professional_register` (
   `register` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `professional_register`
+--
+
+INSERT INTO `professional_register` (`professional_register_id`, `consulting_professional_id`, `profession_id`, `register_type_id`, `register`) VALUES
+(1, 1, 1, 1, '174'),
+(2, 2, 1, 1, '175'),
+(3, 3, 1, 1, '176'),
+(4, 4, 1, 1, '177'),
+(5, 5, 1, 1, '178'),
+(6, 6, 1, 1, '179'),
+(7, 7, 1, 1, '180'),
+(8, 8, 1, 1, '181'),
+(9, 9, 1, 1, '182'),
+(10, 10, 1, 1, '183'),
+(11, 11, 1, 1, '184'),
+(18, 18, 1, 1, '1234'),
+(19, 19, 2, 4, '543223'),
+(20, 20, 1, 1, '1234'),
+(21, 21, 2, 4, '543223'),
+(22, 22, 1, 1, '1234'),
+(23, 23, 2, 4, '543223'),
+(24, 24, 1, 1, '1234'),
+(25, 25, 2, 4, '543223'),
+(26, 26, 1, 1, '1234'),
+(27, 27, 2, 4, '543223'),
+(28, 28, 1, 1, '123'),
+(29, 28, 2, 4, '321'),
+(30, 29, 1, 1, '');
+
 -- --------------------------------------------------------
 
 --
@@ -275,6 +306,15 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Despejando dados para a tabela `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_name`, `email`, `user_password`, `cpf_or_cnpj`, `profile_photo`, `professional`, `phone`) VALUES
+(1, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$I1LoTBKnJuAr9nUOp2xKgev/78oxJFgYs4EPv4NswU2owvOkiKGBe', '51882572890', 'download.jpg', NULL, '11983020691'),
+(2, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$r09ODrlfOW8lohowHJZDouiLOXTAi8TOzhsgIO3Tr6aV/9h74I8Z2', '51882572890', 'a.jpg', NULL, '11983020691'),
+(3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', NULL, '11991825452');
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -302,7 +342,8 @@ ALTER TABLE `consulting_access`
 -- Índices de tabela `consulting_benefit`
 --
 ALTER TABLE `consulting_benefit`
-  ADD PRIMARY KEY (`consulting_benefit_id`);
+  ADD PRIMARY KEY (`consulting_benefit_id`),
+  ADD KEY `consulting_benefit_FK_consulting_id` (`consulting_id`);
 
 --
 -- Índices de tabela `consulting_benefit_professional`
@@ -449,7 +490,7 @@ ALTER TABLE `profession`
 -- AUTO_INCREMENT de tabela `professional_register`
 --
 ALTER TABLE `professional_register`
-  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `register_type`
@@ -461,7 +502,7 @@ ALTER TABLE `register_type`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para tabelas despejadas
@@ -479,6 +520,12 @@ ALTER TABLE `consulting`
 ALTER TABLE `consulting_access`
   ADD CONSTRAINT `consulting_access_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `consulting_access_ibfk_2` FOREIGN KEY (`consulting_id`) REFERENCES `consulting` (`consulting_id`);
+
+--
+-- Restrições para tabelas `consulting_benefit`
+--
+ALTER TABLE `consulting_benefit`
+  ADD CONSTRAINT `consulting_benefit_FK_consulting_id` FOREIGN KEY (`consulting_id`) REFERENCES `consulting` (`consulting_id`);
 
 --
 -- Restrições para tabelas `consulting_benefit_professional`
