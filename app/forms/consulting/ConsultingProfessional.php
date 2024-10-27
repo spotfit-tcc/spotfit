@@ -3,6 +3,7 @@
 namespace App\forms\consulting;
 
 class ConsultingProfessional {
+	private $consulting_professional_id;
 	private $name;
 	private $instagram;
 	private $phone;
@@ -12,6 +13,7 @@ class ConsultingProfessional {
     private $errors;
 
     public function __construct($params){
+        $this->consulting_professional_id = $params['consulting_professional']['consulting_professional_id'] ?? null;
         $this->name = $params['consulting_professional']['name'] ?? null;
         $this->instagram = $params['consulting_professional']['instagram'] ?? null;
         $this->phone = $params['consulting_professional']['phone'] ?? null;

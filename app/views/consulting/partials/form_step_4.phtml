@@ -5,8 +5,6 @@
     </div>
 
     <div class="mt-3">
-        <input type="hidden" name="form_step" value="3">
-
         <div id="professionals">
             <?php foreach($this->view->consulting_form->consulting_professionals as $key => $professional) { ?>
                 <fieldset class="custom_fieldset new_professional mb-5" id="professional_<?= $key ?>">
@@ -82,8 +80,13 @@
                         <div class="professional_benefits" id="professional_<?= $key ?>_benefits" data-professional-idx="<?= $key ?>">
                             <?php foreach($this->view->consulting_form->consulting_benefits as $benefit) { ?>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="professional_form_<?= $key ?>_benefits_<?= $benefit->idx ?>" name="professional_form[<?= $key ?>][benefits][]" value="<?= $benefit->idx ?>" <?= in_array($benefit->idx, $professional->benefits) ? "checked" : "" ?>>
-                                    <label class="form-check-label" for="professional_form_<?= $key ?>_benefits_<?= $benefit->idx ?>"><?= $benefit->benefit ?></label>
+                                    <?php if($this->view->type === "new") { ?>
+                                        <input class="form-check-input" type="checkbox" id="professional_form_<?= $key ?>_benefits_<?= $benefit->idx ?>" name="professional_form[<?= $key ?>][benefits][]" value="<?= $benefit->idx ?>" <?= in_array($benefit->idx, $professional->benefits) ? "checked" : "" ?>>
+                                        <label class="form-check-label" for="professional_form_<?= $key ?>_benefits_<?= $benefit->idx ?>"><?= $benefit->benefit ?></label>
+                                    <?php } else { ?>
+                                        <label class="form-check-label" for="professional_form_<?= $key ?>_benefits_<?= $benefit->consulting_benefit_id ?>"><?= $benefit->benefit ?></label>
+                                        <input class="form-check-input" type="checkbox" id="professional_form_<?= $key ?>_benefits_<?= $benefit->consulting_benefit_id ?>" name="professional_form[<?= $key ?>][benefits][]" value="<?= $benefit->consulting_benefit_id ?>" <?= in_array($benefit->consulting_benefit_id, $professional->benefits) ? "checked" : "" ?>>
+                                    <?php } ?>
                                 </div>
                             <?php } ?>
                         </div>

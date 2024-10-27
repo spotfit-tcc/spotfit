@@ -8,6 +8,7 @@ class ConsultingImage {
 	private $size;
 	private $tmp_name;
     private $db_saved_name;
+    private $consulting_image_id;
     private $errors = [];
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -16,6 +17,8 @@ class ConsultingImage {
         $this->type = $params['type'] ?? null;
         $this->size = $params['size'] ?? null;
         $this->tmp_name = $params['tmp_name'] ?? null;
+        $this->db_saved_name = $params['db_saved_name'] ?? null;
+        $this->consulting_image_id  = $params['consulting_image_id'] ?? null;
     }
 
     public function __get($attr){

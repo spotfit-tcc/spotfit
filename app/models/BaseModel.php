@@ -67,7 +67,7 @@ class BaseModel {
     }
 
     public static function file_upload_dir(){
-        $dir = dirname(__DIR__, 3) . '/spotfit_uploads/';
+        $dir = dirname(__DIR__, 2) . '/public/image_uploads/';
 
         //create directory if it doesn't exists
         if (!is_dir($dir)) {

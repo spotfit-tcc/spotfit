@@ -3,6 +3,7 @@
 namespace App\forms\consulting;
 
 class ConsultingBenefit {
+	private $consulting_benefit_id ;
 	private $benefit;
 	private $description;
 	private $icon;
@@ -10,6 +11,7 @@ class ConsultingBenefit {
     private $errors = [];
 
     public function __construct($params, $idx){
+        $this->consulting_benefit_id = $params['consulting_benefit_id'] ?? null;
         $this->benefit = $params['benefit'] ?? null;
         $this->description = $params['description'] ?? null;
         $this->icon = $params['icon'] ?? null;

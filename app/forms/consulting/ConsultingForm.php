@@ -11,6 +11,7 @@ class ConsultingForm extends BaseModel {
 	private $contact_phone;
 	private $adm_user_id;
     private $consulting_images = [];
+    private $delete_images = [];
     private $categories = [];
     private $consulting_benefits = [];
     private $consulting_professionals = [];
@@ -25,9 +26,10 @@ class ConsultingForm extends BaseModel {
         $this->adm_user_id = $params['adm_user_id'] ?? null;
         $this->contact_phone = $params['contact_phone'] ?? null;
         $this->categories = $params['categories'] ?? [];
+        $this->delete_images = $params['delete_images'] ?? [];
 
         //ConsultingImage
-        if(isset($files_params["consulting_images"]) && count($files_params["consulting_images"]) > 0) {
+        if(isset($files_params["consulting_images"]) && count($files_params["consulting_images"]) > 0 && !empty($files_params["consulting_images"]['tmp_name'][0])) {
             $images_key = $files_params["consulting_images"];
             foreach($images_key["name"] as $key => $image){
                 $props = [
@@ -38,6 +40,10 @@ class ConsultingForm extends BaseModel {
                 ];
     
                 $this->consulting_images[] = new ConsultingImage($props);
+            }
+        } elseif (isset($params["consulting_images"]) && count($params["consulting_images"]) > 0) {
+            foreach($params["consulting_images"] as $key => $image){
+                $this->consulting_images[] = new ConsultingImage($image);
             }
         }
         
@@ -65,6 +71,77 @@ class ConsultingForm extends BaseModel {
 
     public function __get($attr){
         return $this->$attr;
+    }
+
+    public static function build_form_from_id($id){
+        $user_id = self::logged_user(true);
+
+        $con = self::get_connection();
+        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id AND adm_user_id = :user_id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $params = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        $stmt = $con->prepare("SELECT * FROM consulting_image WHERE consulting_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $params['consulting_images'] = array_map(function($img){
+            return [
+                "name" => $img['description'],
+                "db_saved_name" => $img['image_dir'],
+                "consulting_image_id" => $img['consulting_image_id']
+            ];
+        }, $stmt->fetchAll(\PDO::FETCH_ASSOC));
+
+        $stmt = $con->prepare("SELECT * FROM consulting_category WHERE consulting_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $params['categories'] = array_map(function($cat){
+            return $cat["category_id"];
+        }, $stmt->fetchAll(\PDO::FETCH_ASSOC));
+
+        $stmt = $con->prepare("SELECT * FROM consulting_benefit WHERE consulting_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $params['benefits'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $stmt = $con->prepare("SELECT * FROM consulting_professional WHERE consulting_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $professionals = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($professionals as $key => $professional) {
+            $params['professional_form'][$key]['consulting_professional'] = $professional;
+
+            $stmt = $con->prepare("SELECT * FROM professional_register WHERE consulting_professional_id  = :id");
+            $stmt->bindParam(':id', $professional['consulting_professional_id']);
+            $stmt->execute();
+            $params['professional_form'][$key]['professional_registers'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            $stmt = $con->prepare("SELECT * FROM consulting_benefit_professional WHERE consulting_professional_id  = :id");
+            $stmt->bindParam(':id', $professional['consulting_professional_id']);
+            $stmt->execute();
+            $params['professional_form'][$key]['benefits'] = array_map(function($benef){
+                return $benef["consulting_benefit_id"];
+            }, $stmt->fetchAll(\PDO::FETCH_ASSOC));
+        }
+
+        $stmt = $con->prepare("SELECT * FROM consulting_plan WHERE consulting_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $params['plans'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($params['plans'] as $key => $plan) {
+            $stmt = $con->prepare("SELECT * FROM consulting_plan_benefit WHERE consulting_plans_id   = :id");
+            $stmt->bindParam(':id', $plan['consulting_plans_id']);
+            $stmt->execute();
+            $params['plans'][$key]['benefits'] = array_map(function($benef){
+                return $benef["id_beneficio_consultoria"];
+            }, $stmt->fetchAll(\PDO::FETCH_ASSOC));
+        }
+
+        return $params;
     }
 
     public function get_errors(){
@@ -110,11 +187,23 @@ class ConsultingForm extends BaseModel {
     public function validate_record(){
         $this->errors = [];
 
-        if(empty($this->consulting_images)){
-            $this->errors[] = "É necessário escolher pelo menos 1 imagem para consultoria";
-        } else {
-            foreach ($this->consulting_images as $image) {
-                $this->errors[] = $image->get_errors();
+        if($this->consulting_id){
+            $con = self::get_connection();
+            $cur_images_qnt = $con->query("SELECT COUNT(*) as qnt FROM consulting_image WHERE consulting_id = " . $this->consulting_id)->fetch(\PDO::FETCH_ASSOC)['qnt'];
+            if($cur_images_qnt == count($this->delete_images) && empty($this->consulting_images)){
+                $this->errors[] = "É necessário escolher pelo menos 1 imagem para consultoria";
+            } elseif(!empty($this->consulting_images)) {
+                foreach ($this->consulting_images as $image) {
+                    $this->errors[] = $image->get_errors();
+                }
+            }
+        } else{
+            if(empty($this->consulting_images)){
+                $this->errors[] = "É necessário escolher pelo menos 1 imagem para consultoria";
+            } else {
+                foreach ($this->consulting_images as $image) {
+                    $this->errors[] = $image->get_errors();
+                }
             }
         }
 
@@ -275,7 +364,7 @@ class ConsultingForm extends BaseModel {
 
                 $plan_stmt->execute([
                     ':plan' => $plan->__get('plan'),
-                    ':price' => $plan->__get('price'),
+                    ':price' => $plan->get_unformated_price(),
                     ':description' => $plan->__get('description'),
                     ':period' => $plan->__get('period'),
                     ':consulting_id' => $this->consulting_id
@@ -305,6 +394,198 @@ class ConsultingForm extends BaseModel {
             
             //return false;
         }
+    }
+
+    public function update_record(){
+        if(count($this->get_errors()) > 0) return false;
+
+        try{
+            $pdo = self::get_connection();
+            $pdo->beginTransaction();
+
+            //save consulting basic info
+            $stmt = $pdo->prepare(
+                'UPDATE consulting SET consulting_name = :consulting_name, '.
+                'description = :description, contact_email = :contact_email, '.
+                'contact_phone = :contact_phone WHERE consulting_id = :consulting_id'
+            );
+
+            $stmt->execute([
+                ':consulting_name' => $this->consulting_name,
+                ':description' => $this->description,
+                ':contact_email' => $this->contact_email,
+                ':contact_phone' => $this->contact_phone,
+                ':consulting_id' => $this->consulting_id
+            ]);
+
+            //delete selected images
+            if(count($this->delete_images) > 0){
+                $placeholders = rtrim(str_repeat('?,', count($this->delete_images)), ',');
+
+                $stmt = $pdo->prepare(
+                    "DELETE FROM consulting_image WHERE consulting_image_id IN ($placeholders)"
+                );
+
+                $stmt->execute($this->delete_images);
+            }
+
+            //deleting consulting_plans to create them again later
+            $stmt = $pdo->prepare('DELETE FROM consulting_plan WHERE consulting_id = :consulting_id');
+            $stmt->bindParam(':consulting_id', $this->consulting_id);
+            $stmt->execute();
+
+            //deleting consulting_categories to create them again later
+            $stmt = $pdo->prepare('DELETE FROM consulting_category WHERE consulting_id = :consulting_id');
+            $stmt->bindParam(':consulting_id', $this->consulting_id);
+            $stmt->execute();
+
+            //deleting consulting_professionals to create them again later
+            $stmt = $pdo->prepare('DELETE FROM consulting_professional WHERE consulting_id = :consulting_id');
+            $stmt->bindParam(':consulting_id', $this->consulting_id);
+            $stmt->execute();
+
+            //deleting consulting_benefits to create them again later
+            $stmt = $pdo->prepare('DELETE FROM consulting_benefit WHERE consulting_id = :consulting_id');
+            $stmt->bindParam(':consulting_id', $this->consulting_id);
+            $stmt->execute();
+
+            foreach ($this->consulting_images as $image) {
+                if($image->save_image(self::file_upload_dir())){
+                    $img_stmt = $pdo->prepare(
+                        'INSERT INTO consulting_image(description, image_dir, consulting_id) '.
+                        'VALUE(:description, :image_dir, :consulting_id)'
+                    );
+
+                    $img_stmt->execute([
+                        ':description' => $image->__get('name'),
+                        ':image_dir' => $image->__get('db_saved_name'),
+                        ':consulting_id' => $this->consulting_id
+                    ]);
+                }else {
+                    $pdo->rollBack();
+                    return false;
+                }
+            }
+
+            foreach ($this->categories as $category) {
+                $cat_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_category(consulting_id, category_id) '.
+                    'VALUE(:consulting_id, :category_id)'
+                );
+
+                $cat_stmt->execute([
+                    ':consulting_id' => $this->consulting_id,
+                    ':category_id' => $category,
+                ]);
+            }
+
+            $benefits_ids = [];
+            foreach ($this->consulting_benefits as $benefit) {
+                $ben_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_benefit(benefit, description, icon, consulting_id) '.
+                    'VALUE(:benefit, :description, :icon, :consulting_id)'
+                );
+
+                $ben_stmt->execute([
+                    ':benefit' => $benefit->__get('benefit'),
+                    ':description' => $benefit->__get('description'),
+                    ':icon' => $benefit->__get('icon'),
+                    ':consulting_id' => $this->consulting_id
+                ]);
+
+                $benefits_ids[$benefit->consulting_benefit_id] = $pdo->lastInsertId();
+            }
+
+            foreach ($this->consulting_professionals as $professional) {
+                $pro_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_professional(name, instagram, phone, email, consulting_id) '.
+                    'VALUE(:name, :instagram, :phone, :email, :consulting_id)'
+                );
+
+                $pro_stmt->execute([
+                    ':name' => $professional->__get('name'),
+                    ':instagram' => $professional->__get('instagram'),
+                    ':phone' => $professional->__get('phone'),
+                    ':email' => $professional->__get('email'),
+                    ':consulting_id' => $this->consulting_id
+                ]);
+
+                $cur_professional_id = $pdo->lastInsertId();
+
+                foreach ($professional->professional_registers as $register) {
+                    $reg_stmt = $pdo->prepare(
+                        'INSERT INTO professional_register(profession_id, register_type_id, register, consulting_professional_id) '.
+                        'VALUE(:profession_id, :register_type_id, :register, :consulting_professional_id)'
+                    );
+    
+                    $reg_stmt->execute([
+                        ':profession_id' => $register->__get('profession'),
+                        ':register_type_id' => $register->__get('register_type'),
+                        ':register' => $register->__get('register'),
+                        ':consulting_professional_id' => $cur_professional_id
+                    ]);
+                }
+
+                foreach ($professional->benefits as $pro_benefit) {
+                    $pb_stmt = $pdo->prepare(
+                        'INSERT INTO consulting_benefit_professional(consulting_benefit_id, consulting_professional_id) '.
+                        'VALUE(:consulting_benefit_id, :consulting_professional_id)'
+                    );
+    
+                    $pb_stmt->execute([
+                        ':consulting_benefit_id' => $benefits_ids[$pro_benefit],
+                        ':consulting_professional_id' => $cur_professional_id
+                    ]);
+                }
+            }
+
+            foreach ($this->consulting_plans as $plan) {
+                $plan_stmt = $pdo->prepare(
+                    'INSERT INTO consulting_plan(plan, price, description, period, consulting_id) '.
+                    'VALUE(:plan, :price, :description, :period, :consulting_id)'
+                );
+
+                $plan_stmt->execute([
+                    ':plan' => $plan->__get('plan'),
+                    ':price' => $plan->get_unformated_price(),
+                    ':description' => $plan->__get('description'),
+                    ':period' => $plan->__get('period'),
+                    ':consulting_id' => $this->consulting_id
+                ]);
+
+                $cur_plan_id = $pdo->lastInsertId();
+
+                foreach ($plan->benefits as $plan_benefit) {
+                    $plb_stmt = $pdo->prepare(
+                        'INSERT INTO consulting_plan_benefit(consulting_plans_id, id_beneficio_consultoria) '.
+                        'VALUE(:consulting_plans_id, :id_beneficio_consultoria)'
+                    );
+    
+                    $plb_stmt->execute([
+                        ':id_beneficio_consultoria' => $benefits_ids[$plan_benefit],
+                        ':consulting_plans_id' => $cur_plan_id
+                    ]);
+                }
+            }
+
+            $pdo->commit();
+            return true;
+        } catch(Exception $e){
+            $pdo->rollBack();
+            print_r($e);
+            die();
+            
+            //return false;
+        }
+    }
+
+    public function cant_edit(){
+        return empty($this->consulting_images) ||
+        empty($this->categories) ||
+        empty($this->consulting_benefits) ||
+        empty($this->consulting_professionals) ||
+        empty($this->consulting_plans) ||
+        empty($this->consulting_id);
     }
 }
 

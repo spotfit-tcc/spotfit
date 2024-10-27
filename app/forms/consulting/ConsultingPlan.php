@@ -3,6 +3,7 @@
 namespace App\forms\consulting;
 
 class ConsultingPlan {
+	private $consulting_plans_id;
 	private $plan;
 	private $price;
 	private $description;
@@ -11,6 +12,7 @@ class ConsultingPlan {
     private $errors;
 
     public function __construct($params){
+        $this->consulting_plans_id = $params['consulting_plans_id'] ?? null;
         $this->plan = $params['plan'] ?? null;
         $this->price = $params['price'] ?? null;
         $this->description = $params['description'] ?? null;
@@ -20,6 +22,14 @@ class ConsultingPlan {
 
     public function __get($attr){
         return $this->$attr;
+    }
+
+    public function get_formated_price(){
+        return str_replace('.', ',', strval($this->price));
+    }
+
+    public function get_unformated_price(){
+        return str_replace(',', '.', str_replace('.', '', strval($this->price)));
     }
 
     public function get_errors(){
