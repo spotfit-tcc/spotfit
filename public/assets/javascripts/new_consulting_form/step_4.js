@@ -1,6 +1,16 @@
 let next_register_idx = 1
 let next_professional_idx = 0
 
+let professionals_el = document.getElementsByClassName('professional_benefits')
+if(professionals_el.length > 0){
+    next_professional_idx = professionals_el.length + 1
+}
+
+let registers_el = document.getElementsByClassName('register_qnt_control')
+if(registers_el.length > 0){
+    next_register_idx = registers_el.length + 1
+}
+
 function build_professional(){
     const container = document.getElementById('professionals')
 
@@ -52,7 +62,7 @@ function build_professional(){
 
                     <div class="col-md-4 mb-4 mb-md-0">
                         <label for="professional_form_${next_professional_idx}_professional_registers_0_register" class="form-label">Nº do registro *</label>
-                        <input type="text" class="form-control" required id="professional_form_${next_professional_idx}_professional_registers_0_register" name="professional_form[${next_professional_idx}][professional_registers][0][register]">
+                        <input type="text" class="form-control register_qnt_control" required id="professional_form_${next_professional_idx}_professional_registers_0_register" name="professional_form[${next_professional_idx}][professional_registers][0][register]">
                     </div>
 
                     <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
@@ -102,7 +112,7 @@ function add_professional_register(professional_idx) {
 
             <div class="col-md-4 mb-4 mb-md-0">
                 <label for="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" class="form-label">Nº do registro *</label>
-                <input type="text" class="form-control" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register]">
+                <input type="text" class="form-control register_qnt_control" required id="professional_form_${professional_idx}_professional_registers_${next_register_idx}_register" name="professional_form[${professional_idx}][professional_registers][${next_register_idx}][register]">
             </div>
 
             <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
@@ -164,4 +174,6 @@ function build_options_for_professions_and_register_types(professional_idx, regi
     })
 }
 
-build_professional()
+if(professionals_el.length === 0){
+    build_professional()
+}

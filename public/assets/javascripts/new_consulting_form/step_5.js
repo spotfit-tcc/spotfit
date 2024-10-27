@@ -10,6 +10,10 @@ document.querySelectorAll('.price-input').forEach(input => {
 })
 
 let next_plan_idx = 0
+let plans_el = document.getElementsByClassName('plan')
+if(plans_el.length > 0){
+    next_plan_idx = plans_el.length + 1
+}
 
 function build_plan(){
     const container = document.getElementById('plans')
@@ -43,8 +47,8 @@ function build_plan(){
                 </div>
 
                 <div class="mb-4">
-                    <label for="plans_${next_plan_idx}_desc" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="plans_${next_plan_idx}_desc" name="plans[${next_plan_idx}][desc]"></textarea>
+                    <label for="plans_${next_plan_idx}_description" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="plans_${next_plan_idx}_description" name="plans[${next_plan_idx}][description]"></textarea>
                 </div>
             </div>
 
@@ -74,7 +78,9 @@ function build_plan(){
 
 document.getElementById('add_plan').addEventListener('click', build_plan)
 
-build_plan()
+if(plans_el.length == 0){
+    build_plan()
+}
 
 function remove_plan(idx){
     document.getElementById(`plan_${idx}`).remove()

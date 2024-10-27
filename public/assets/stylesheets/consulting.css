@@ -167,7 +167,8 @@ input, textarea, select{
     transform: rotate(90deg);
 }
 
-.table_for_show{
+.errors_alert{
+    max-width: 900px;
 }
 
 .table_for_show th{

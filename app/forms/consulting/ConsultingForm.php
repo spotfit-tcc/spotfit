@@ -24,7 +24,7 @@ class ConsultingForm extends BaseModel {
         $this->contact_email = $params['contact_email'] ?? null;
         $this->adm_user_id = $params['adm_user_id'] ?? null;
         $this->contact_phone = $params['contact_phone'] ?? null;
-        $this->categories = $params['categories'] ?? null;
+        $this->categories = $params['categories'] ?? [];
 
         //ConsultingImage
         if(isset($files_params["consulting_images"]) && count($files_params["consulting_images"]) > 0) {
@@ -61,8 +61,6 @@ class ConsultingForm extends BaseModel {
                 $this->consulting_plans[] = new ConsultingPlan($plan);
             }
         }
-
-        $this->validate_record();
     }
 
     public function __get($attr){
@@ -152,7 +150,7 @@ class ConsultingForm extends BaseModel {
             empty(trim($this->consulting_name)) ||
             empty(trim($this->contact_email))
         ){
-            $this->errors[] = "Preencha todos os campos obrigatórios";
+            $this->errors[] = "Preencha todos os campos obrigatórios das informações básicas";
         }
     }
 

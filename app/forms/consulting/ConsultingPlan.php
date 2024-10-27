@@ -7,7 +7,7 @@ class ConsultingPlan {
 	private $price;
 	private $description;
 	private $period;
-	private $benefits;
+	private $benefits = [];
     private $errors;
 
     public function __construct($params){
@@ -15,7 +15,7 @@ class ConsultingPlan {
         $this->price = $params['price'] ?? null;
         $this->description = $params['description'] ?? null;
         $this->period = $params['period'] ?? null;
-        $this->benefits = $params['benefits'] ?? null;
+        $this->benefits = $params['benefits'] ?? [];
     }
 
     public function __get($attr){

@@ -8,6 +8,50 @@
         <input type="hidden" name="form_step" value="4">
 
         <div id="benefits">
+            <?php foreach($this->view->consulting_form->consulting_benefits as $key => $benefit) { ?>
+                <fieldset class="custom_fieldset new_benefit mb-5" id="benefit_<?= $key ?>">
+                    <legend>Benefício <?= (int) $key + 1 ?></legend>
+                    <i class="fas fa-trash delete_fieldset" onclick="remove_benefit('<?= $key ?>')"></i>
+
+                    <div class="benefit">
+                        <div class="mb-4">
+                            <label for="benefits_<?= $key ?>_benefit" class="form-label">Nome do benefício *</label>
+                            <input type="text" 
+                                   class="form-control benefit_option" required 
+                                   id="benefits_<?= $key ?>_benefit" 
+                                   name="benefits[<?= $key ?>][benefit]" 
+                                   data-benefit-idx="<?= $key ?>" 
+                                   onchange="reload_plan_benefits()"
+                                   value="<?= $benefit->__get('benefit') ?>"
+                            >
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="benefits_<?= $key ?>_description" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="benefits_<?= $key ?>_description" name="benefits[<?= $key ?>][description]"
+                            ><?= $benefit->__get('description') ?></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="benefits_<?= $key ?>_icon" class="form-label">Ícone</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text" id="benefits_<?= $key ?>_icon_show"><i class="<?= $benefit->__get('icon')?>"></i></span>
+                                <select class="form-select icon_form" id="benefits_<?= $key ?>_icon" name="benefits[<?= $key ?>][icon]" onchange="show_benefit_select_icon(<?= $key ?>, this)">
+                                    <option value="" <?= empty($benefit->__get('icon')) ? "selected" : "" ?>></option>
+                                    <option value="fa-solid fa-weight-scale" <?= $benefit->__get('icon') == "fa-solid fa-weight-scale" ? "selected" : "" ?>>Balança</option>
+                                    <option value="fa-solid fa-heart" <?= $benefit->__get('icon') == "fa-solid fa-heart" ? "selected" : "" ?>>Coração</option>
+                                    <option value="fa-solid fa-person-walking" <?= $benefit->__get('icon') == "fa-solid fa-person-walking" ? "selected" : "" ?>>Corrida</option>
+                                    <option value="fa-solid fa-user-nurse" <?= $benefit->__get('icon') == "fa-solid fa-user-nurse" ? "selected" : "" ?>>Enfermeira</option>
+                                    <option value="fa-solid fa-dumbbell" <?= $benefit->__get('icon') == "fa-solid fa-dumbbell" ? "selected" : "" ?>>Halter</option>
+                                    <option value="fa-solid fa-receipt" <?= $benefit->__get('icon') == "fa-solid fa-receipt" ? "selected" : "" ?>>Receita</option>
+                                    <option value="fa-solid fa-syringe" <?= $benefit->__get('icon') == "fa-solid fa-syringe" ? "selected" : "" ?>>Siringa</option>
+                                    <option value="fa-solid fa-utensils" <?= $benefit->__get('icon') == "fa-solid fa-utensils" ? "selected" : "" ?>>Talheres</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            <?php } ?>
         </div>
 
         <button type="button" class="btn btn-success" id="add_benefit">

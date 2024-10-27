@@ -22,7 +22,7 @@ class ConsultingBenefit {
 
     public function get_errors(){
         if (empty(trim($this->benefit))){
-            $this->errors[] = "Preencha todos os campos obrigatórios";
+            $this->errors[] = "Preencha todos os campos obrigatórios do benefício " . $this->idx + 1;
         }
 
         return $this->errors;

@@ -1,4 +1,8 @@
 let next_benefit_idx = 0
+let benefit_options_el = document.getElementsByClassName('benefit_option')
+if(benefit_options_el.length > 0){
+    next_benefit_idx = benefit_options_el.length + 1
+}
 
 function build_benefit(){
     const container = document.getElementById('benefits')
@@ -47,7 +51,9 @@ function build_benefit(){
 
 document.getElementById('add_benefit').addEventListener('click', build_benefit)
 
-build_benefit();
+if(benefit_options_el.length === 0){
+    build_benefit();
+}
 
 function remove_benefit(idx){
     document.getElementById(`benefit_${idx}`).remove()

@@ -1,18 +1,26 @@
-<?php if(isset($_GET['errors'])){ ?>
-    <div class="alert alert-warning" role="alert">
-        <?= $_GET['errors'] ?>
-    </div>
-<?php } ?>
-
 <div class="floating-btn-container d-lg-none">
     <button type="btn" id="toggle-steps-show"><i class="fas fa-chevron-circle-right" id="toggle-steps-icon"></i></button>
 </div>
 
 <div class="container mt-5">
+    <?php if(count($this->view->consulting_form->get_errors()) > 0){ ?>
+        <div class="alert alert-danger alert-dismissible fade show errors_alert" role="alert">
+            <strong><i class="fa-solid fa-circle-exclamation"></i> Corrija os seguintes erros:</strong>
+            <ul>
+                <?php foreach($this->view->consulting_form->get_errors() as $error) { ?>
+                    <li><?= $error ?></li>
+                <?php } ?>
+            </ul>
+            <small>Faça upload das imagens de novo</small>
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+
     <div class="row">
         <div class="col-lg-4 d-none d-lg-block" id="steps-show-column">
             <div class="bg-opacity-50 rounded py-4 px-3 bg-for-cell steps-show-column">
-                <h1 class="fs-2">Nova consultoria</h1>
+                <h1 class="fs-2"><?= $this->view->action ?> consultoria</h1>
                 <p class="text-light">Crie e configure sua consultoria nos seguintes passos:</p>
                 <hr>
                 <div id="steps">
@@ -104,7 +112,7 @@
         </div>
 
         <div class="col-lg-7 ms-lg-5">
-            <form action="/consulting/create" method="post" id="consulting_form" class="mt-3" enctype='multipart/form-data' novalidate>
+            <form action="<?= $this->view->form_action ?>" method="post" id="consulting_form" class="mt-3" enctype='multipart/form-data' novalidate>
                 <?php require 'partials/form_step_1.phtml' ?>
                 <?php require 'partials/form_step_2.phtml' ?>
                 <?php require 'partials/form_step_3.phtml' ?>
@@ -139,7 +147,7 @@
         </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-success"><i class="fas fa-check"></i> Confirmar e salvar</button>
+                <button type="button" class="btn btn-success" id="true_submit_form_btn"><i class="fas fa-check"></i> Confirmar e salvar</button>
             </div>
         </div>
     </div>

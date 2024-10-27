@@ -8,7 +8,7 @@ class ConsultingProfessional {
 	private $phone;
 	private $email;
 	private $professional_registers = [];
-	private $benefits;
+	private $benefits = [];
     private $errors;
 
     public function __construct($params){
@@ -22,7 +22,7 @@ class ConsultingProfessional {
             $this->professional_registers[] = new ConsultingProfessionalRegister($benefit);
         }
 
-        $this->benefits = $params['benefits'] ?? null;
+        $this->benefits = $params['benefits'] ?? [];
     }
 
     public function __get($attr){

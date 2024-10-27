@@ -8,6 +8,88 @@
         <input type="hidden" name="form_step" value="3">
 
         <div id="professionals">
+            <?php foreach($this->view->consulting_form->consulting_professionals as $key => $professional) { ?>
+                <fieldset class="custom_fieldset new_professional mb-5" id="professional_<?= $key ?>">
+                    <legend>Profissional <?= $key + 1 ?></legend>
+                    <i class="fas fa-trash delete_fieldset" onclick="remove_professional('<?= $key ?>')"></i>
+
+                    <div class="consulting_professional">
+                        <h6>Informações do profissional</h6>
+
+                        <div class="mb-4">
+                            <label for="professional_form_<?= $key ?>_consulting_professional_name" class="form-label">Nome *</label>
+                            <input type="text" class="form-control" required id="professional_form_<?= $key ?>_consulting_professional_name" name="professional_form[<?= $key ?>][consulting_professional][name]" value="<?= $professional->__get('name') ?>">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="professional_form_<?= $key ?>_consulting_professional_instagram" class="form-label">Instagram</label>
+                            <input type="text" class="form-control" id="professional_form_<?= $key ?>_consulting_professional_instagram" name="professional_form[<?= $key ?>][consulting_professional][instagram]" value="<?= $professional->__get('instagram') ?>">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="professional_form_<?= $key ?>_consulting_professional_phone" class="form-label">Telefone/celular</label>
+                            <input type="text" class="form-control" id="professional_form_<?= $key ?>_consulting_professional_phone" name="professional_form[<?= $key ?>][consulting_professional][phone]" value="<?= $professional->__get('phone') ?>">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="professional_form_<?= $key ?>_consulting_professional_email" class="form-label">Email de contato</label>
+                            <input type="email" class="form-control" id="professional_form_<?= $key ?>_consulting_professional_email" name="professional_form[<?= $key ?>][consulting_professional][email]" value="<?= $professional->__get('email') ?>">
+                        </div>
+                    </div>
+
+                    <div class="professional_registers" id="professional_registers_<?= $key ?>">
+                        <h6>Registros profissionais</h6>
+
+                        <?php foreach($professional->professional_registers as $reg_key => $register) {?>
+                            <div class="row mb-4 professional_register" id="professional_<?= $key ?>_register_<?= $reg_key ?>">
+                                <div class="col-md-3 mb-4 mb-md-0">
+                                    <label for="professional_form_<?= $key ?>_professional_registers_<?= $reg_key ?>_profession" class="form-label">Profissão *</label>
+                                    <select class="form-select" required id="professional_form_<?= $key ?>_professional_registers_<?= $reg_key ?>_profession" name="professional_form[<?= $key ?>][professional_registers][<?= $reg_key ?>][profession]">
+                                        <?php foreach($this->view->consulting_form->collection_for_professions() as $opt) {?>
+                                            <option value="<?= $opt['id'] ?>" title="<?= $opt['desc'] ?>" <?= $register->__get('profession') == $opt['id'] ? "selected" : "" ?>><?= $opt['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-4 mb-md-0">
+                                    <label for="professional_form_<?= $key ?>_professional_registers_<?= $reg_key ?>_register_type" class="form-label">Tipo *</label>
+                                    <select class="form-select" required id="professional_form_<?= $key ?>_professional_registers_<?= $reg_key ?>_register_type" name="professional_form[<?= $key ?>][professional_registers][<?= $reg_key ?>][register_type]">
+                                        <?php foreach($this->view->consulting_form->collection_for_register_types() as $opt) {?>
+                                            <option value="<?= $opt['id'] ?>" title="<?= $opt['desc'] ?>" <?= $register->__get('register_type') == $opt['id'] ? "selected" : "" ?>><?= $opt['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 mb-4 mb-md-0">
+                                    <label for="professional_form_<?= $key ?>_professional_registers_<?= $reg_key ?>_register" class="form-label">Nº do registro *</label>
+                                    <input type="text" class="form-control register_qnt_control" required id="professional_form_<?= $key ?>_professional_registers_<?= $reg_key ?>_register" name="professional_form[<?= $key ?>][professional_registers][<?= $reg_key ?>][register]" value="<?= $register->__get('register') ?>">
+                                </div>
+
+                                <div class="col-md-1 mb-4 mb-md-0 remove-item-container">
+                                    <button type="button" class="btn btn-danger remove_register" onclick="remove_register('<?= $key ?>', '<?= $reg_key ?>')"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                    <button type="button" class="btn btn-success" id="add_professional_<?= $key ?>_register" onclick="add_professional_register('<?= $key ?>')">
+                        <i class="fas fa-plus"></i> Adicionar Registro
+                    </button>
+
+                    <div class="mt-4">
+                        <h6>Escolha os benefícios que esse profissional atua</h6>
+
+                        <div class="professional_benefits" id="professional_<?= $key ?>_benefits" data-professional-idx="<?= $key ?>">
+                            <?php foreach($this->view->consulting_form->consulting_benefits as $benefit) { ?>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="professional_form_<?= $key ?>_benefits_<?= $benefit->idx ?>" name="professional_form[<?= $key ?>][benefits][]" value="<?= $benefit->idx ?>" <?= in_array($benefit->idx, $professional->benefits) ? "checked" : "" ?>>
+                                    <label class="form-check-label" for="professional_form_<?= $key ?>_benefits_<?= $benefit->idx ?>"><?= $benefit->benefit ?></label>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </fieldset>
+            <?php } ?>
         </div>
 
         <button type="button" class="btn btn-success" id="add_professional">

@@ -8,6 +8,54 @@
         <input type="hidden" name="form_step" value="5">
 
         <div id="plans">
+            <?php foreach($this->view->consulting_form->consulting_plans as $idx => $plan) { ?>
+                <fieldset class="custom_fieldset new_plan mb-5" id="plan_<?= $idx ?>">
+                    <legend>Plano <?= $idx + 1 ?></legend>
+                    <i class="fas fa-trash delete_fieldset" onclick="remove_plan('<?= $idx ?>')"></i>
+
+                    <div class="plan">
+                        <div class="mb-4">
+                            <label for="plans_<?= $idx ?>_plan" class="form-label">Nome do plano *</label>
+                            <input type="text" class="form-control" required id="plans_<?= $idx ?>_plan" name="plans[<?= $idx ?>][plan]" value="<?= $plan->__get('plan') ?>">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="plans_<?= $idx ?>_price" class="form-label">Preço *</label>
+                            <div class="input-group">
+                                <span class="input-group-text">R$</span>
+                                <input type="text" class="form-control price-input" required id="plans_<?= $idx ?>_price" name="plans[<?= $idx ?>][price]" value="<?= $plan->__get('price') ?>"></input>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="plans_<?= $idx ?>_period" class="form-label">Duração *</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" required id="plans_<?= $idx ?>_period" name="plans[<?= $idx ?>][period]" value="<?= $plan->__get('period') ?>">
+                                <span class="input-group-text">meses</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="plans_<?= $idx ?>_description" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="plans_<?= $idx ?>_description" name="plans[<?= $idx ?>][description]"
+                            ><?= $plan->__get('description') ?></textarea>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <h6>Escolha os benefícios incluídos nesse plano</h6>
+
+                        <div class="plan_benefits" id="plan_<?= $idx ?>_benefits" data-plan-idx="<?= $idx ?>">
+                            <?php foreach($this->view->consulting_form->consulting_benefits as $benefit) { ?>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="plans_<?= $idx ?>_benefits_<?= $benefit->idx ?>" name="plans[<?= $idx ?>][benefits][]" value="<?= $benefit->idx ?>" <?= in_array($benefit->idx, $plan->benefits) ? "checked" : "" ?>>
+                                    <label class="form-check-label" for="plans_<?= $idx ?>_benefits_<?= $benefit->idx ?>"><?= $benefit->benefit ?></label>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </fieldset>
+            <?php } ?>
         </div>
 
         <button type="button" class="btn btn-success" id="add_plan">
