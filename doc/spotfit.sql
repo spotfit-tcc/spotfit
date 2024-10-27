@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/10/2024 às 17:26
+-- Tempo de geração: 28/10/2024 às 00:18
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -67,6 +67,14 @@ CREATE TABLE `consulting` (
   `adm_user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `consulting`
+--
+
+INSERT INTO `consulting` (`consulting_id`, `consulting_name`, `description`, `contact_email`, `contact_phone`, `adm_user_id`) VALUES
+(1, 'Consultoria do Ademir', 'Consultoria do Ademir cuida da sua saúde e bem estar', 'contato.ademir@gmail.com', '11991825452', 3),
+(2, 'Natan Personal', '', 'natan.personal@gmail.com', '123123123123', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +101,16 @@ CREATE TABLE `consulting_benefit` (
   `icon` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `consulting_benefit`
+--
+
+INSERT INTO `consulting_benefit` (`consulting_benefit_id`, `consulting_id`, `benefit`, `description`, `icon`) VALUES
+(25, 1, 'Prescrição de exercícios', 'Prescrição de exercícios', 'fa-solid fa-dumbbell'),
+(26, 1, 'Acompanhamento de dores', 'Acompanhamento de dores', 'fa-solid fa-user-nurse'),
+(27, 2, 'Treino periodizado', 'Treino periodizado', 'fa-solid fa-dumbbell'),
+(28, 2, 'Dieta personalizada', 'Dieta personalizada', 'fa-solid fa-utensils');
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +122,17 @@ CREATE TABLE `consulting_benefit_professional` (
   `consulting_professional_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `consulting_benefit_professional`
+--
+
+INSERT INTO `consulting_benefit_professional` (`consulting_benefit_id`, `consulting_professional_id`) VALUES
+(25, 24),
+(26, 23),
+(26, 24),
+(27, 25),
+(28, 26);
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +143,16 @@ CREATE TABLE `consulting_category` (
   `consulting_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `consulting_category`
+--
+
+INSERT INTO `consulting_category` (`consulting_id`, `category_id`) VALUES
+(1, 4),
+(1, 14),
+(2, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -143,6 +182,16 @@ CREATE TABLE `consulting_image` (
   `consulting_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `consulting_image`
+--
+
+INSERT INTO `consulting_image` (`consulting_image_id`, `description`, `image_dir`, `consulting_id`) VALUES
+(5, 'foto-perfil-2.jpeg', '671ec53989ca60.02671578.jpeg', 1),
+(6, 'foto-proa.jpg', '671ec539bdfa55.04428595.jpg', 1),
+(7, 'Foto-perfil.jpeg', '671ec637c08336.24727239.jpeg', 1),
+(8, 'rock pistola loko.jpeg', '671ec935efd201.90051686.jpeg', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -158,6 +207,16 @@ CREATE TABLE `consulting_plan` (
   `period` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `consulting_plan`
+--
+
+INSERT INTO `consulting_plan` (`consulting_plans_id`, `consulting_id`, `plan`, `price`, `description`, `period`) VALUES
+(21, 1, 'Plano semestral completo', 500.00, 'Plano de 6 meses com todos os benefícios', '6'),
+(22, 1, 'Plano anual completo', 1999.99, 'Plano de 1 ano com desconto mensal, incluso todos os benefícios', '12'),
+(23, 2, 'Plano semestral completo', 659.99, 'Plano semestral completo', '6'),
+(24, 2, 'Plano anual completo', 999.99, 'Plano anual completo', '12');
+
 -- --------------------------------------------------------
 
 --
@@ -168,6 +227,19 @@ CREATE TABLE `consulting_plan_benefit` (
   `consulting_plans_id` int(11) NOT NULL,
   `id_beneficio_consultoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `consulting_plan_benefit`
+--
+
+INSERT INTO `consulting_plan_benefit` (`consulting_plans_id`, `id_beneficio_consultoria`) VALUES
+(21, 25),
+(22, 25),
+(22, 26),
+(23, 27),
+(23, 28),
+(24, 27),
+(24, 28);
 
 -- --------------------------------------------------------
 
@@ -183,6 +255,16 @@ CREATE TABLE `consulting_professional` (
   `email` varchar(255) NOT NULL,
   `consulting_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `consulting_professional`
+--
+
+INSERT INTO `consulting_professional` (`consulting_professional_id`, `name`, `instagram`, `phone`, `email`, `consulting_id`) VALUES
+(23, 'Cleiton', '@cleiton', '56545465', '', 1),
+(24, 'Samara', '@samara', '675534234', 'contato.samara@gmail.com', 1),
+(25, 'Natan', '@natan', '1231231232', 'natan.personal@gmail.com', 2),
+(26, 'Cleiton nutri', '@nutri_cleiton', '1231332123', '', 2);
 
 -- --------------------------------------------------------
 
@@ -234,6 +316,16 @@ CREATE TABLE `professional_register` (
   `register` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `professional_register`
+--
+
+INSERT INTO `professional_register` (`professional_register_id`, `consulting_professional_id`, `profession_id`, `register_type_id`, `register`) VALUES
+(23, 23, 1, 1, '456234'),
+(24, 24, 1, 1, '75645'),
+(25, 25, 1, 1, '12312312'),
+(26, 26, 2, 2, '32543435');
+
 -- --------------------------------------------------------
 
 --
@@ -282,7 +374,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `user_name`, `email`, `user_password`, `cpf_or_cnpj`, `profile_photo`, `professional`, `phone`) VALUES
 (1, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$I1LoTBKnJuAr9nUOp2xKgev/78oxJFgYs4EPv4NswU2owvOkiKGBe', '51882572890', 'download.jpg', NULL, '11983020691'),
 (2, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$r09ODrlfOW8lohowHJZDouiLOXTAi8TOzhsgIO3Tr6aV/9h74I8Z2', '51882572890', 'a.jpg', NULL, '11983020691'),
-(3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', NULL, '11991825452');
+(3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', NULL, '11991825452'),
+(4, 'Natan Personal', 'natan.personal@gmail.com', '$2y$10$dtA1ac48uIkHVOSUrZW9Vebe3lCWwBR.W/9PhJgZda.f4tkt9XFPG', '31522433678', '31522433678671ec7369a8049.46876155.jpeg', NULL, '5435433242');
 
 --
 -- Índices para tabelas despejadas
@@ -320,7 +413,7 @@ ALTER TABLE `consulting_benefit`
 --
 ALTER TABLE `consulting_benefit_professional`
   ADD PRIMARY KEY (`consulting_benefit_id`,`consulting_professional_id`),
-  ADD KEY `consulting_professional_id` (`consulting_professional_id`);
+  ADD KEY `consulting_benefit_professional_FK_consulting_professional_id` (`consulting_professional_id`);
 
 --
 -- Índices de tabela `consulting_category`
@@ -356,7 +449,7 @@ ALTER TABLE `consulting_plan`
 --
 ALTER TABLE `consulting_plan_benefit`
   ADD PRIMARY KEY (`consulting_plans_id`,`id_beneficio_consultoria`),
-  ADD KEY `id_beneficio_consultoria` (`id_beneficio_consultoria`);
+  ADD KEY `consulting_plan_benefit_FK_id_beneficio_consultoria` (`id_beneficio_consultoria`);
 
 --
 -- Índices de tabela `consulting_professional`
@@ -382,9 +475,9 @@ ALTER TABLE `profession`
 --
 ALTER TABLE `professional_register`
   ADD PRIMARY KEY (`professional_register_id`),
-  ADD KEY `consulting_professional_id` (`consulting_professional_id`),
   ADD KEY `profession_id` (`profession_id`),
-  ADD KEY `register_type_id` (`register_type_id`);
+  ADD KEY `register_type_id` (`register_type_id`),
+  ADD KEY `professional_register_FK_consulting_professional_id` (`consulting_professional_id`);
 
 --
 -- Índices de tabela `register_type`
@@ -412,13 +505,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de tabela `consulting`
 --
 ALTER TABLE `consulting`
-  MODIFY `consulting_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consulting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_benefit`
 --
 ALTER TABLE `consulting_benefit`
-  MODIFY `consulting_benefit_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consulting_benefit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_comment`
@@ -430,19 +523,19 @@ ALTER TABLE `consulting_comment`
 -- AUTO_INCREMENT de tabela `consulting_image`
 --
 ALTER TABLE `consulting_image`
-  MODIFY `consulting_image_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consulting_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_plan`
 --
 ALTER TABLE `consulting_plan`
-  MODIFY `consulting_plans_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consulting_plans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_professional`
 --
 ALTER TABLE `consulting_professional`
-  MODIFY `consulting_professional_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consulting_professional_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `email_contact`
@@ -460,7 +553,7 @@ ALTER TABLE `profession`
 -- AUTO_INCREMENT de tabela `professional_register`
 --
 ALTER TABLE `professional_register`
-  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `register_type`
@@ -472,7 +565,7 @@ ALTER TABLE `register_type`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para tabelas despejadas
@@ -501,6 +594,7 @@ ALTER TABLE `consulting_benefit`
 -- Restrições para tabelas `consulting_benefit_professional`
 --
 ALTER TABLE `consulting_benefit_professional`
+  ADD CONSTRAINT `consulting_benefit_professional_FK_consulting_professional_id` FOREIGN KEY (`consulting_professional_id`) REFERENCES `consulting_professional` (`consulting_professional_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `consulting_benefit_professional_ibfk_1` FOREIGN KEY (`consulting_benefit_id`) REFERENCES `consulting_benefit` (`consulting_benefit_id`),
   ADD CONSTRAINT `consulting_benefit_professional_ibfk_2` FOREIGN KEY (`consulting_professional_id`) REFERENCES `consulting_professional` (`consulting_professional_id`);
 
@@ -534,6 +628,8 @@ ALTER TABLE `consulting_plan`
 -- Restrições para tabelas `consulting_plan_benefit`
 --
 ALTER TABLE `consulting_plan_benefit`
+  ADD CONSTRAINT `consulting_plan_benefit_FK_consulting_plans_id` FOREIGN KEY (`consulting_plans_id`) REFERENCES `consulting_plan` (`consulting_plans_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `consulting_plan_benefit_FK_id_beneficio_consultoria` FOREIGN KEY (`id_beneficio_consultoria`) REFERENCES `consulting_benefit` (`consulting_benefit_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `consulting_plan_benefit_ibfk_1` FOREIGN KEY (`consulting_plans_id`) REFERENCES `consulting_plan` (`consulting_plans_id`),
   ADD CONSTRAINT `consulting_plan_benefit_ibfk_2` FOREIGN KEY (`id_beneficio_consultoria`) REFERENCES `consulting_benefit` (`consulting_benefit_id`);
 
@@ -547,7 +643,7 @@ ALTER TABLE `consulting_professional`
 -- Restrições para tabelas `professional_register`
 --
 ALTER TABLE `professional_register`
-  ADD CONSTRAINT `consulting_professional_id_FK_consulting_professional` FOREIGN KEY (`consulting_professional_id`) REFERENCES `consulting_professional` (`consulting_professional_id`),
+  ADD CONSTRAINT `professional_register_FK_consulting_professional_id` FOREIGN KEY (`consulting_professional_id`) REFERENCES `consulting_professional` (`consulting_professional_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `professional_register_ibfk_2` FOREIGN KEY (`profession_id`) REFERENCES `profession` (`profession_id`),
   ADD CONSTRAINT `professional_register_ibfk_3` FOREIGN KEY (`register_type_id`) REFERENCES `register_type` (`register_type_id`);
 COMMIT;
