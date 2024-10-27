@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/10/2024 às 02:15
+-- Tempo de geração: 27/10/2024 às 17:26
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -234,36 +234,6 @@ CREATE TABLE `professional_register` (
   `register` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `professional_register`
---
-
-INSERT INTO `professional_register` (`professional_register_id`, `consulting_professional_id`, `profession_id`, `register_type_id`, `register`) VALUES
-(1, 1, 1, 1, '174'),
-(2, 2, 1, 1, '175'),
-(3, 3, 1, 1, '176'),
-(4, 4, 1, 1, '177'),
-(5, 5, 1, 1, '178'),
-(6, 6, 1, 1, '179'),
-(7, 7, 1, 1, '180'),
-(8, 8, 1, 1, '181'),
-(9, 9, 1, 1, '182'),
-(10, 10, 1, 1, '183'),
-(11, 11, 1, 1, '184'),
-(18, 18, 1, 1, '1234'),
-(19, 19, 2, 4, '543223'),
-(20, 20, 1, 1, '1234'),
-(21, 21, 2, 4, '543223'),
-(22, 22, 1, 1, '1234'),
-(23, 23, 2, 4, '543223'),
-(24, 24, 1, 1, '1234'),
-(25, 25, 2, 4, '543223'),
-(26, 26, 1, 1, '1234'),
-(27, 27, 2, 4, '543223'),
-(28, 28, 1, 1, '123'),
-(29, 28, 2, 4, '321'),
-(30, 29, 1, 1, '');
-
 -- --------------------------------------------------------
 
 --
@@ -490,7 +460,7 @@ ALTER TABLE `profession`
 -- AUTO_INCREMENT de tabela `professional_register`
 --
 ALTER TABLE `professional_register`
-  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `register_type`
@@ -577,7 +547,7 @@ ALTER TABLE `consulting_professional`
 -- Restrições para tabelas `professional_register`
 --
 ALTER TABLE `professional_register`
-  ADD CONSTRAINT `professional_register_ibfk_1` FOREIGN KEY (`consulting_professional_id`) REFERENCES `consulting_professional` (`consulting_professional_id`),
+  ADD CONSTRAINT `consulting_professional_id_FK_consulting_professional` FOREIGN KEY (`consulting_professional_id`) REFERENCES `consulting_professional` (`consulting_professional_id`),
   ADD CONSTRAINT `professional_register_ibfk_2` FOREIGN KEY (`profession_id`) REFERENCES `profession` (`profession_id`),
   ADD CONSTRAINT `professional_register_ibfk_3` FOREIGN KEY (`register_type_id`) REFERENCES `register_type` (`register_type_id`);
 COMMIT;
