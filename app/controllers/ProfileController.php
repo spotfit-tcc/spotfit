@@ -9,10 +9,6 @@ class ProfileController extends ApplicationController{
         $this->render('index');
     }
 
-    public function edit(){
-        $this->render('edit');
-    }
-
 }
 
 ?>
