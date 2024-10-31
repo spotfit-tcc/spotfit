@@ -1,4 +1,10 @@
-<?php var_dump($userData); // Verifique se a view está recebendo os dados ?>
+<?php var_dump(get_defined_vars()); var_dump([
+    'profile_photo' => $userData['profile_photo'] ?? null,
+    'user_name' => $userData['user_name'] ?? 'Nome não disponível',
+    'email' => $userData['email'] ?? 'E-mail não disponível',
+    'phone' => $userData['phone'] ?? 'Telefone não disponível',
+]);
+?>
 
 <div class="container">
     <div class="row justify-content-center">
