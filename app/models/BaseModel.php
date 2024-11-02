@@ -85,7 +85,7 @@ class BaseModel {
         if($_SESSION["user_id"] && $only_id){
             return $_SESSION["user_id"];
         } else if($_SESSION["user_id"] && !$only_id){
-            return User::findByAttribute('id', $_SESSION["user_id"]);
+            return User::findByAttribute('user_id', $_SESSION["user_id"]);
         } else {
             return null;
         }

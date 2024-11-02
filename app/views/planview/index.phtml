@@ -1,67 +1,75 @@
 <div class="container">
-  <span class="over-flow-atras">PLANOS</span>
-
-  <h2 class="mb-4"><strong>Nossos Planos</strong></h2>
-
-  <div class="row mb-3 text-center mt-5">
-
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Grátis</h4>
+    <span class="over-flow-atras">PLANOS</span>
+    <h2 class="mb-4"><strong>Nossos Planos</strong></h2>
+    <div class="row mb-3 text-center mt-5">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Grátis</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">R$0,00 <small class="text-muted">/ mês</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Selo de Verificação</li>
+                        <li>Seção Exclusiva nas Pesquisas</li>
+                        <li class="bloq"><s>Criar até 3 consultorias</s></li>
+                        <li class="bloq"><s>Quem viu seu Perfil</s></li>
+                    </ul>
+                    <form action="/planRedirect" method="post">
+                        <input type="hidden" name="plan" value="free">
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary btn-free">Conhecer</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">R$0,00 <small class="text-muted">/ mês</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>Selo de Verificação</li>
-            <li>Seção Exclusiva nas Pesquisas</li>
-            <li class="bloq"><s>Criar até 3 consultorias</s></li>
-            <li class="bloq"><s>Quem viu seu Perfil</s></li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-outline-primary btn-free">Cadastre-se de graça</button>
+
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal text-primary">Pro</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">R$15,00 <small class="text-muted">/ mês</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Selo de Verificação</li>
+                        <li>Seção Exclusiva nas Pesquisas</li>
+                        <li>+ Criar até 3 consultorias</li>
+                        <li class="bloq"><s>Quem viu seu Perfil</s></li>
+                    </ul>
+                    <form action="/planRedirect" method="post">
+                        <input type="hidden" name="plan" value="pro">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary btn-pro">Contratar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal" style="color:var(--orange-color)">Premium</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">R$25,00 <small class="text-muted">/ mês</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Selo de Verificação</li>
+                        <li>Seção Exclusiva nas Pesquisas</li>
+                        <li>Criar até 3 consultorias</li>
+                        <li>+ Quem viu seu Perfil</li>
+                    </ul>
+                    <form action="/planRedirect" method="post">
+                        <input type="hidden" name="plan" value="premium">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary btn-premium">Assinar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal text-primary">Pro</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">R$15,00 <small class="text-muted">/ mês</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>Selo de Verificação</li>
-            <li>Seção Exclusiva nas Pesquisas</li>
-            <li>+ Criar até 3 consultorias</li>
-            <li class="bloq"><s>Quem viu seu Perfil</s></li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary btn-pro">Conhecer</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal" style="color:var(--orange-color)">Premium</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">R$25,00 <small class="text-muted">/ mês</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>Selo de Verificação</li>
-            <li>Seção Exclusiva nas Pesquisas</li>
-            <li>Criar até 3 consultorias</li>
-            <li>+ Quem viu seu Perfil</li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary btn-premium">Contate-nos</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+
 
 <!-- Inclui o script do Stripe -->
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
 
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
