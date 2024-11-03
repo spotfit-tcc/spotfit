@@ -56,6 +56,22 @@ class Comment extends BaseModel {
             return false;
         }
     }
+
+    public function list_rating_detail ($consulting_id) {
+        $records = $this->list_records($consulting_id);
+        
+        $totalRatings = count($records);
+        $sumRatings = array_reduce($records, function($sum, $record) {
+            return $sum + $record['rating'];
+        }, 0);
+
+        $averageRating = $totalRatings > 0 ? $sumRatings / $totalRatings : 0;
+
+        return [
+            'total_ratings' => $totalRatings,
+            'average_rating' => $averageRating
+        ];
+    }
 }
 
 ?>

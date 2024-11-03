@@ -72,3 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
+
+function redirectToWhatsApp(phoneNumber) {
+  const url = `https://wa.me/${phoneNumber}`;
+  window.open(url, '_blank');
+}

@@ -23,7 +23,7 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                         <label class="spot-label-orange">FITNESS</label>
                         <label class="spot-label-green">Novo na plataforma</label>
                     </div>
-                    <h1 class="service-page--service-title"><?= $dados["consulting_name"]?></h1>
+                    <h1 class="service-page--service-title"><?= $dados["consulting"]["consulting_name"]?></h1>
                 </div>
 
                 <div class="professional-service-slider--container">
@@ -92,30 +92,32 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
                 <div class="professional-service-info--text-description-container">
                     <p class="professional-service-info--text-description">
-                    <?= $dados["description"]?>
+                    <?= $dados["consulting"]["description"]?>
                     </p>
                 </div>
 
                 <div class="professional-service-info--contact-container">
                     <div class="professional-service-info--contact-item">
                         <i class="fas fa-phone gray-icon"></i>
-                        <p class="professional-service-info--contact-text"> <?= $dados["contact_phone"]?></p>
+                        <p class="professional-service-info--contact-text"> <?= $dados["consulting"]["contact_phone"]?></p>
                     </div>
                     <div class="professional-service-info--contact-item">
                         <i class="fas fa-envelope gray-icon"></i>
-                        <p class="professional-service-info--contact-text"><?= $dados["contact_email"]?></p>
+                        <p class="professional-service-info--contact-text"><?= $dados["consulting"]["contact_email"]?></p>
                     </div>
                 </div>
 
                 <div class="professional-service-info--chat-action-container">
-                    <form action="" method="POST">
-                        <input type="text" style="display: none" value="<?=!empty($providerId) ? $providerId : ''?>">
-                        <button type="submit" class="spot-btn-dark-orange onhover-broom">
-                            <span>
-                                Entrar em contato pelo Chat
-                            </span>
-                        </button>
-                    </form>
+                    <?php 
+                        $phoneNumber = preg_replace('/\D/', '', $dados["consulting"]["contact_phone"]); // Sanitize phone number
+                        $data = preg_replace('/\D/', '', $dados["consulting"]["contact_phone"]) ;
+                    ?>
+                    <button href="https://wa.me/<?= $phoneNumber ?>" 
+                        target="_blank" class="spot-btn-dark-orange onhover-broom" 
+                        onclick="redirectToWhatsApp(<?=$data ?>)"
+                    >
+                        <span>Entrar em contato pelo WhatsApp</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -277,9 +279,14 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
             <form id="ratingForm" method="POST">
                 <input type="number" id="comment_rating" style="display:none" value="" name="comment_rating">
                 <textarea class="form-control rating_desc" id="comment_description" name="comment_description" placeholder="Descreva como foi o atendimento, ou a prescrição de treino e dieta, ou os feedbacks, etc."></textarea>
-                
+
                 <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div>
-                <button type="submit">Enviar</button>
+
+                <?php if (!empty($_SESSION["user_id"])): ?>
+                    <button type="submit" id="submitBtn">Enviar</button>
+                <?php else: ?>
+                    <button type="button" id="redirectBtn" onclick="window.location.href='/sign_in'">Enviar</button>
+                <?php endif; ?>
             </form>
         </div>
 
@@ -287,15 +294,18 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
             <h4>Outras avaliações</43>
 
             <div class="rated-container mt-3">
-                <div class="large-number">4,1</div>
-                <div class="stars">
-                    <i class="fa fa-star checked rated-icon"></i>
-                    <i class="fa fa-star checked rated-icon"></i>
-                    <i class="fa fa-star checked rated-icon"></i>
-                    <i class="fa fa-star checked rated-icon"></i>
-                    <i class="fa fa-star rated-icon"></i>
-                </div>
-                <small class="qnt-rated">32 avaliações</small>
+            <div class="large-number"><?= $dados["rating_detail"]["average_rating"] ?></div>
+            <div class="stars">
+                <?php 
+                for ($i = 0; $i < 5; $i++) {
+                    if ($i < $dados["rating_detail"]["average_rating"]) { ?>
+                        <i class="fa fa-star checked rated-icon"></i>
+                    <?php } else { ?>
+                        <i class="fa fa-star rated-icon"></i>
+                    <?php }
+                } ?>
+            </div>
+            <small class="qnt-rated"><?= $dados["rating_detail"]["total_ratings"] ?> avaliações</small>
             </div>
 
             <div class="user-ratings">

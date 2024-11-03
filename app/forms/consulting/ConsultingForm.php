@@ -78,12 +78,17 @@ class ConsultingForm extends BaseModel {
         $user_id = self::logged_user(true);
 
         $con = self::get_connection();
-        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id -- AND adm_user_id = :user_id");
+        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id AND adm_user_id = :user_id");
         $stmt->bindParam(':id', $id);
-        // $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         $params = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $params['consulting'] = $params;
+
+        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $consulting = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $params['consulting'] = $consulting;
 
         $stmt = $con->prepare("SELECT * FROM consulting_image WHERE consulting_id = :id");
         $stmt->bindParam(':id', $id);
@@ -105,6 +110,9 @@ class ConsultingForm extends BaseModel {
 
         $comment_model = new Comment();
         $params['comments'] = $comment_model->list_records($id);
+
+        $params['rating_detail'] = $comment_model->list_rating_detail($id);
+
         
         $stmt = $con->prepare("SELECT * FROM consulting_benefit WHERE consulting_id = :id");
         $stmt->bindParam(':id', $id);

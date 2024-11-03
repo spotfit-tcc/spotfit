@@ -37,8 +37,8 @@ class ConsultingController extends ApplicationController{
         if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
             $comment_model = new Comment();
             $comment_model->create_record([
-                'user_id' => 1,
-                'consulting_id' => 1,
+                'user_id' => $_SESSION["user_id"],
+                'consulting_id' => $_GET["prof"],
                 'comment_type' => "nao sei",
                 'comment_text' => $_POST["comment_description"],
                 'rating' => $_POST["comment_rating"],
