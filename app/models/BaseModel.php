@@ -82,9 +82,9 @@ class BaseModel {
     public static function logged_user($only_id = true){
         if (session_status() === PHP_SESSION_NONE) session_start();
 
-        if($_SESSION["user_id"] && $only_id){
+        if(!empty($_SESSION["user_id"]) && $only_id){
             return $_SESSION["user_id"];
-        } else if($_SESSION["user_id"] && !$only_id){
+        } else if(!empty($_SESSION["user_id"]) && !$only_id){
             return User::findByAttribute('user_id', $_SESSION["user_id"]);
         } else {
             return null;

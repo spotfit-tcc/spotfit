@@ -2,6 +2,7 @@
 
 namespace App\forms\consulting;
 use App\models\BaseModel;
+use App\models\Comment;
 
 class ConsultingForm extends BaseModel {
 	private $consulting_id;
@@ -77,11 +78,12 @@ class ConsultingForm extends BaseModel {
         $user_id = self::logged_user(true);
 
         $con = self::get_connection();
-        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id AND adm_user_id = :user_id");
+        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id -- AND adm_user_id = :user_id");
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':user_id', $user_id);
+        // $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         $params = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $params['consulting'] = $params;
 
         $stmt = $con->prepare("SELECT * FROM consulting_image WHERE consulting_id = :id");
         $stmt->bindParam(':id', $id);
@@ -101,6 +103,9 @@ class ConsultingForm extends BaseModel {
             return $cat["category_id"];
         }, $stmt->fetchAll(\PDO::FETCH_ASSOC));
 
+        $comment_model = new Comment();
+        $params['comments'] = $comment_model->list_records($id);
+        
         $stmt = $con->prepare("SELECT * FROM consulting_benefit WHERE consulting_id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -118,6 +123,18 @@ class ConsultingForm extends BaseModel {
             $stmt->bindParam(':id', $professional['consulting_professional_id']);
             $stmt->execute();
             $params['professional_form'][$key]['professional_registers'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            $stmt = $con->prepare(
+                "SELECT * FROM professional_register pr 
+                INNER JOIN profession p 
+                ON pr.profession_id  = p.profession_id 
+                WHERE pr.professional_register_id = :professional_register_id"
+            );
+            $stmt->bindParam(':professional_register_id', $professional['consulting_professional_id']);
+            $stmt->execute();
+            $params['professional_form'][$key]['profession'] = array_map(function($benef){
+                return $benef;
+            }, $stmt->fetchAll(\PDO::FETCH_ASSOC));
 
             $stmt = $con->prepare("SELECT * FROM consulting_benefit_professional WHERE consulting_professional_id  = :id");
             $stmt->bindParam(':id', $professional['consulting_professional_id']);

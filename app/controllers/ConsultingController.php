@@ -5,6 +5,7 @@ namespace App\controllers;
 use App\controllers\ApplicationController;
 use App\models\Consulting;
 use App\models\Category;
+use App\models\Comment;
 use App\forms\consulting\ConsultingForm;
 
 class ConsultingController extends ApplicationController{
@@ -16,17 +17,46 @@ class ConsultingController extends ApplicationController{
             $this->show();
             return;
         }
-        $search = $_GET["search"];
+
+        $search = null;
+        if (!empty($_GET["search"])) {
+            $search = $_GET["search"];
+        }
 
         $parametros = $this->get_consulting($search);
-
         $this->view->parametros = json_decode(json_encode($parametros), true);
+
 
         $this->render('index');
 
     }
 
     public function show(){
+        $consulting = new ConsultingForm([]);
+
+        if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
+            $comment_model = new Comment();
+            $comment_model->create_record([
+                'user_id' => 1,
+                'consulting_id' => 1,
+                'comment_type' => "nao sei",
+                'comment_text' => $_POST["comment_description"],
+                'rating' => $_POST["comment_rating"],
+            ]);
+
+            $_POST["comment_description"] = null;
+            $_POST["comment_rating"] = null;
+
+            header("Location: /consulting?prof=$_GET[prof]");
+        }
+
+       
+        $prof = null;
+        if (!empty($_GET["prof"])) {
+            $prof = $_GET["prof"];
+        }
+
+        $this->view->consultingData = $consulting->build_form_from_id($prof);
         $this->render('show');
     }
 

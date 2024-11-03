@@ -5,7 +5,7 @@ namespace App;
 class DbConnection {
 	public static function getDb() {
 		$user = "root";
-		$password = "";
+		$password = "root";
 		$host = "localhost";
 		$db_name = "spotfit";
 		

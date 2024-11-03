@@ -1,3 +1,18 @@
+<?php
+// echo "<pre>";
+// print_r($this->view->consultingData); die;
+$dados = $this->view->consultingData;
+
+if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
+
+    $_POST["comment_description"] = null;
+    $_POST["comment_rating"] = null;
+}
+
+// print_r($_POST); die;
+
+?>
+
 <section id="ServiceHeadingSection">
     <div class="container">
         <div class="row">
@@ -8,27 +23,17 @@
                         <label class="spot-label-orange">FITNESS</label>
                         <label class="spot-label-green">Novo na plataforma</label>
                     </div>
-                    <h1 class="service-page--service-title">Centro Fitness SCS</h1>
+                    <h1 class="service-page--service-title"><?= $dados["consulting_name"]?></h1>
                 </div>
 
                 <div class="professional-service-slider--container">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide professional-service-slider--item">
-                                <img src="/assets/img/models/m1.png" alt="">
-                            </div>
-                            <div class="swiper-slide professional-service-slider--item">
-                                <img src="/assets/img/models/m2.png" alt="">
-                            </div>
-                            <div class="swiper-slide professional-service-slider--item">
-                                <img src="/assets/img/models/m3.png" alt="">
-                            </div>
-                            <div class="swiper-slide professional-service-slider--item">
-                                <img src="/assets/img/models/m2.png" alt="">
-                            </div>
-                            <div class="swiper-slide professional-service-slider--item">
-                                <img src="/assets/img/models/m3.png" alt="">
-                            </div>
+                            <?php foreach ($dados['consulting_images'] as $img) { ?>
+                                <div class="swiper-slide professional-service-slider--item">
+                                    <img src="<?=$img['db_saved_name']?>" alt="">
+                                </div>
+                            <?php } ?>
                         </div>
 
                         <div class="professional-service-slider--button-next"><i class="fa-solid fa-chevron-right"></i></div>
@@ -87,18 +92,18 @@
 
                 <div class="professional-service-info--text-description-container">
                     <p class="professional-service-info--text-description">
-                    Um plano de desenvolvimento para atletas de alta performance é essencial para maximizar seu potencial. Com avaliação holística, metas claras, treinamento multidisciplinar. 
+                    <?= $dados["description"]?>
                     </p>
                 </div>
 
                 <div class="professional-service-info--contact-container">
                     <div class="professional-service-info--contact-item">
                         <i class="fas fa-phone gray-icon"></i>
-                        <p class="professional-service-info--contact-text">+55 (11) 98302-0692</p>
+                        <p class="professional-service-info--contact-text"> <?= $dados["contact_phone"]?></p>
                     </div>
                     <div class="professional-service-info--contact-item">
                         <i class="fas fa-envelope gray-icon"></i>
-                        <p class="professional-service-info--contact-text">fake.email@gmail.com</p>
+                        <p class="professional-service-info--contact-text"><?= $dados["contact_email"]?></p>
                     </div>
                 </div>
 
@@ -226,70 +231,24 @@
         </div>
 
         <div class="row">
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-header">Nutricionista</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Natália Valente</h5>
-                        <div class="card-text">
-                            <h6>Contato</h6>
-                            <div><i class="fab fa-instagram"></i> <a href="">@natalia_valente</a></div>
-                            <div><i class="fas fa-envelope"></i> <a href="">natalua.valente@gmail.com</a></div>
-                            <div><i class="fab fa-whatsapp"></i> <a href="">11928348392</a></div>
+            <?php foreach ($dados["professional_form"] as $professional) { ?>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header"><?=$professional["profession"][0]["profession_name"]?></div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?=$professional["consulting_professional"]["name"]?></h5>
+                            <div class="card-text">
+                                <h6>Contato</h6>
+                                <div><i class="fab fa-instagram"></i> <a href=""><?=$professional["consulting_professional"]["instagram"]?></a></div>
+                                <div><i class="fas fa-envelope"></i> <a href=""><?=$professional["consulting_professional"]["email"]?></a></div>
+                                <div><i class="fab fa-whatsapp"></i> <a href=""><?=$professional["consulting_professional"]["phone"]?></a></div>
+                            </div>
+                            <p class="card-text"><small class="text-body-secondary">CFN: 123456</small></p>
                         </div>
-                        <p class="card-text"><small class="text-body-secondary">CFN: 123456</small></p>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-header">Nutricionista</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Natália Valente</h5>
-                        <div class="card-text">
-                            <h6>Contato</h6>
-                            <div><i class="fab fa-instagram"></i> <a href="">@natalia_valente</a></div>
-                            <div><i class="fas fa-envelope"></i> <a href="">natalua.valente@gmail.com</a></div>
-                            <div><i class="fab fa-whatsapp"></i> <a href="">11928348392</a></div>
-                        </div>
-                        <p class="card-text"><small class="text-body-secondary">CFN: 123456</small></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-header">Nutricionista</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Natália Valente</h5>
-                        <div class="card-text">
-                            <h6>Contato</h6>
-                            <div><i class="fab fa-instagram"></i> <a href="">@natalia_valente</a></div>
-                            <div><i class="fas fa-envelope"></i> <a href="">natalua.valente@gmail.com</a></div>
-                            <div><i class="fab fa-whatsapp"></i> <a href="">11928348392</a></div>
-                        </div>
-                        <p class="card-text"><small class="text-body-secondary">CFN: 123456</small></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-header">Nutricionista</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Natália Valente</h5>
-                        <div class="card-text">
-                            <h6>Contato</h6>
-                            <div><i class="fab fa-instagram"></i> <a href="">@natalia_valente</a></div>
-                            <div><i class="fas fa-envelope"></i> <a href="">natalua.valente@gmail.com</a></div>
-                            <div><i class="fab fa-whatsapp"></i> <a href="">11928348392</a></div>
-                        </div>
-                        <p class="card-text"><small class="text-body-secondary">CFN: 123456</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <?php } ?>
     </div>
 </section>
 
@@ -305,19 +264,23 @@
         </div>
 
         <div class="mt-4">
-            <h4>Avalie essa consultoria</43>
+            <h4>Avalie essa consultoria</h4>
 
-            <div>
-                <i class="fa fa-star checked rating-icon"></i>
-                <i class="fa fa-star checked rating-icon"></i>
-                <i class="fa fa-star checked rating-icon"></i>
-                <i class="fa fa-star checked rating-icon"></i>
-                <i class="fa fa-star rating-icon"></i>
+            <div class="rating-stars">
+                <i class="fa fa-star rating-icon" data-value="1"></i>
+                <i class="fa fa-star rating-icon" data-value="2"></i>
+                <i class="fa fa-star rating-icon" data-value="3"></i>
+                <i class="fa fa-star rating-icon" data-value="4"></i>
+                <i class="fa fa-star rating-icon" data-value="5"></i>
             </div>
 
-            <div>
-                <textarea class="form-control rating_desc" placeholder="Descreva como foi o atendimento, ou a prescrição de treino e dieta, ou os feedbacks, etc."></textarea>
-            </div>
+            <form id="ratingForm" method="POST">
+                <input type="number" id="comment_rating" style="display:none" value="" name="comment_rating">
+                <textarea class="form-control rating_desc" id="comment_description" name="comment_description" placeholder="Descreva como foi o atendimento, ou a prescrição de treino e dieta, ou os feedbacks, etc."></textarea>
+                
+                <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
 
         <div class="mt-4">
@@ -336,72 +299,32 @@
             </div>
 
             <div class="user-ratings">
-                <div class="user-rating">
-                    <div class="user-info">
-                        <img src="https://st.depositphotos.com/1144472/2003/i/950/depositphotos_20030237-stock-photo-cheerful-young-man-over-white.jpg" class="user-photo">
-                        <span class="user-name">Carlos Lagarto</span>
-                        <i class="fas fa-ellipsis-v more-options"></i>
-                    </div>
-                    <div class="user-stars">
-                        <div class="user-star">
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star rated-icon"></i>
+                <?php foreach ($dados["comments"] as $comment) { ?>
+                    <div class="user-rating">
+                        <div class="user-info">
+                            <img src="/assets/<?=$comment["profile_photo"]?>" class="user-photo" onerror="this.onerror=null;this.src='/assets/img/default-profile.jpg';">
+                            <span class="user-name"><?=$comment["user_name"]?></span>
+                            <i class="fas fa-ellipsis-v more-options"></i>
                         </div>
-
-                        <span class="user-rating-date">02/08/2024</span>
-                    </div>
-                    <div class="user-comment">
-                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sed possimus ad aliquam, quaerat iste enim provident dolorem corporis, quis vero voluptates. Repellendus quam consequatur iure odit laudantium perferendis adipisci!</span>
-                    </div>
-                </div>
-
-                <div class="user-rating">
-                    <div class="user-info">
-                        <img src="https://st.depositphotos.com/1144472/2003/i/950/depositphotos_20030237-stock-photo-cheerful-young-man-over-white.jpg" class="user-photo">
-                        <span class="user-name">Carlos Lagarto</span>
-                        <i class="fas fa-ellipsis-v more-options"></i>
-                    </div>
-                    <div class="user-stars">
-                        <div class="user-star">
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star rated-icon"></i>
+                        <div class="user-stars">
+                            <div class="user-star">
+                                <?php for ($i = 0; $i < 5; $i++) { ?> 
+                                    <?php if ($i < $comment["rating"]) { ?>
+                                        <i class="fa fa-star checked rated-icon"></i>
+                                    <?php } else { ?>
+                                        <i class="fa fa-star rated-icon"></i>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+    
                         </div>
-
-                        <span class="user-rating-date">02/08/2024</span>
-                    </div>
-                    <div class="user-comment">
-                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sed possimus ad aliquam, quaerat iste enim provident dolorem corporis, quis vero voluptates. Repellendus quam consequatur iure odit laudantium perferendis adipisci!</span>
-                    </div>
-                </div>
-
-                <div class="user-rating">
-                    <div class="user-info">
-                        <img src="https://st.depositphotos.com/1144472/2003/i/950/depositphotos_20030237-stock-photo-cheerful-young-man-over-white.jpg" class="user-photo">
-                        <span class="user-name">Carlos Lagarto</span>
-                        <i class="fas fa-ellipsis-v more-options"></i>
-                    </div>
-                    <div class="user-stars">
-                        <div class="user-star">
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star checked rated-icon"></i>
-                            <i class="fa fa-star rated-icon"></i>
+                        <div class="user-comment">
+                            <span><?= $comment["comment_text"]?></span>
                         </div>
+                    </div>
 
-                        <span class="user-rating-date">02/08/2024</span>
-                    </div>
-                    <div class="user-comment">
-                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sed possimus ad aliquam, quaerat iste enim provident dolorem corporis, quis vero voluptates. Repellendus quam consequatur iure odit laudantium perferendis adipisci!</span>
-                    </div>
-                </div>
-            </div>
+                <?php }  ?>
+            </div>  
         </div>
     </div>
 </section>
