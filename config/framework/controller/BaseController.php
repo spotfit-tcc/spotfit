@@ -4,31 +4,46 @@ namespace Framework\controller;
 
 abstract class BaseController {
 
-	protected $view;
+    protected $view;
 
-	public function __construct() {
-		$this->view = new \stdClass();
-	}
+    public function __construct() {
+        $this->view = new \stdClass();
+    }
 
-	protected function render($view, $layout = "default") {
-		$this->view->page = $view;
+    /**
+     * @param string $view Nome da view (sem a extensão .phtml).
+     * @param string $layout Nome do layout a ser usado (default se não especificado).
+     * @param array $data Dados a serem passados para a view.
+     */
+    protected function render($view, $layout = "default", $data = []) {
+        $this->view->data = $data; 
 
-		if(file_exists("../app/views/layouts/".$layout.".phtml")) {
-			require_once "../app/views/layouts/".$layout.".phtml";
-		} else {
-			$this->content();
-		}
-	}
+        $this->view->page = $view;
 
-	protected function content() {
-		$classAtual = get_class($this);
+        if(file_exists("../app/views/layouts/".$layout.".phtml")) {
+            require_once "../app/views/layouts/".$layout.".phtml";
+        } else {
+            $this->content();
+        }
+    }
 
-		$classAtual = str_replace('App\\controllers\\', '', $classAtual);
+    protected function content() {
+        $classAtual = get_class($this);
 
-		$classAtual = lcfirst(str_replace('Controller', '', $classAtual));
+        $classAtual = str_replace('App\\controllers\\', '', $classAtual);
 
-		require_once "../app/views/".$classAtual."/".$this->view->page.".phtml";
-	}
+        $classAtual = lcfirst(str_replace('Controller', '', $classAtual));
+
+        $viewFile = "../app/views/".$classAtual."/".$this->view->page.".phtml";
+        if (file_exists($viewFile)) {
+            extract($this->view->data);
+
+            require_once $viewFile;
+        } else {
+            echo "Erro: A view não foi encontrada!";
+        }
+    }
 }
+
 
 ?>

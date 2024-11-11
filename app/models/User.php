@@ -157,6 +157,22 @@ class User extends BaseModel {
             return [];
         }
     }
+
+    public static function getLoggedUserData() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+    
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+    
+            return self::findByAttribute('user_id', $user_id); 
+        }
+    
+        return null; 
+    }
+    
+    
+    
+    
 }
 
 ?>

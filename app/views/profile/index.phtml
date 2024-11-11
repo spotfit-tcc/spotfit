@@ -1,38 +1,30 @@
-<?php var_dump(get_defined_vars()); var_dump([
-    'profile_photo' => $userData['profile_photo'] ?? null,
-    'user_name' => $userData['user_name'] ?? 'Nome não disponível',
-    'email' => $userData['email'] ?? 'E-mail não disponível',
-    'phone' => $userData['phone'] ?? 'Telefone não disponível',
-]);
-?>
 
 <div class="container">
     <div class="row justify-content-center">
-        <span class="over-flow-atras text-center">MINHA CONTA</span>
-        <h1 class="mb-5 text-center"><strong>Minha Conta</strong></h1>
+        <h1 class="text-center"><strong>Minha Conta</strong></h1>
 
         <div class="col-md-5 mb-5">
-            <form class="form-forgot">
+            <form>
                 <div class="text-center mb-3">
-                    <img class="img mx-auto d-block rounded-circle img-perfil"src="<?= isset($userData['profile_photo']) ? htmlspecialchars($userData['profile_photo']) : ''; ?>" alt="Imagem de capa do card">
+                    <img class="img mx-auto d-block rounded-circle img-perfil" src="<?= isset($user['profile_photo']) ? '/image_uploads/' . htmlspecialchars($user['profile_photo']) : ''; ?>" alt="Imagem de perfil">
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control name" id="name" autocomplete="name" value="<?= isset($userData['user_name']) ? htmlspecialchars($userData['user_name']) : ''; ?>" readonly>
+                    <input type="text" class="form-control name" id="name" autocomplete="name" readonly value="<?= htmlspecialchars($user['user_name']); ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control" id="email" autocomplete="email" value="<?= isset($userData['email']) ? htmlspecialchars($userData['email']) : ''; ?>" readonly>
+                    <input type="email" class="form-control" id="email" autocomplete="email" readonly value="<?= htmlspecialchars($user['email']); ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="phone">Telefone ou Celular</label>
-                    <input type="number" class="form-control" id="phone" autocomplete="phone" value="<?= isset($userData['phone']) ? htmlspecialchars($userData['phone']) : ''; ?>" readonly>
+                    <input type="text" class="form-control" id="phone" autocomplete="phone" readonly value="<?= htmlspecialchars($user['phone']); ?>">
                 </div>
             </form>
         </div>
- 
+    </div>
 
     <div class="justify-content-center">
 
