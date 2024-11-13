@@ -38,56 +38,26 @@
             </div>
 
             <div class="col-auto d-flex justify-content-center">
-                <button class="btn btn-outline-light" type="button"><a href="/consulting/new" class="nav-link active"> Nova Consultoria</a></button>
+                <button class="btn btn-outline-light" type="button"><a href="/consulting/new" class="nav-link active">Nova Consultoria</a></button>
             </div>
         </div>
         
-    
-        <div class="row">
+        <?php foreach ($consultings as $consulting): ?>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="/assets/img/models/m1.png" alt="Imagem de capa do card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Consultoria 1</h5>
-                        <p class="card-text text-center">Descrição 1</p>
+                    <img class="card-img-top img-fluid" src="/image_uploads/<?= htmlspecialchars($consulting['image_path']); ?>" alt="Imagem de capa do card">
+                    <div class="card-body"> 
+                        <h5 class="card-title text-center"><?= htmlspecialchars($consulting['consulting_name']); ?></h5>
+                        <p class="card-text text-center"><?= htmlspecialchars($consulting['description']); ?></p>
                         <div class="row align-items-center">
                             <div class="col">
-                                <a href="/consulting/show" class="btn btn-primary btn-block btn-view">Visualizar</a>
+                                <a href="/consulting/show?id=<?= htmlspecialchars($consulting['consulting_id']); ?>" class="btn btn-primary btn-block btn-view">Visualizar</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="/assets/img/models/m2.png" alt="Imagem de capa do card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Consultoria 2</h5>
-                        <p class="card-text text-center">Descrição 2</p>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <a href="/consulting/show" class="btn btn-primary btn-block btn-view">Visualizar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="/assets/img/models/m3.png" alt="Imagem de capa do card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Consultoria 3</h5>
-                        <p class="card-text text-center">Descrição 3</p>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <a href="/consulting/show" class="btn btn-primary btn-block btn-view">Visualizar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
+        
     </div>
 </div>

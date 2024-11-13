@@ -97,6 +97,29 @@ class Consulting extends BaseModel {
             return false;
         }
     }
+
+    public function list_records_by_user($user_id)
+    {
+        $con = self::get_connection();
+
+        try {
+            $query = 'SELECT con.*, ci.image_dir AS image_path
+                    FROM consulting con
+                    LEFT JOIN consulting_image ci 
+                    ON ci.consulting_id = con.consulting_id
+                    WHERE con.adm_user_id = :user_id';
+            $stmt = $con->prepare($query);
+            $stmt->bindParam(':user_id', $user_id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $records = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $records;
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+    }
+
+
 }
 
 ?>
