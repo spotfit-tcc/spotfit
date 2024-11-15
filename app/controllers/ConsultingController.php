@@ -137,18 +137,6 @@ class ConsultingController extends ApplicationController{
         $consulting_form = new ConsultingForm($_POST, $_FILES);
         $consulting_form->validate_record();
 
-        // echo("<pre>");
-        // print_r($consulting_form);
-        // echo("</pre>");
-
-        // echo("<pre>");
-        // print_r($_POST);
-        // echo("</pre>");
-
-        // echo("<pre>");
-        // print_r($_FILES);
-        // echo("</pre>");
-
         if($consulting_form->update_record()){
             header('Location: /consulting?prof=' . $consulting_form->__get('consulting_id'));
         } else {
