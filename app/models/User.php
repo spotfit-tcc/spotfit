@@ -33,7 +33,7 @@ class User extends BaseModel {
 
     public function getProfessional(){
         if(is_null($this->professional)) return true;
-        (bool)$this->professional;
+        return (bool)$this->professional;
     }
 
     public function setFileParams($file_params){
