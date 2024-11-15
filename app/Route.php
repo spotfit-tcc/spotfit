@@ -43,6 +43,18 @@ class Route extends Bootstrap {
 			'action' => 'update'
 		);
 
+		$routes['/pending_consultings'] = array(
+			'route' => '/pending_consultings',
+			'controller' => 'PendingConsultingsController',
+			'action' => 'index'
+		);
+
+		$routes['/pending_consultings/change_consulting_status'] = array(
+			'route' => '/pending_consultings/change_consulting_status',
+			'controller' => 'PendingConsultingsController',
+			'action' => 'change_consulting_status'
+		);
+
 		$routes['/landing_page'] = array(
 			'route' => '/landing_page',
 			'controller' => 'LandingPageController',

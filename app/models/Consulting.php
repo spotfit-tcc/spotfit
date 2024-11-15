@@ -119,6 +119,23 @@ class Consulting extends BaseModel {
         }
     }
 
+    public static function list_all_pending_consultings()
+    {
+        $con = self::get_connection();
+
+        try {
+            $query = 'SELECT *
+                    FROM consulting con
+                    WHERE con.status = "pending"';
+            $stmt = $con->query($query);
+            $records = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $records;
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+    }
+
 
 }
 

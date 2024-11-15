@@ -4,6 +4,7 @@ namespace App\controllers;
 
 //os recursos do miniframework
 use Framework\controller\BaseController;
+use App\models\BaseModel;
 
 
 class ApplicationController extends BaseController {
@@ -55,6 +56,13 @@ class ApplicationController extends BaseController {
         else {
             return;
         }
+    }
+
+    public static function logged_as_admin(){
+        $user = BaseModel::logged_user(false)[0];
+
+        return $user["email"] == __ADMIN_LOGIN__ &&
+               password_verify(__ADMIN_PASSWORD__, $user['user_password']);
     }
 
 }

@@ -1,0 +1,30 @@
+<h2 class="text-center mt-3">Aceitar ou recusar consultorias</h2>
+
+<div class="container">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome da consultoria</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Email de contato</th>
+        <th scope="col">Telefone de contato</th>
+        <th colspan="3"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->view->pending_consultings as $consulting) { ?>
+            <tr>
+                <th scope="row"><?= $consulting['consulting_id'] ?></th>
+                <td><?= $consulting['consulting_name'] ?></td>
+                <td><?= $consulting['description'] ?></td>
+                <td><?= $consulting['contact_email'] ?></td>
+                <td><?= $consulting['contact_phone'] ?></td>
+                <td><a href="/consulting?prof=<?= $consulting['consulting_id'] ?>" class="btn btn-info" target="_blank"> <i class="fa-solid fa-eye"></i> </a></td>
+                <td><a href="<?= '/pending_consultings/change_consulting_status?status=accepted&consulting_id=' . $consulting['consulting_id'] ?>" class="btn btn-success" title="Aceitar e liberar vizualização da consultoria"><i class="fa-solid fa-check"></i></button></td>
+                <td><a href="<?= '/pending_consultings/change_consulting_status?status=refused&consulting_id=' . $consulting['consulting_id'] ?>" class="btn btn-danger" title="Recusar e esconder consultoria"><i class="fa-solid fa-x"></i></button></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+    </table>
+</div>
