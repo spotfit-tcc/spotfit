@@ -291,6 +291,13 @@ CREATE TABLE `profession` (
   `profession_description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE consulting_view (
+    consulting_view_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    consulting_id INT NOT NULL,
+    time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 --
 -- Despejando dados para a tabela `profession`
 --

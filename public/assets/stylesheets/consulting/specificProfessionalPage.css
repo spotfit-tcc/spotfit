@@ -413,3 +413,64 @@
 #ratingForm button {
     margin-left: auto;
 }
+
+/* Button container for the like button */
+#likeButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+/* For the heart icon when liked */
+#likeButton .fa-heart {
+    color: red;  /* Red color for the heart when liked */
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* For the heart-broken SVG when not liked */
+#likeButton img.professional-service-info--social-media-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Add a hover effect for the button */
+#likeButton:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+#likeButton:active {
+    transform: scale(0.95); /* Shrink the button when clicked */
+}
+
+/* Ensure proper layout for the button */
+#likeButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+#likeButton i, #likeButton img {
+    transition: transform 0.2s ease;
+}
+
+#likeButton:hover i, #likeButton:hover img {
+    transform: scale(1.1);  /* Slight scaling on hover */
+}
+
+/* Optional: Add animation when the like status changes */
+#likeButton .fa-heart, #likeButton img.professional-service-info--social-media-icon {
+    transition: all 0.3s ease-in-out;
+}

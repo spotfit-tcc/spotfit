@@ -46,9 +46,27 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
             </div>
             <div class="col-12 col-lg-4 professional-service-info--container">
                 <div class="professional-service-info--social-media-container">
-                    <img src="/assets/icons/share.svg" alt="" class="professional-service-info--social-media-icon">
-                    <img src="/assets/icons/solar_heart-broken.svg" alt="" class="professional-service-info--social-media-icon">
-                    <img src="/assets/icons/location.svg" alt="" class="professional-service-info--social-media-icon">
+                    <img src="/assets/icons/share.svg" alt="Share" class="professional-service-info--social-media-icon" id="shareButton">
+                    <form id="likeForm" method="POST" style="display: none;">
+                        <input type="hidden" name="like_form" value="1">
+                        <input type="hidden" name="user_has_liked" value="<?= $dados['user_has_liked'] ?>">
+                        <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?? '' ?>">
+                        <input type="hidden" name="consulting_id" value="<?= $_GET['prof'] ?>">
+                    </form>
+
+                    <button id="likeButton" onclick="toggleLike()">
+                        <?php if ($dados['user_has_liked']) { ?> 
+                            <i class="fa-solid fa-heart"></i>
+                        <?php } else { ?>
+                            <img src="/assets/icons/solar_heart-broken.svg" alt="Like" class="professional-service-info--social-media-icon">
+                        <?php } ?>
+                    </button>
+                    <?php if (!empty($dados["location"])) { ?>
+                        <img src="/assets/icons/location.svg" alt="" class="professional-service-info--social-media-icon">
+                    <?php } ?>
+                </div>
+                <div id="copyMessage" style="display:none; padding: 10px 20px; background-color: green; color: white; font-size: 14px; border-radius: 5px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+                    Link de compartilhamento copiado
                 </div>
                 
                 <div class="professional-service-info--features-container">
@@ -60,7 +78,7 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
                         <div class="professional-service-feature--intensity-container">
                             <p class="professional-service-feature--intensity-text">
-                                87
+                                <?= $dados["likes_quantity"]["qtd"] ?>
                             </p>
                         </div>
                     </div>
@@ -72,7 +90,7 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
                         <div class="professional-service-feature--intensity-container">
                             <p class="professional-service-feature--intensity-text">
-                                500
+                                <?=$dados["totalViews"] ? $dados["totalViews"] : 0 ?>
                             </p>
                         </div>
                     </div>
@@ -84,7 +102,7 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
                         <div class="professional-service-feature--intensity-container">
                             <p class="professional-service-feature--intensity-text">
-                                10
+                                <?= count($dados["comments"]) ?>
                             </p>
                         </div>
                     </div>
@@ -138,11 +156,11 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
         <div class="row">
             <div class="swiper plans-swiper">
                 <div class="swiper-wrapper">
-                    <?php foreach ($dados["plans"] as $plans) { ?>
+                    <?php foreach ($dados["plans_benefits"] as $plans) { ?>
                         <div class="swiper-slide">
                             <div class="card professional-card" style="width: 18rem;">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title"><?=$plans["plan"]?></h5>
+                                    <h5 class="card-title"><?=$plans["name"]?></h5>
                                     <p class="card-text"><?=$plans["description"]?></p>
                                     <div class="plan-price">
                                         <h6>R$ <?=$plans["price"]?></h6>
@@ -152,74 +170,15 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                                 <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
                                 <ul class="list-group list-group-flush">
                                     <?php foreach ($plans["benefits"] as $benefits) {?>
-                                        <li class="list-group-item"><i class="fas fa-dumbbell"></i> Treino periodizado</li>
+                                        <li class="list-group-item"><?=$benefits["icon"] ? $benefits["icon"] : '<i class="fas fa-person"></i>' ?> <?=$benefits["benefit_name"] ?></li>
                                     <?php } ?>
-                                    <li class="list-group-item"><i class="fab fa-apple"></i> Dieta</li>
-                                    <li class="list-group-item"><i class="fas fa-person"></i> Prescrição de alongamentos</li>
                                 </ul>
                             </div>
                         </div>
                     <?php } ?>
-
-                    <div class="swiper-slide">
-                        <div class="card professional-card" style="width: 18rem;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano completo semestral</h5>
-                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ventore voluptatem ratione</p>
-                                <div class="plan-price">
-                                    <h6>R$ 600</h6>
-                                    <small>/2 meses</small>
-                                </div>
-                            </div>
-                            <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><i class="fas fa-dumbbell"></i> Treino periodizado</li>
-                                <li class="list-group-item"><i class="fab fa-apple"></i> Dieta</li>
-                                <li class="list-group-item"><i class="fas fa-person"></i> Prescrição de alongamentos</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="card professional-card" style="width: 18rem;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano completo semestral</h5>
-                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ventore voluptatem ratione</p>
-                                <div class="plan-price">
-                                    <h6>R$ 600</h6>
-                                    <small>/2 meses</small>
-                                </div>
-                            </div>
-                            <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><i class="fas fa-dumbbell"></i> Treino periodizado</li>
-                                <li class="list-group-item"><i class="fab fa-apple"></i> Dieta</li>
-                                <li class="list-group-item"><i class="fas fa-person"></i> Prescrição de alongamentos</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="card professional-card" style="width: 18rem;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano completo semestral</h5>
-                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ventore voluptatem ratione</p>
-                                <div class="plan-price">
-                                    <h6>R$ 600</h6>
-                                    <small>/2 meses</small>
-                                </div>
-                            </div>
-                            <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><i class="fas fa-dumbbell"></i> Treino periodizado</li>
-                                <li class="list-group-item"><i class="fab fa-apple"></i> Dieta</li>
-                                <li class="list-group-item"><i class="fas fa-person"></i> Prescrição de alongamentos</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="lp-control-swiper-categorie-button lp-control-swiper-categorie-button-next"><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="lp-control-swiper-categorie-button lp-control-swiper-categorie-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                    
+                    <div class="lp-control-swiper-categorie-button lp-control-swiper-categorie-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="lp-control-swiper-categorie-button lp-control-swiper-categorie-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
             </div>
         </div>
     </div>
@@ -345,3 +304,67 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
 
 <script src="/assets/javascripts/consulting/specificProfessionalPage.js" defer></script>
+
+<script>
+    function toggleLike() {
+        const isLoggedIn = <?= json_encode(!empty($_SESSION['user_id'])) ?>;
+        
+        if (!isLoggedIn) {
+            window.location.href = '/sign_in';
+            return;
+        }
+
+        // Submit the form using fetch
+        const form = document.getElementById('likeForm');
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the button's appearance
+                const likeButton = document.getElementById('likeButton');
+                if (data.user_has_liked) {
+                    likeButton.innerHTML = '<i class="fa-solid fa-heart"></i>';
+                } else {
+                    likeButton.innerHTML = '<img src="/assets/icons/solar_heart-broken.svg" alt="Like" class="professional-service-info--social-media-icon">';
+                }
+            } else {
+                alert('An error occurred while toggling like.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An unexpected error occurred.');
+        });
+    }
+
+    document.getElementById('shareButton').addEventListener('click', function() {
+        // Get the current page URL
+        const currentUrl = window.location.href;
+
+        // Create a temporary input element to use for copying the text
+        const textArea = document.createElement('textarea');
+        textArea.value = currentUrl; // Set the value to the current URL
+        document.body.appendChild(textArea); // Append the text area to the body
+        textArea.select(); // Select the text
+        document.execCommand('copy'); // Copy the selected text to clipboard
+
+        // Remove the text area from the document
+        document.body.removeChild(textArea);
+
+        // Show the confirmation message
+        const copyMessage = document.getElementById('copyMessage');
+        copyMessage.style.display = 'block'; // Make the message visible
+
+        // Hide the message after 10 seconds
+        setTimeout(() => {
+            copyMessage.style.display = 'none';
+        }, 10000); // 10 seconds
+    });
+
+
+</script>

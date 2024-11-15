@@ -34,6 +34,28 @@ class ConsultingController extends ApplicationController{
     public function show(){
         $consulting = new ConsultingForm([]);
 
+        $userView = 0;
+        if (!empty($_SESSION["user_id"])) {
+            $userView = $_SESSION["user_id"];
+        }
+
+        $consulting->insert_view(
+            $userView,
+            $_GET["prof"]
+        );
+
+        if (!empty($_POST["like_form"])) {
+            $result = $consulting->toggle_user_like($_POST["user_id"], $_POST['consulting_id']);
+            $response = [
+                'success' => !empty($result),
+                'user_has_liked' => $result['liked'],
+            ];
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+
         if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
             $comment_model = new Comment();
             $comment_model->create_record([

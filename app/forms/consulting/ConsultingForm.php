@@ -119,10 +119,76 @@ class ConsultingForm extends BaseModel {
         $stmt->execute();
         $params['benefits'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
+        $stmt = $con->prepare(
+            "SELECT * from consulting c 
+            inner join consulting_plan cp
+            on c.consulting_id = cp.consulting_id 
+            inner join consulting_plan_benefit cpb 
+            on cp.consulting_plans_id = cpb.consulting_plans_id 
+            inner join consulting_benefit cb 
+            on cb.consulting_benefit_id = cpb.id_beneficio_consultoria
+            where c.consulting_id = :id"
+        );
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $queryResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $plans = [];
+        foreach ($queryResult as $row) {
+            $planId = $row['consulting_plans_id'];
+
+            if (!isset($plans[$planId])) {
+                $plans[$planId] = [
+                    "name" => $row["plan"],
+                    "description" => $row["description"],
+                    "price" => $row["price"],
+                    "period" => $row["period"],
+                    "benefits" => []
+                ];
+            }
+
+            $plans[$planId]["benefits"][] = [
+                "icon" => $row["icon"],
+                "benefit_name" => $row["benefit"]
+            ];
+        }
+        $plans = array_values($plans);
+        $params['plans_benefits'] =  $plans;
+
+
         $stmt = $con->prepare("SELECT * FROM consulting_professional WHERE consulting_id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $professionals = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $stmt = $con->prepare("SELECT count(*) as qtd FROM consulting_access WHERE liked = 1 AND consulting_id = :consulting_id");
+        $stmt->bindParam(':consulting_id', $id);
+        $stmt->execute();
+        $params['likes_quantity'] = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        $userHasLiked = false;
+        if (!empty($user_id)) {
+            $stmt = $con->prepare("SELECT count(*) qtd FROM consulting_access WHERE liked = 1 AND consulting_id = :consulting_id and user_id=:user_id");
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':consulting_id', $id);
+            $stmt->execute();
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $userHasLiked = $result["qtd"] == 1;
+        }
+        $params['user_has_liked'] = $userHasLiked;
+
+        $stmt = $con->prepare("SELECT count(*) as qtd, user_id, consulting_id from consulting_view where consulting_id = :consulting_id  group by user_id, consulting_id; ");
+        $stmt->bindParam(':consulting_id', $id);
+        $stmt->execute();
+        $params["views"] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $totalViews = 0;
+        foreach ($params["views"] as $view) {
+            $totalViews += $view['qtd'];
+        }
+
+        $params["totalViews"] = $totalViews;
+        
 
         foreach ($professionals as $key => $professional) {
             $params['professional_form'][$key]['consulting_professional'] = $professional;
@@ -611,6 +677,82 @@ class ConsultingForm extends BaseModel {
         empty($this->consulting_professionals) ||
         empty($this->consulting_plans) ||
         empty($this->consulting_id);
+    }
+
+    public function toggle_user_like($user_id, $consulting_id) {
+        $con = self::get_connection();
+    
+        try {
+            // Check if a record exists for the user and consulting combination
+            $stmt = $con->prepare(
+                'SELECT liked FROM consulting_access WHERE user_id = :user_id AND consulting_id = :consulting_id'
+            );
+            $stmt->execute([
+                ':user_id' => $user_id,
+                ':consulting_id' => $consulting_id
+            ]);
+    
+            $record = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$record || empty($record) || count($record) <= 0) {
+                // If not found, insert a new record with liked = 1
+                $insertStmt = $con->prepare(
+                    'INSERT INTO consulting_access (user_id, consulting_id, liked) VALUES (:user_id, :consulting_id, :liked)'
+                );
+                $insertStmt->execute([
+                    ':user_id' => $user_id,
+                    ':consulting_id' => $consulting_id,
+                    ':liked' => 1
+                ]);
+            }
+            
+            // If found, toggle the "liked" value
+            $newLikedValue = $record['liked'] == 1 ? 0 : 1;
+            $updateStmt = $con->prepare(
+                'UPDATE consulting_access SET liked = :liked WHERE user_id = :user_id AND consulting_id = :consulting_id'
+            );
+            $updateStmt->execute([
+                ':liked' => $newLikedValue,
+                ':user_id' => $user_id,
+                ':consulting_id' => $consulting_id
+            ]);
+
+            return [
+                'liked' => $newLikedValue,
+                'user_id' => $user_id,
+                'consulting_id' => $consulting_id
+            ];
+        } catch (\PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+    }
+
+    public function insert_view($user_id, $consulting_id) {
+        // Ensure that user_id and consulting_id are not empty
+        if (empty($user_id) || empty($consulting_id)) {
+            return false; // Validation failed
+        }
+
+        $con = self::get_connection();
+
+        try {
+            $stmt = $con->prepare(
+                'INSERT INTO consulting_view (user_id, consulting_id, time_stamp) ' .
+                'VALUES (:user_id, :consulting_id, NOW())'
+            );
+
+            // Execute the statement with the provided values
+            $stmt->execute([
+                ':user_id' => $user_id,
+                ':consulting_id' => $consulting_id
+            ]);
+
+            return true; // Success
+        } catch (\PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false; // Error occurred
+        }
     }
 }
 
