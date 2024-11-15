@@ -138,24 +138,28 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
         <div class="row">
             <div class="swiper plans-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="card professional-card" style="width: 18rem;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Plano completo semestral</h5>
-                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ventore voluptatem ratione</p>
-                                <div class="plan-price">
-                                    <h6>R$ 600</h6>
-                                    <small>/2 meses</small>
+                    <?php foreach ($dados["plans"] as $plans) { ?>
+                        <div class="swiper-slide">
+                            <div class="card professional-card" style="width: 18rem;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title"><?=$plans["plan"]?></h5>
+                                    <p class="card-text"><?=$plans["description"]?></p>
+                                    <div class="plan-price">
+                                        <h6>R$ <?=$plans["price"]?></h6>
+                                        <small>/<?=$plans["period"]?> meses</small>
+                                    </div>
                                 </div>
+                                <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
+                                <ul class="list-group list-group-flush">
+                                    <?php foreach ($plans["benefits"] as $benefits) {?>
+                                        <li class="list-group-item"><i class="fas fa-dumbbell"></i> Treino periodizado</li>
+                                    <?php } ?>
+                                    <li class="list-group-item"><i class="fab fa-apple"></i> Dieta</li>
+                                    <li class="list-group-item"><i class="fas fa-person"></i> Prescrição de alongamentos</li>
+                                </ul>
                             </div>
-                            <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><i class="fas fa-dumbbell"></i> Treino periodizado</li>
-                                <li class="list-group-item"><i class="fab fa-apple"></i> Dieta</li>
-                                <li class="list-group-item"><i class="fas fa-person"></i> Prescrição de alongamentos</li>
-                            </ul>
                         </div>
-                    </div>
+                    <?php } ?>
 
                     <div class="swiper-slide">
                         <div class="card professional-card" style="width: 18rem;">

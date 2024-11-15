@@ -4,17 +4,10 @@ namespace App;
 
 class DbConnection {
 	public static function getDb() {
-		$user = "root";
-		$password = "";
-		$host = "localhost";
-		$db_name = "spotfit";
-		
-		// $user = "if0_37279824";
-		// $password = "Spot123admin";
-		// $host = "sql112.infinityfree.com";
-		// $db_name = "if0_37279824_spotfit";
-
-
+		$user = __DB_USER__;
+		$password = __DB_PASSWORD__;
+		$host = __DB_HOST__;
+		$db_name = __DB_NAME__;
 
 		try {
 			return new \PDO(
