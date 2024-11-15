@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/11/2024 às 19:57
+-- Tempo de geração: 15/11/2024 às 22:47
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -65,7 +65,7 @@ CREATE TABLE `consulting` (
   `contact_email` varchar(255) NOT NULL,
   `contact_phone` varchar(20) NOT NULL,
   `adm_user_id` int(11) DEFAULT NULL,
-  `status` varchar(7) NOT NULL DEFAULT 'pending' COMMENT 'collection: pending, refused, accepted'
+  `status` varchar(8) NOT NULL DEFAULT 'pending' COMMENT 'collection: pending, refused, accepted'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -87,6 +87,13 @@ CREATE TABLE `consulting_access` (
   `consulting_id` int(11) NOT NULL,
   `liked` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `consulting_access`
+--
+
+INSERT INTO `consulting_access` (`user_id`, `consulting_id`, `liked`) VALUES
+(10, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -169,6 +176,13 @@ CREATE TABLE `consulting_comment` (
   `comment_text` text DEFAULT NULL,
   `rating` decimal(2,1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `consulting_comment`
+--
+
+INSERT INTO `consulting_comment` (`id_consulting_comment`, `user_id`, `consulting_id`, `comment_type`, `comment_text`, `rating`) VALUES
+(1, 10, 1, 'nao sei', 'top', 5.0);
 
 -- --------------------------------------------------------
 
@@ -280,6 +294,24 @@ CREATE TABLE `consulting_view` (
   `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `consulting_view`
+--
+
+INSERT INTO `consulting_view` (`consulting_view_id`, `user_id`, `consulting_id`, `time_stamp`) VALUES
+(1, 10, 1, '2024-11-15 19:44:54'),
+(2, 10, 1, '2024-11-15 20:10:43'),
+(3, 10, 1, '2024-11-15 20:10:50'),
+(4, 10, 1, '2024-11-15 20:10:50'),
+(5, 10, 1, '2024-11-15 20:11:06'),
+(6, 10, 1, '2024-11-15 20:11:08'),
+(7, 10, 1, '2024-11-15 20:11:11'),
+(8, 10, 1, '2024-11-15 20:11:12'),
+(9, 10, 1, '2024-11-15 21:22:36'),
+(10, 10, 1, '2024-11-15 21:23:39'),
+(11, 10, 2, '2024-11-15 21:23:42'),
+(12, 10, 2, '2024-11-15 21:27:16');
+
 -- --------------------------------------------------------
 
 --
@@ -386,12 +418,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `email`, `user_password`, `cpf_or_cnpj`, `profile_photo`, `professional`, `phone`) VALUES
-(0, 'admin', 'admin@spotfit.com', '$2y$10$FMz1gdZUA2lYQo3SBzd4weI7yNcyEFjtBgbE7XDGki48Gq823I4ri', '', NULL, 1, NULL),
 (1, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$I1LoTBKnJuAr9nUOp2xKgev/78oxJFgYs4EPv4NswU2owvOkiKGBe', '51882572890', 'download.jpg', 0, '11983020691'),
 (2, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$r09ODrlfOW8lohowHJZDouiLOXTAi8TOzhsgIO3Tr6aV/9h74I8Z2', '51882572890', 'a.jpg', 0, '11983020691'),
 (3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', 1, '11991825452'),
 (4, 'Natan Personal', 'natan.personal@gmail.com', '$2y$10$dtA1ac48uIkHVOSUrZW9Vebe3lCWwBR.W/9PhJgZda.f4tkt9XFPG', '31522433678', '31522433678671ec7369a8049.46876155.jpeg', 1, '5435433242'),
-(5, 'Natan Consultor', 'natan.consultoria@gmail.com', '$2y$10$Jno4/KHIJISD5MT4ecnzKOdmqq.xM8A9zyGjsqaeDnvSdOnCxCPgS', '', NULL, 0, '11991825452');
+(5, 'Natan Consultor', 'natan.consultoria@gmail.com', '$2y$10$Jno4/KHIJISD5MT4ecnzKOdmqq.xM8A9zyGjsqaeDnvSdOnCxCPgS', '', NULL, 0, '11991825452'),
+(10, 'admin', 'admin@spotfit.com', '$2y$10$FMz1gdZUA2lYQo3SBzd4weI7yNcyEFjtBgbE7XDGki48Gq823I4ri', '', NULL, 1, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -539,7 +571,7 @@ ALTER TABLE `consulting_benefit`
 -- AUTO_INCREMENT de tabela `consulting_comment`
 --
 ALTER TABLE `consulting_comment`
-  MODIFY `id_consulting_comment` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_consulting_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_image`
@@ -563,7 +595,7 @@ ALTER TABLE `consulting_professional`
 -- AUTO_INCREMENT de tabela `consulting_view`
 --
 ALTER TABLE `consulting_view`
-  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `email_contact`
@@ -593,7 +625,7 @@ ALTER TABLE `register_type`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para tabelas despejadas
