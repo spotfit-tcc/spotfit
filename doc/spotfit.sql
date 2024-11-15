@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/10/2024 às 00:18
+-- Tempo de geração: 15/11/2024 às 19:57
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -64,16 +64,17 @@ CREATE TABLE `consulting` (
   `description` text DEFAULT NULL,
   `contact_email` varchar(255) NOT NULL,
   `contact_phone` varchar(20) NOT NULL,
-  `adm_user_id` int(11) DEFAULT NULL
+  `adm_user_id` int(11) DEFAULT NULL,
+  `status` varchar(7) NOT NULL DEFAULT 'pending' COMMENT 'collection: pending, refused, accepted'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `consulting`
 --
 
-INSERT INTO `consulting` (`consulting_id`, `consulting_name`, `description`, `contact_email`, `contact_phone`, `adm_user_id`) VALUES
-(1, 'Consultoria do Ademir', 'Consultoria do Ademir cuida da sua saúde e bem estar', 'contato.ademir@gmail.com', '11991825452', 3),
-(2, 'Natan Personal', '', 'natan.personal@gmail.com', '123123123123', 4);
+INSERT INTO `consulting` (`consulting_id`, `consulting_name`, `description`, `contact_email`, `contact_phone`, `adm_user_id`, `status`) VALUES
+(1, 'Consultoria do Ademir', 'Consultoria do Ademir cuida da sua saúde e bem estar', 'contato.ademir@gmail.com', '11991825452', 3, 'pending'),
+(2, 'Natan Personal', '', 'natan.personal@gmail.com', '123123123123', 4, 'pending');
 
 -- --------------------------------------------------------
 
@@ -269,6 +270,19 @@ INSERT INTO `consulting_professional` (`consulting_professional_id`, `name`, `in
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `consulting_view`
+--
+
+CREATE TABLE `consulting_view` (
+  `consulting_view_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `consulting_id` int(11) NOT NULL,
+  `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `email_contact`
 --
 
@@ -290,13 +304,6 @@ CREATE TABLE `profession` (
   `profession_name` varchar(100) NOT NULL,
   `profession_description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE consulting_view (
-    consulting_view_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    consulting_id INT NOT NULL,
-    time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 --
 -- Despejando dados para a tabela `profession`
@@ -370,8 +377,8 @@ CREATE TABLE `user` (
   `user_password` varchar(255) NOT NULL,
   `cpf_or_cnpj` varchar(20) NOT NULL,
   `profile_photo` varchar(255) DEFAULT NULL,
-  `professional` tinyint(1) DEFAULT NULL,
-  `phone` varchar(20) NOT NULL
+  `professional` tinyint(1) NOT NULL DEFAULT 0,
+  `phone` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -379,10 +386,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `email`, `user_password`, `cpf_or_cnpj`, `profile_photo`, `professional`, `phone`) VALUES
-(1, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$I1LoTBKnJuAr9nUOp2xKgev/78oxJFgYs4EPv4NswU2owvOkiKGBe', '51882572890', 'download.jpg', NULL, '11983020691'),
-(2, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$r09ODrlfOW8lohowHJZDouiLOXTAi8TOzhsgIO3Tr6aV/9h74I8Z2', '51882572890', 'a.jpg', NULL, '11983020691'),
-(3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', NULL, '11991825452'),
-(4, 'Natan Personal', 'natan.personal@gmail.com', '$2y$10$dtA1ac48uIkHVOSUrZW9Vebe3lCWwBR.W/9PhJgZda.f4tkt9XFPG', '31522433678', '31522433678671ec7369a8049.46876155.jpeg', NULL, '5435433242');
+(0, 'admin', 'admin@spotfit.com', '$2y$10$FMz1gdZUA2lYQo3SBzd4weI7yNcyEFjtBgbE7XDGki48Gq823I4ri', '', NULL, 1, NULL),
+(1, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$I1LoTBKnJuAr9nUOp2xKgev/78oxJFgYs4EPv4NswU2owvOkiKGBe', '51882572890', 'download.jpg', 0, '11983020691'),
+(2, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$r09ODrlfOW8lohowHJZDouiLOXTAi8TOzhsgIO3Tr6aV/9h74I8Z2', '51882572890', 'a.jpg', 0, '11983020691'),
+(3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', 1, '11991825452'),
+(4, 'Natan Personal', 'natan.personal@gmail.com', '$2y$10$dtA1ac48uIkHVOSUrZW9Vebe3lCWwBR.W/9PhJgZda.f4tkt9XFPG', '31522433678', '31522433678671ec7369a8049.46876155.jpeg', 1, '5435433242'),
+(5, 'Natan Consultor', 'natan.consultoria@gmail.com', '$2y$10$Jno4/KHIJISD5MT4ecnzKOdmqq.xM8A9zyGjsqaeDnvSdOnCxCPgS', '', NULL, 0, '11991825452');
 
 --
 -- Índices para tabelas despejadas
@@ -466,6 +475,12 @@ ALTER TABLE `consulting_professional`
   ADD KEY `consulting_id` (`consulting_id`);
 
 --
+-- Índices de tabela `consulting_view`
+--
+ALTER TABLE `consulting_view`
+  ADD PRIMARY KEY (`consulting_view_id`);
+
+--
 -- Índices de tabela `email_contact`
 --
 ALTER TABLE `email_contact`
@@ -545,6 +560,12 @@ ALTER TABLE `consulting_professional`
   MODIFY `consulting_professional_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT de tabela `consulting_view`
+--
+ALTER TABLE `consulting_view`
+  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `email_contact`
 --
 ALTER TABLE `email_contact`
@@ -572,7 +593,7 @@ ALTER TABLE `register_type`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para tabelas despejadas
