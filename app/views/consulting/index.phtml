@@ -3,6 +3,16 @@
 $parametros = $this->view->parametros;
 ?>
 
+<?php if(isset($_GET['created_msg']) && $_GET['created_msg'] == "1"){ ?>
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <p><strong>Consultoria salva com sucesso!</strong></p>
+            <p>Agora é só aguardar nosso time analizar sua consultoria para disponibilizá-la para o público</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+<?php } ?>
+
 <section id="fpTitleSection">
     <div class="container">
         <div class="row">

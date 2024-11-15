@@ -498,7 +498,7 @@ class ConsultingForm extends BaseModel {
             $stmt = $pdo->prepare(
                 'UPDATE consulting SET consulting_name = :consulting_name, '.
                 'description = :description, contact_email = :contact_email, '.
-                'contact_phone = :contact_phone WHERE consulting_id = :consulting_id'
+                'contact_phone = :contact_phone, status = "pending" WHERE consulting_id = :consulting_id'
             );
 
             $stmt->execute([

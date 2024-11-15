@@ -26,7 +26,6 @@ class ConsultingController extends ApplicationController{
         $parametros = $this->get_consulting($search);
         $this->view->parametros = json_decode(json_encode($parametros), true);
 
-
         $this->render('index');
 
     }
@@ -101,7 +100,7 @@ class ConsultingController extends ApplicationController{
         $consulting_form->validate_record();
 
         if($consulting_form->create_record()){
-            header('Location: /consulting?prof=' . $consulting_form->__get('consulting_id'));
+            header('Location: /consulting?created_msg=1');
         } else {
             $this->view->consulting_form = $consulting_form;
             $this->view->action = "Nova";
@@ -138,7 +137,7 @@ class ConsultingController extends ApplicationController{
         $consulting_form->validate_record();
 
         if($consulting_form->update_record()){
-            header('Location: /consulting?prof=' . $consulting_form->__get('consulting_id'));
+            header('Location: /consulting?created_msg=1');
         } else {
             $this->view->consulting_form = $consulting_form;
             $this->view->action = "Editar";
