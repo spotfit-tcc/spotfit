@@ -162,37 +162,6 @@ class ConsultingController extends ApplicationController{
         }
     }
 
-    public function pending_consultings(){
-        $this->authenticate();
-
-        if(!self::logged_as_admin() ){
-            header('Location: /consulting');
-            return;
-        }
-
-        $this->view->pending_consultings = Consulting::list_all_pending_consultings();
-        $this->render('pending_consultings');
-    }
-
-    public function change_consulting_status(){
-        $this->authenticate();
-
-        if(!self::logged_as_admin() ){
-            header('Location: /consulting');
-            return;
-        }
-
-        $updateStmt = $con->prepare(
-            'UPDATE consulting SET status = :status WHERE adm_user_id = :user_id'
-        );
-        $updateStmt->execute([
-            ':status' => $_GET["status"],
-            ':user_id' => Consulting::logged_user()
-        ]);
-
-        header('Location: /pending_consultings');
-    }
-
     private function get_consulting ($search) {
         $consulting = new Consulting([]);
         return $consulting->list_records($search);
