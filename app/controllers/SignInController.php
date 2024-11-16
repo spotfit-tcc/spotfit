@@ -23,6 +23,7 @@ class SignInController extends ApplicationController{
             $_SESSION["email"] = $user['email'];
             $_SESSION["profile_photo"] = $user['profile_photo'];
             $_SESSION["phone"] = $user['phone']; 
+            $_SESSION['professional'] = $user['professional']; 
             $_SESSION["auth"] = true;
             header('Location: /');
         }

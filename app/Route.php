@@ -72,6 +72,12 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['/profile/schedules'] = array(
+			'route' => '/profile/schedules',
+			'controller' => 'ProfileController',
+			'action' => 'schedules'
+		);
+
 		$routes['/sign_up'] = array(
 			'route' => '/sign_up',
 			'controller' => 'SignUpController',

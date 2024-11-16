@@ -77,3 +77,10 @@ function redirectToWhatsApp(phoneNumber) {
   const url = `https://wa.me/${phoneNumber}`;
   window.open(url, '_blank');
 }
+
+document.getElementById('scheduleContactButton').onclick = function() {
+    document.getElementById('scheduleContactModal').style.display = 'block';
+};
+document.getElementById('closeModal').onclick = function() {
+    document.getElementById('scheduleContactModal').style.display = 'none';
+};

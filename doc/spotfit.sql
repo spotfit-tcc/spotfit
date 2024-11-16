@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/11/2024 às 22:47
+-- Tempo de geração: 16/11/2024 às 03:45
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -74,7 +74,9 @@ CREATE TABLE `consulting` (
 
 INSERT INTO `consulting` (`consulting_id`, `consulting_name`, `description`, `contact_email`, `contact_phone`, `adm_user_id`, `status`) VALUES
 (1, 'Consultoria do Ademir', 'Consultoria do Ademir cuida da sua saúde e bem estar', 'contato.ademir@gmail.com', '11991825452', 3, 'pending'),
-(2, 'Natan Personal', '', 'natan.personal@gmail.com', '123123123123', 4, 'pending');
+(2, 'Natan Personal', '', 'natan.personal@gmail.com', '123123123123', 4, 'pending'),
+(3, 'Ana Eliza Yukimoto de Oliveira', 's', 'anaelizayuki@gmail.com', '11949417826', 11, 'pending'),
+(4, 'Ana Eliza Yukimoto de Oliveira', 'q', 'anaelizayuki@gmail.com', '11949417826', 11, 'pending');
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,9 @@ INSERT INTO `consulting_benefit` (`consulting_benefit_id`, `consulting_id`, `ben
 (25, 1, 'Prescrição de exercícios', 'Prescrição de exercícios', 'fa-solid fa-dumbbell'),
 (26, 1, 'Acompanhamento de dores', 'Acompanhamento de dores', 'fa-solid fa-user-nurse'),
 (27, 2, 'Treino periodizado', 'Treino periodizado', 'fa-solid fa-dumbbell'),
-(28, 2, 'Dieta personalizada', 'Dieta personalizada', 'fa-solid fa-utensils');
+(28, 2, 'Dieta personalizada', 'Dieta personalizada', 'fa-solid fa-utensils'),
+(29, 3, 'ANA ELIZA YUKIMOTO DE OLIVEIRA', 's', 'fa-solid fa-syringe'),
+(30, 4, 'ANA ELIZA YUKIMOTO DE OLIVEIRA', 'qq', 'fa-solid fa-syringe');
 
 -- --------------------------------------------------------
 
@@ -139,7 +143,8 @@ INSERT INTO `consulting_benefit_professional` (`consulting_benefit_id`, `consult
 (26, 23),
 (26, 24),
 (27, 25),
-(28, 26);
+(28, 26),
+(29, 27);
 
 -- --------------------------------------------------------
 
@@ -160,7 +165,11 @@ INSERT INTO `consulting_category` (`consulting_id`, `category_id`) VALUES
 (1, 4),
 (1, 14),
 (2, 1),
-(2, 2);
+(2, 2),
+(3, 1),
+(4, 2),
+(4, 5),
+(4, 13);
 
 -- --------------------------------------------------------
 
@@ -205,7 +214,9 @@ INSERT INTO `consulting_image` (`consulting_image_id`, `description`, `image_dir
 (5, 'foto-perfil-2.jpeg', '671ec53989ca60.02671578.jpeg', 1),
 (6, 'foto-proa.jpg', '671ec539bdfa55.04428595.jpg', 1),
 (7, 'Foto-perfil.jpeg', '671ec637c08336.24727239.jpeg', 1),
-(8, 'rock pistola loko.jpeg', '671ec935efd201.90051686.jpeg', 2);
+(8, 'rock pistola loko.jpeg', '671ec935efd201.90051686.jpeg', 2),
+(9, 'fitDance.jpg', '6738008f9542d9.60472949.jpg', 3),
+(10, 'fitDance.jpg', '673800bcda3b05.15782483.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -230,7 +241,9 @@ INSERT INTO `consulting_plan` (`consulting_plans_id`, `consulting_id`, `plan`, `
 (21, 1, 'Plano semestral completo', 500.00, 'Plano de 6 meses com todos os benefícios', '6'),
 (22, 1, 'Plano anual completo', 1999.99, 'Plano de 1 ano com desconto mensal, incluso todos os benefícios', '12'),
 (23, 2, 'Plano semestral completo', 659.99, 'Plano semestral completo', '6'),
-(24, 2, 'Plano anual completo', 999.99, 'Plano anual completo', '12');
+(24, 2, 'Plano anual completo', 999.99, 'Plano anual completo', '12'),
+(25, 3, 'ANA ELIZA YUKIMOTO DE OLIVEIRA', 111.00, 'aaa', '1'),
+(26, 4, 'ANA ELIZA YUKIMOTO DE OLIVEIRA', 222.00, '2', '2');
 
 -- --------------------------------------------------------
 
@@ -254,7 +267,9 @@ INSERT INTO `consulting_plan_benefit` (`consulting_plans_id`, `id_beneficio_cons
 (23, 27),
 (23, 28),
 (24, 27),
-(24, 28);
+(24, 28),
+(25, 29),
+(26, 30);
 
 -- --------------------------------------------------------
 
@@ -279,7 +294,23 @@ INSERT INTO `consulting_professional` (`consulting_professional_id`, `name`, `in
 (23, 'Cleiton', '@cleiton', '56545465', '', 1),
 (24, 'Samara', '@samara', '675534234', 'contato.samara@gmail.com', 1),
 (25, 'Natan', '@natan', '1231231232', 'natan.personal@gmail.com', 2),
-(26, 'Cleiton nutri', '@nutri_cleiton', '1231332123', '', 2);
+(26, 'Cleiton nutri', '@nutri_cleiton', '1231332123', '', 2),
+(27, 'Ana Eliza Yukimoto de Oliveira', '', '11949417826', 'anaelizayuki@gmail.com', 3),
+(28, 'Ana Eliza Yukimoto de Oliveira', '', '11949417826', 'anaelizayuki@gmail.com', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `consulting_schedules`
+--
+
+CREATE TABLE `consulting_schedules` (
+  `schedule_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `consulting_id` int(11) NOT NULL,
+  `reason` text NOT NULL,
+  `contact_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -310,7 +341,196 @@ INSERT INTO `consulting_view` (`consulting_view_id`, `user_id`, `consulting_id`,
 (9, 10, 1, '2024-11-15 21:22:36'),
 (10, 10, 1, '2024-11-15 21:23:39'),
 (11, 10, 2, '2024-11-15 21:23:42'),
-(12, 10, 2, '2024-11-15 21:27:16');
+(12, 10, 2, '2024-11-15 21:27:16'),
+(13, 5, 1, '2024-11-15 22:26:44'),
+(14, 5, 1, '2024-11-15 22:26:53'),
+(15, 5, 1, '2024-11-15 22:28:50'),
+(16, 5, 1, '2024-11-15 22:28:53'),
+(17, 5, 1, '2024-11-15 22:29:00'),
+(18, 5, 1, '2024-11-15 22:29:13'),
+(19, 5, 1, '2024-11-15 22:31:11'),
+(20, 5, 1, '2024-11-15 22:31:18'),
+(21, 5, 1, '2024-11-15 22:31:59'),
+(22, 5, 1, '2024-11-15 22:32:06'),
+(23, 5, 1, '2024-11-15 22:33:51'),
+(24, 5, 1, '2024-11-15 22:34:20'),
+(25, 5, 1, '2024-11-15 22:34:46'),
+(26, 5, 1, '2024-11-15 22:35:47'),
+(27, 5, 1, '2024-11-15 22:35:56'),
+(28, 5, 1, '2024-11-15 22:36:11'),
+(29, 5, 1, '2024-11-15 22:38:07'),
+(30, 5, 1, '2024-11-15 22:38:17'),
+(31, 5, 1, '2024-11-15 22:39:39'),
+(32, 5, 1, '2024-11-15 22:40:08'),
+(33, 5, 1, '2024-11-15 22:40:16'),
+(34, 5, 1, '2024-11-15 22:41:41'),
+(35, 5, 1, '2024-11-15 22:41:49'),
+(36, 5, 1, '2024-11-15 22:41:56'),
+(37, 5, 1, '2024-11-15 22:43:48'),
+(38, 5, 1, '2024-11-15 22:43:57'),
+(39, 11, 1, '2024-11-15 22:46:33'),
+(40, 11, 1, '2024-11-15 22:46:45'),
+(41, 11, 1, '2024-11-15 22:55:46'),
+(42, 11, 1, '2024-11-15 22:55:48'),
+(43, 11, 1, '2024-11-15 22:56:44'),
+(44, 11, 1, '2024-11-15 22:57:25'),
+(45, 11, 1, '2024-11-15 22:58:07'),
+(46, 11, 1, '2024-11-15 23:02:33'),
+(47, 11, 1, '2024-11-15 23:04:22'),
+(48, 11, 1, '2024-11-15 23:07:04'),
+(49, 11, 1, '2024-11-15 23:09:53'),
+(50, 11, 1, '2024-11-15 23:10:01'),
+(51, 11, 1, '2024-11-15 23:11:43'),
+(52, 11, 1, '2024-11-15 23:11:51'),
+(53, 11, 1, '2024-11-15 23:19:48'),
+(54, 11, 1, '2024-11-15 23:22:00'),
+(55, 11, 1, '2024-11-15 23:22:10'),
+(56, 11, 1, '2024-11-15 23:28:12'),
+(57, 11, 1, '2024-11-16 00:01:42'),
+(58, 11, 1, '2024-11-16 00:21:31'),
+(59, 11, 1, '2024-11-16 00:23:00'),
+(60, 11, 1, '2024-11-16 00:23:11'),
+(61, 11, 1, '2024-11-16 00:23:37'),
+(62, 11, 1, '2024-11-16 00:23:59'),
+(63, 11, 1, '2024-11-16 00:24:18'),
+(64, 11, 1, '2024-11-16 00:24:29'),
+(65, 11, 1, '2024-11-16 00:24:32'),
+(66, 11, 1, '2024-11-16 00:24:34'),
+(67, 11, 1, '2024-11-16 00:24:58'),
+(68, 11, 1, '2024-11-16 00:26:11'),
+(69, 11, 1, '2024-11-16 00:26:44'),
+(70, 11, 1, '2024-11-16 00:27:45'),
+(71, 11, 1, '2024-11-16 00:29:26'),
+(72, 11, 1, '2024-11-16 00:29:53'),
+(73, 11, 1, '2024-11-16 00:30:15'),
+(74, 11, 1, '2024-11-16 00:34:17'),
+(75, 11, 1, '2024-11-16 00:34:42'),
+(76, 11, 1, '2024-11-16 00:34:58'),
+(77, 11, 1, '2024-11-16 00:35:52'),
+(78, 11, 1, '2024-11-16 00:36:05'),
+(79, 11, 1, '2024-11-16 00:36:56'),
+(80, 11, 1, '2024-11-16 00:37:41'),
+(81, 11, 1, '2024-11-16 00:37:50'),
+(82, 11, 1, '2024-11-16 00:38:03'),
+(83, 11, 1, '2024-11-16 00:38:22'),
+(84, 11, 1, '2024-11-16 00:38:56'),
+(85, 11, 1, '2024-11-16 00:39:20'),
+(86, 11, 1, '2024-11-16 00:39:30'),
+(87, 11, 1, '2024-11-16 00:39:41'),
+(88, 11, 1, '2024-11-16 00:39:55'),
+(89, 11, 1, '2024-11-16 00:40:15'),
+(90, 11, 1, '2024-11-16 00:40:41'),
+(91, 11, 1, '2024-11-16 00:41:15'),
+(92, 11, 1, '2024-11-16 00:41:38'),
+(93, 11, 1, '2024-11-16 00:41:56'),
+(94, 11, 1, '2024-11-16 00:42:15'),
+(95, 11, 1, '2024-11-16 00:42:27'),
+(96, 11, 1, '2024-11-16 00:42:40'),
+(97, 11, 1, '2024-11-16 00:42:50'),
+(98, 11, 1, '2024-11-16 00:43:04'),
+(99, 11, 1, '2024-11-16 00:43:13'),
+(100, 11, 1, '2024-11-16 00:44:16'),
+(101, 11, 1, '2024-11-16 00:44:28'),
+(102, 11, 1, '2024-11-16 00:44:53'),
+(103, 11, 1, '2024-11-16 00:45:09'),
+(104, 11, 1, '2024-11-16 00:45:28'),
+(105, 11, 1, '2024-11-16 00:45:45'),
+(106, 11, 1, '2024-11-16 00:45:54'),
+(107, 11, 1, '2024-11-16 00:46:09'),
+(108, 11, 1, '2024-11-16 00:46:21'),
+(109, 11, 1, '2024-11-16 00:47:04'),
+(110, 11, 1, '2024-11-16 00:47:25'),
+(111, 11, 1, '2024-11-16 00:48:47'),
+(112, 11, 1, '2024-11-16 00:49:12'),
+(113, 11, 1, '2024-11-16 00:49:28'),
+(114, 11, 1, '2024-11-16 00:49:41'),
+(115, 11, 1, '2024-11-16 00:50:23'),
+(116, 11, 1, '2024-11-16 00:51:21'),
+(117, 11, 1, '2024-11-16 00:51:46'),
+(118, 11, 1, '2024-11-16 00:51:59'),
+(119, 11, 1, '2024-11-16 00:52:13'),
+(120, 11, 1, '2024-11-16 00:52:29'),
+(121, 11, 1, '2024-11-16 00:52:53'),
+(122, 11, 1, '2024-11-16 00:53:30'),
+(123, 11, 1, '2024-11-16 00:53:40'),
+(124, 11, 1, '2024-11-16 00:55:50'),
+(125, 11, 1, '2024-11-16 00:56:08'),
+(126, 11, 1, '2024-11-16 00:57:16'),
+(127, 11, 1, '2024-11-16 00:57:30'),
+(128, 11, 1, '2024-11-16 00:57:37'),
+(129, 11, 1, '2024-11-16 00:58:09'),
+(130, 11, 1, '2024-11-16 01:00:17'),
+(131, 11, 1, '2024-11-16 01:04:08'),
+(132, 11, 1, '2024-11-16 01:04:20'),
+(133, 11, 1, '2024-11-16 01:06:22'),
+(134, 11, 1, '2024-11-16 01:06:54'),
+(135, 11, 1, '2024-11-16 01:07:06'),
+(136, 11, 1, '2024-11-16 01:07:15'),
+(137, 11, 1, '2024-11-16 01:07:31'),
+(138, 11, 1, '2024-11-16 01:07:40'),
+(139, 11, 1, '2024-11-16 01:07:55'),
+(140, 11, 1, '2024-11-16 01:08:16'),
+(141, 11, 1, '2024-11-16 01:08:56'),
+(142, 11, 1, '2024-11-16 01:09:26'),
+(143, 11, 1, '2024-11-16 01:10:24'),
+(144, 11, 1, '2024-11-16 01:10:42'),
+(145, 11, 1, '2024-11-16 01:10:51'),
+(146, 11, 1, '2024-11-16 01:11:11'),
+(147, 11, 1, '2024-11-16 01:12:06'),
+(148, 11, 1, '2024-11-16 01:12:21'),
+(149, 11, 1, '2024-11-16 01:12:47'),
+(150, 11, 1, '2024-11-16 01:13:39'),
+(151, 11, 1, '2024-11-16 01:13:44'),
+(152, 11, 1, '2024-11-16 01:14:46'),
+(153, 11, 1, '2024-11-16 01:14:54'),
+(154, 11, 1, '2024-11-16 01:15:06'),
+(155, 11, 1, '2024-11-16 01:16:01'),
+(156, 11, 1, '2024-11-16 01:16:20'),
+(157, 11, 1, '2024-11-16 01:18:13'),
+(158, 11, 1, '2024-11-16 01:18:19'),
+(159, 11, 1, '2024-11-16 01:18:48'),
+(160, 11, 1, '2024-11-16 01:20:12'),
+(161, 11, 1, '2024-11-16 01:30:19'),
+(162, 11, 1, '2024-11-16 01:30:33'),
+(163, 11, 1, '2024-11-16 01:30:42'),
+(164, 11, 1, '2024-11-16 01:31:25'),
+(165, 11, 1, '2024-11-16 01:31:37'),
+(166, 11, 1, '2024-11-16 01:31:40'),
+(167, 11, 1, '2024-11-16 01:31:55'),
+(168, 11, 1, '2024-11-16 01:32:07'),
+(169, 11, 1, '2024-11-16 01:32:15'),
+(170, 11, 1, '2024-11-16 01:32:19'),
+(171, 11, 1, '2024-11-16 01:47:51'),
+(172, 11, 1, '2024-11-16 01:48:53'),
+(173, 11, 1, '2024-11-16 01:49:20'),
+(174, 11, 1, '2024-11-16 01:49:24'),
+(175, 11, 2, '2024-11-16 01:49:33'),
+(176, 11, 2, '2024-11-16 01:50:07'),
+(177, 11, 1, '2024-11-16 01:50:12'),
+(178, 11, 1, '2024-11-16 01:50:25'),
+(179, 11, 1, '2024-11-16 01:50:31'),
+(180, 11, 1, '2024-11-16 01:50:37'),
+(181, 11, 1, '2024-11-16 01:51:00'),
+(182, 11, 1, '2024-11-16 01:51:37'),
+(183, 11, 1, '2024-11-16 01:52:47'),
+(184, 11, 2, '2024-11-16 01:52:51'),
+(185, 11, 2, '2024-11-16 01:53:40'),
+(186, 11, 2, '2024-11-16 01:53:47'),
+(187, 11, 2, '2024-11-16 01:54:10'),
+(188, 11, 1, '2024-11-16 01:54:15'),
+(189, 11, 1, '2024-11-16 01:55:12'),
+(190, 11, 1, '2024-11-16 01:56:13'),
+(191, 11, 1, '2024-11-16 01:58:08'),
+(192, 11, 1, '2024-11-16 01:59:22'),
+(193, 11, 1, '2024-11-16 01:59:29'),
+(194, 11, 1, '2024-11-16 02:00:08'),
+(195, 11, 1, '2024-11-16 02:00:29'),
+(196, 11, 1, '2024-11-16 02:00:37'),
+(197, 11, 1, '2024-11-16 02:00:58'),
+(198, 11, 1, '2024-11-16 02:02:01'),
+(199, 11, 1, '2024-11-16 02:02:43'),
+(200, 11, 3, '2024-11-16 02:16:47'),
+(201, 11, 4, '2024-11-16 02:17:33');
 
 -- --------------------------------------------------------
 
@@ -370,7 +590,9 @@ INSERT INTO `professional_register` (`professional_register_id`, `consulting_pro
 (23, 23, 1, 1, '456234'),
 (24, 24, 1, 1, '75645'),
 (25, 25, 1, 1, '12312312'),
-(26, 26, 2, 2, '32543435');
+(26, 26, 2, 2, '32543435'),
+(27, 27, 1, 1, 'aaaa'),
+(28, 28, 1, 1, 'wwww');
 
 -- --------------------------------------------------------
 
@@ -423,7 +645,8 @@ INSERT INTO `user` (`user_id`, `user_name`, `email`, `user_password`, `cpf_or_cn
 (3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', 1, '11991825452'),
 (4, 'Natan Personal', 'natan.personal@gmail.com', '$2y$10$dtA1ac48uIkHVOSUrZW9Vebe3lCWwBR.W/9PhJgZda.f4tkt9XFPG', '31522433678', '31522433678671ec7369a8049.46876155.jpeg', 1, '5435433242'),
 (5, 'Natan Consultor', 'natan.consultoria@gmail.com', '$2y$10$Jno4/KHIJISD5MT4ecnzKOdmqq.xM8A9zyGjsqaeDnvSdOnCxCPgS', '', NULL, 0, '11991825452'),
-(10, 'admin', 'admin@spotfit.com', '$2y$10$FMz1gdZUA2lYQo3SBzd4weI7yNcyEFjtBgbE7XDGki48Gq823I4ri', '', NULL, 1, NULL);
+(10, 'admin', 'admin@spotfit.com', '$2y$10$FMz1gdZUA2lYQo3SBzd4weI7yNcyEFjtBgbE7XDGki48Gq823I4ri', '', NULL, 1, NULL),
+(11, 'Ana ', 'anayukimoto.dev@gmail.com', '$2y$10$BO/P6riuaxqB6BRKWTtnbOkq8mkumwuKHm9LhZmKJcdROHbjb7NyS', '12076674047', '120766740476737cf3eecaf76.54732600.jpg', 1, '1158787878987');
 
 --
 -- Índices para tabelas despejadas
@@ -507,6 +730,14 @@ ALTER TABLE `consulting_professional`
   ADD KEY `consulting_id` (`consulting_id`);
 
 --
+-- Índices de tabela `consulting_schedules`
+--
+ALTER TABLE `consulting_schedules`
+  ADD PRIMARY KEY (`schedule_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `consulting_id` (`consulting_id`);
+
+--
 -- Índices de tabela `consulting_view`
 --
 ALTER TABLE `consulting_view`
@@ -559,13 +790,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de tabela `consulting`
 --
 ALTER TABLE `consulting`
-  MODIFY `consulting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `consulting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_benefit`
 --
 ALTER TABLE `consulting_benefit`
-  MODIFY `consulting_benefit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `consulting_benefit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_comment`
@@ -577,25 +808,31 @@ ALTER TABLE `consulting_comment`
 -- AUTO_INCREMENT de tabela `consulting_image`
 --
 ALTER TABLE `consulting_image`
-  MODIFY `consulting_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `consulting_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_plan`
 --
 ALTER TABLE `consulting_plan`
-  MODIFY `consulting_plans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `consulting_plans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_professional`
 --
 ALTER TABLE `consulting_professional`
-  MODIFY `consulting_professional_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `consulting_professional_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT de tabela `consulting_schedules`
+--
+ALTER TABLE `consulting_schedules`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_view`
 --
 ALTER TABLE `consulting_view`
-  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT de tabela `email_contact`
@@ -613,7 +850,7 @@ ALTER TABLE `profession`
 -- AUTO_INCREMENT de tabela `professional_register`
 --
 ALTER TABLE `professional_register`
-  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `professional_register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de tabela `register_type`
@@ -625,7 +862,7 @@ ALTER TABLE `register_type`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restrições para tabelas despejadas
@@ -698,6 +935,13 @@ ALTER TABLE `consulting_plan_benefit`
 --
 ALTER TABLE `consulting_professional`
   ADD CONSTRAINT `consulting_professional_ibfk_1` FOREIGN KEY (`consulting_id`) REFERENCES `consulting` (`consulting_id`);
+
+--
+-- Restrições para tabelas `consulting_schedules`
+--
+ALTER TABLE `consulting_schedules`
+  ADD CONSTRAINT `consulting_schedules_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `consulting_schedules_ibfk_2` FOREIGN KEY (`consulting_id`) REFERENCES `consulting` (`consulting_id`);
 
 --
 -- Restrições para tabelas `professional_register`

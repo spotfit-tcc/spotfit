@@ -10,6 +10,9 @@ class Consulting extends BaseModel {
 	private $contact_email;
 	private $contact_phone;
 	private $adm_user_id;
+    // private $schedule_id;
+    // private $reason;
+    // private $contact_date;
 
     public function __construct($params){
         $this->set_attributes($params);
@@ -22,6 +25,10 @@ class Consulting extends BaseModel {
         $this->contact_email = $params['contact_email'] ?? null;
         $this->adm_user_id = $params['adm_user_id'] ?? self::logged_user(true);
         $this->contact_phone = $params['contact_phone'] ?? null;
+        // $this->schedule_id = $params['schedule_id'] ?? null;
+        // $this->consulting_id = $params['consulting_id'] ?? null;
+        // $this->reason = $params['reason'] ?? null;
+        // $this->contact_date = $params['contact_date'] ?? null;
     }
 
     public function __get($attr){
@@ -135,6 +142,29 @@ class Consulting extends BaseModel {
             return false;
         }
     }
+
+    // public function schedules(){
+    //     if (!$this->valid_record()) return false;
+
+    //     $con = self::get_connection();
+
+    //     try {
+    //         $stmt = $con->prepare(
+    //             'INSERT INTO consulting_schedules(user_id, consulting_id, reason, contact_date)' .
+    //             'VALUES (:user_id, :consulting_id, :reason, :contact_date)'
+    //         );
+    //         $stmt->execute(array(
+    //             ':user_id' => $this->user_id,
+    //             ':consulting_id' => $this->consulting_id,
+    //             ':reason' => $this->reason,
+    //             ':contact_date' => $this->contact_date
+    //         ));
+    //         return true;
+    //     } catch (PDOException $e) {
+    //         $this->errors[] = $e->getMessage();
+    //         return false;
+    //     }
+    // }
 
 
 }

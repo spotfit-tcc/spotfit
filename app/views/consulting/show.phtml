@@ -130,12 +130,39 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                         $phoneNumber = preg_replace('/\D/', '', $dados["consulting"]["contact_phone"]); // Sanitize phone number
                         $data = preg_replace('/\D/', '', $dados["consulting"]["contact_phone"]) ;
                     ?>
-                    <button href="https://wa.me/<?= $phoneNumber ?>" 
-                        target="_blank" class="spot-btn-dark-orange onhover-broom" 
-                        onclick="redirectToWhatsApp(<?=$data ?>)"
-                    >
-                        <span>Entrar em contato pelo WhatsApp</span>
+
+                    <button class="btn btn-outline-light spot-schedule mb-3"
+                        id="scheduleContactButton" 
+                        title="Agendar um contato para discutir a consultoria">
+                        <span>Agendar Contato</span>
                     </button>
+
+                    <!-- Pop-up de Agendamento de Contato -->
+                    <div id="scheduleContactModal" class="modal" style="display:none;">
+                        <div class="modal-content">
+                            <span id="closeModal" class="close">&times;</span>
+                            <h3 class="mb-3">Agende um Contato</h3>
+
+                            <form id="contactScheduleForm" method="POST">
+                                <div class="mb-3">
+                                    <label for="contact_reason" class="form-label">Motivo do contato:</label>
+                                    <textarea id="contact_reason" name="contact_reason" class="form-control" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact_date" class="form-label">Data e horário preferido:</label>
+                                    <input type="datetime-local" id="contact_date" name="contact_date" class="form-control" required />
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <button href="https://wa.me/<?= $phoneNumber ?>" 
+                        target="_blank" class="spot-btn-dark-orange onhover-broom mb-3" 
+                        onclick="redirectToWhatsApp(<?=$data ?>)" >
+                        <span>Contato pelo WhatsApp</span>
+                    </button>
+                    
                 </div>
             </div>
         </div>

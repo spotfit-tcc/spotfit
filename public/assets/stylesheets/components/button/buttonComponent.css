@@ -150,7 +150,16 @@
   position: relative;
 }
 
+.spot-schedule{
+  width: 100%;
+  padding: 12px 29px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+
 .spot-btn-dark-orange {
+  width: 100%;
   padding: 12px 29px;
   font-style: normal;
   font-weight: 500;
@@ -167,7 +176,6 @@
 .spot-btn-dark-orange.onhover-broom {
   background: linear-gradient(30deg, var(--orange-color), var(--orange-color-broom-effect-adjustment)) !important;
   overflow: hidden;
-  width: auto;
   position: relative;
 }
 

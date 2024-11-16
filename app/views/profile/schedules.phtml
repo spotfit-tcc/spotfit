@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Notificações</h1>
+    <ul>
+        <?php foreach ($schedules as $schedules): ?>
+            <li>
+                <p><strong>Cliente:</strong> <?= htmlspecialchars($schedules['user_name']); ?></p>
+                <p><strong>Motivo:</strong> <?= htmlspecialchars($schedules['reason']); ?></p>
+                <p><strong>Data:</strong> <?= htmlspecialchars($schedules['contact_date']); ?></p>
+                <a href="https://wa.me/<?= preg_replace('/\D/', '', $schedules['phone']); ?>" class="btn btn-primary" target="_blank">Enviar WhatsApp</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
