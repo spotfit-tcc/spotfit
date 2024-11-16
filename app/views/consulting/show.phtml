@@ -137,28 +137,41 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                     ?>
 
                     <button class="btn btn-outline-light spot-schedule mb-3"
-                        id="scheduleContactButton" 
+                        id="scheduleContactButton" data-toggle="modal" data-target="#scheduleContactModal"
                         title="Agendar um contato para discutir a consultoria">
                         <span>Agendar Contato</span>
                     </button>
 
                     <!-- Pop-up de Agendamento de Contato -->
-                    <div id="scheduleContactModal" class="modal" style="display:none;">
-                        <div class="modal-content">
-                            <span id="closeModal" class="close">&times;</span>
-                            <h3 class="mb-3">Agende um Contato</h3>
-
-                            <form id="contactScheduleForm" method="POST">
-                                <div class="mb-3">
-                                    <label for="contact_reason" class="form-label">Motivo do contato:</label>
-                                    <textarea id="contact_reason" name="contact_reason" class="form-control" required></textarea>
+                    <div class="modal fade" id="scheduleContactModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div>
+                                        <h5 class="modal-title" id="ModalLabel">Agende um Contato</h5>
+                                        <h6 class="modal-title spot-text-orange"><?= $dados["consulting"]["consulting_name"] ?></h6>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="contact_date" class="form-label">Data e horário preferido:</label>
-                                    <input type="datetime-local" id="contact_date" name="contact_date" class="form-control" required />
+                                <div class="modal-body">
+                                    <form id="contactScheduleForm" method="POST">
+                                        <input type="hidden" name="consulting_id" value="<?= htmlspecialchars($dados["consulting"]["consulting_id"]) ?>">
+                                        <div class="mb-3">
+                                            <label for="reason" class="form-label">Motivo do contato:</label>
+                                            <textarea id="reason" name="reason" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contact_date" class="form-label">Data e horário preferido:</label>
+                                            <input type="datetime-local" id="contact_date" name="contact_date" class="form-control" required />
+                                        </div>
+                                        <button type="submit" class="btn btn-danger">Enviar</button>
+                                    </form>
+                                    <div id="response-message"></div>
+                            
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">Enviar</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
 
@@ -344,6 +357,9 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
 
 <script src="/assets/javascripts/consulting/specificProfessionalPage.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
     function toggleLike() {

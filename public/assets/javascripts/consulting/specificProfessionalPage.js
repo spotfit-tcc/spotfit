@@ -78,9 +78,10 @@ function redirectToWhatsApp(phoneNumber) {
   window.open(url, '_blank');
 }
 
-document.getElementById('scheduleContactButton').onclick = function() {
-    document.getElementById('scheduleContactModal').style.display = 'block';
-};
-document.getElementById('closeModal').onclick = function() {
-    document.getElementById('scheduleContactModal').style.display = 'none';
-};
+$('#scheduleContactModal').on('shown.bs.modal', function () {
+    $('#meuInput').trigger('focus')
+})
+
+
+
+
