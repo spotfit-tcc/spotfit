@@ -62,7 +62,7 @@ $parametros = $this->view->parametros;
         <div class="card fp-professional-card--container">
             <a href="/consulting?prof=<?= $record['consulting_id']; ?>">
                 <label for="" class="fp-professional-card--label-categorie"><?= $record['category_name']; ?></label>
-                <img src="<?= $record['image_dir']; ?>" class="card-img-top" alt="<?= $record['description']; ?>">
+                <img src="image_uploads/<?= $record['image_dir']; ?>" class="card-img-top" alt="<?= $record['description']; ?>">
                 <div class="card-body">
                     <div class="fp-professional-card--content">
                         <h5 class="fp-professional-card--title"><?= $record['consulting_name']; ?></h5>
