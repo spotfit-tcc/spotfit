@@ -142,7 +142,7 @@ class ConsultingController extends ApplicationController{
             $this->view->consulting_form = $consulting_form;
             $this->view->action = "Editar";
             $this->view->type = "edit";
-            $this->view->form_action = "/consulting/pdate";
+            $this->view->form_action = "/consulting/update";
             $this->view->categories = Category::get_all_categories();
 
             $this->render('form');
