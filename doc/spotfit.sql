@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/11/2024 às 03:45
+-- Tempo de geração: 16/11/2024 às 20:09
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -309,8 +309,17 @@ CREATE TABLE `consulting_schedules` (
   `user_id` int(11) NOT NULL,
   `consulting_id` int(11) NOT NULL,
   `reason` text NOT NULL,
-  `contact_date` datetime NOT NULL
+  `contact_date` datetime NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT 0,
+  `dismiss` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `consulting_schedules`
+--
+
+INSERT INTO `consulting_schedules` (`schedule_id`, `user_id`, `consulting_id`, `reason`, `contact_date`, `read`, `dismiss`) VALUES
+(1, 4, 1, 'Quero agendaaaar', '2024-11-16 19:05:54', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -330,6 +339,7 @@ CREATE TABLE `consulting_view` (
 --
 
 INSERT INTO `consulting_view` (`consulting_view_id`, `user_id`, `consulting_id`, `time_stamp`) VALUES
+(0, 5, 1, '2024-11-16 17:29:09'),
 (1, 10, 1, '2024-11-15 19:44:54'),
 (2, 10, 1, '2024-11-15 20:10:43'),
 (3, 10, 1, '2024-11-15 20:10:50'),
@@ -530,7 +540,12 @@ INSERT INTO `consulting_view` (`consulting_view_id`, `user_id`, `consulting_id`,
 (198, 11, 1, '2024-11-16 02:02:01'),
 (199, 11, 1, '2024-11-16 02:02:43'),
 (200, 11, 3, '2024-11-16 02:16:47'),
-(201, 11, 4, '2024-11-16 02:17:33');
+(201, 11, 4, '2024-11-16 02:17:33'),
+(202, 5, 4, '2024-11-16 17:31:28'),
+(203, 3, 1, '2024-11-16 18:02:58'),
+(204, 3, 1, '2024-11-16 18:03:08'),
+(205, 4, 1, '2024-11-16 18:03:14'),
+(206, 4, 1, '2024-11-16 18:05:01');
 
 -- --------------------------------------------------------
 
@@ -644,7 +659,7 @@ INSERT INTO `user` (`user_id`, `user_name`, `email`, `user_password`, `cpf_or_cn
 (2, 'Gustavo ', 'gutiinacio@gmail.com', '$2y$10$r09ODrlfOW8lohowHJZDouiLOXTAi8TOzhsgIO3Tr6aV/9h74I8Z2', '51882572890', 'a.jpg', 0, '11983020691'),
 (3, 'admin', 'admin@teste.com', '$2y$10$OAXW5o8dlnk3T5Q9cYxLxu51LxWrUTnlxWRPFbgVeDzQUF4LbuuCC', '39658585132', '3965858513267170fdae3a198.80474028.jpg', 1, '11991825452'),
 (4, 'Natan Personal', 'natan.personal@gmail.com', '$2y$10$dtA1ac48uIkHVOSUrZW9Vebe3lCWwBR.W/9PhJgZda.f4tkt9XFPG', '31522433678', '31522433678671ec7369a8049.46876155.jpeg', 1, '5435433242'),
-(5, 'Natan Consultor', 'natan.consultoria@gmail.com', '$2y$10$Jno4/KHIJISD5MT4ecnzKOdmqq.xM8A9zyGjsqaeDnvSdOnCxCPgS', '', NULL, 0, '11991825452'),
+(5, 'Natan Consultor', 'natan.consultoria@gmail.com', '$2y$10$Jno4/KHIJISD5MT4ecnzKOdmqq.xM8A9zyGjsqaeDnvSdOnCxCPgS', '', NULL, 1, '11991825452'),
 (10, 'admin', 'admin@spotfit.com', '$2y$10$FMz1gdZUA2lYQo3SBzd4weI7yNcyEFjtBgbE7XDGki48Gq823I4ri', '', NULL, 1, NULL),
 (11, 'Ana ', 'anayukimoto.dev@gmail.com', '$2y$10$BO/P6riuaxqB6BRKWTtnbOkq8mkumwuKHm9LhZmKJcdROHbjb7NyS', '12076674047', '120766740476737cf3eecaf76.54732600.jpg', 1, '1158787878987');
 
@@ -826,13 +841,13 @@ ALTER TABLE `consulting_professional`
 -- AUTO_INCREMENT de tabela `consulting_schedules`
 --
 ALTER TABLE `consulting_schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `consulting_view`
 --
 ALTER TABLE `consulting_view`
-  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `consulting_view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 
 --
 -- AUTO_INCREMENT de tabela `email_contact`

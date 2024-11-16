@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="row justify-content-center">
         <h1 class="text-center"><strong>Minha Conta</strong></h1>
@@ -6,71 +5,112 @@
         <div class="col-md-5 mb-5">
             <form>
                 <div class="text-center mb-3">
-                    <img class="img mx-auto d-block rounded-circle img-perfil" src="<?= isset($user['profile_photo']) ? '/image_uploads/' . htmlspecialchars($user['profile_photo']) : ''; ?>" alt="Imagem de perfil">
+                    <img class="img mx-auto d-block rounded-circle img-perfil"
+                        src="<?= isset($user['profile_photo']) ? '/image_uploads/' . htmlspecialchars($user['profile_photo']) : ''; ?>"
+                        alt="Imagem de perfil">
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control name" id="name" autocomplete="name" readonly value="<?= htmlspecialchars($user['user_name']); ?>">
+                    <input type="text" class="form-control name" id="name" autocomplete="name" readonly
+                        value="<?= htmlspecialchars($user['user_name']); ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control" id="email" autocomplete="email" readonly value="<?= htmlspecialchars($user['email']); ?>">
+                    <input type="email" class="form-control" id="email" autocomplete="email" readonly
+                        value="<?= htmlspecialchars($user['email']); ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="phone">Telefone ou Celular</label>
-                    <input type="text" class="form-control" id="phone" autocomplete="phone" readonly value="<?= htmlspecialchars($user['phone']); ?>">
+                    <input type="text" class="form-control" id="phone" autocomplete="phone" readonly
+                        value="<?= htmlspecialchars($user['phone']); ?>">
                 </div>
             </form>
         </div>
     </div>
 
     <div class="justify-content-center">
-    <!-- Outras seções do perfil aqui -->
+        <!-- Outras seções do perfil aqui -->
 
-    <?php if ($isProfessional): ?>
-    <div class="row align-items-center mb-5">
-        <div class="col">
-            <h1><strong>Minhas Consultorias</strong></h1>
-        </div>
-        <div class="col-auto d-flex justify-content-center">
-            <a href="/consulting/new" class="btn btn-outline-light">Nova Consultoria</a>
-        </div>
-        <div class="col-auto d-flex justify-content-center">
-            <a href="/profile/schedules" class="btn btn-primary">Agendamentos</a>
-        </div>
-    </div>
+        <?php if ($isProfessional): ?>
+            <div class="row align-items-center mb-5">
+                <div class="col">
+                    <h1><strong>Minhas Consultorias</strong></h1>
+                </div>
+                <div class="col-auto d-flex justify-content-center">
+                    <a href="/consulting/new" class="btn btn-outline-light">Nova Consultoria</a>
+                </div>
+                <div class="col-auto d-flex justify-content-center">
+                    <a href="/profile/schedules" class="btn btn-primary position-relative" data-bs-toggle="modal"
+                        data-bs-target="#show_schedules">
+                        Agendamentos
+                        <?php if($notifications_qnt > 0) { ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?= $notifications_qnt ?>
+                                <span class="visually-hidden">Agendamentos não lidos</span>
+                            </span>
+                        <?php } ?>
+                    </a>
+                </div>
+            </div>
 
-    <?php if (empty($consultings)): ?>
-        <div class="alert alert-light" role="alert">
-            Você não tem consultorias cadastradas.
-        </div>
-    <?php else: ?>
-        <div class="row">
-            <?php foreach ($consultings as $consulting): ?>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="/image_uploads/<?= htmlspecialchars($consulting['image_path']); ?>" alt="Imagem de capa do card">
-                        <div class="card-body">
-                            <h5 class="card-title text-center"><?= htmlspecialchars($consulting['consulting_name']); ?></h5>
-                            <p class="card-text text-center"><?= htmlspecialchars($consulting['description']); ?></p>
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <a href="/consulting?prof=<?= htmlspecialchars($consulting['consulting_id']); ?>" class="btn btn-primary btn-block btn-view">Visualizar</a>
-                                </div>
-                                <div class="col">
-                                    <a href="/consulting/edit?id=<?= htmlspecialchars($consulting['consulting_id']); ?>" class="btn btn-primary btn-block btn-edit-profile">Editar Conta</a>
+            <?php if (empty($consultings)): ?>
+                <div class="alert alert-light" role="alert">
+                    Você não tem consultorias cadastradas.
+                </div>
+            <?php else: ?>
+                <div class="row">
+                    <?php foreach ($consultings as $consulting): ?>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card">
+                                <img class="card-img-top img-fluid"
+                                    src="/image_uploads/<?= htmlspecialchars($consulting['image_path']); ?>"
+                                    alt="Imagem de capa do card">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center"><?= htmlspecialchars($consulting['consulting_name']); ?></h5>
+                                    <p class="card-text text-center"><?= htmlspecialchars($consulting['description']); ?></p>
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <a href="/consulting?prof=<?= htmlspecialchars($consulting['consulting_id']); ?>"
+                                                class="btn btn-primary btn-block btn-view">Visualizar</a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="/consulting/edit?id=<?= htmlspecialchars($consulting['consulting_id']); ?>"
+                                                class="btn btn-primary btn-block btn-edit-profile">Editar Conta</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-<?php endif; ?>
-
-
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
 </div>
 
+<div class="modal fade modal-xl" id="show_schedules" tabindex="-1" aria-labelledby="show_schedules_modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agendamentos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="show_schedules_content"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const myModal = document.getElementById('show_schedules')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        $.ajax({
+            url: "/profile/schedules",
+            success: function(result){
+                $("#show_schedules_content").html(result);
+            }
+        });
+    })
+</script>

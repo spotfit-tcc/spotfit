@@ -1,13 +1,32 @@
-<div class="container">
-    <h1>Notificações</h1>
-    <ul>
-        <?php foreach ($schedules as $schedules): ?>
-            <li>
-                <p><strong>Cliente:</strong> <?= htmlspecialchars($schedules['user_name']); ?></p>
-                <p><strong>Motivo:</strong> <?= htmlspecialchars($schedules['reason']); ?></p>
-                <p><strong>Data:</strong> <?= htmlspecialchars($schedules['contact_date']); ?></p>
-                <a href="https://wa.me/<?= preg_replace('/\D/', '', $schedules['phone']); ?>" class="btn btn-primary" target="_blank">Enviar WhatsApp</a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</div>
+<pre>
+    <?= print_r($this->view->schedules) ?>
+</pre>
+
+<?php foreach ($this->view->schedules as $schedule) { ?>
+    <div class="notification row">
+        <div class="col-2 notification-image-container">
+            <?php if($schedule["profile_photo"] == "no_image_profile.jpg") { ?>
+                <img src="/assets/img/no_image_profile.jpg" alt="" class="notification-image">
+            <?php } else { ?>
+                <img src="/image_uploads/<?= $schedule['profile_photo'] ?>" alt="" class="notification-image">
+            <?php } ?>
+        </div>
+
+        <div class="col-6 d-flex flex-column">
+            <div><strong><?= $schedule["user_name"] ?></strong></div>
+            <div>
+                <?= $schedule["reason"] ?>
+            </div>
+            <small class="text-light mt-3">Solicitado para: 
+                <?php 
+                    $date = new DateTime($schedule["contact_date"]);
+                    echo($date->format("d/m/Y H:i:s"));
+                ?></small>
+        </div>
+
+        <div class="col-4 text-end notification-buttons-container">
+            <button class="btn btn-primary" title="Marcar visto"><i class="fa-solid fa-check"></i></button>
+            <button class="btn btn-success" title="Entrar em contato"><i class="fa-brands fa-whatsapp"></i></button>
+        </div>
+    </div>
+<?php } ?>

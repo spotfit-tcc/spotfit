@@ -27,11 +27,22 @@ class ProfileController extends ApplicationController {
             $consultingRecords = $user['professional'] == 1 
                 ? $consultingModel->list_records_by_user($user['user_id']) 
                 : [];
+
+            $con = Consulting::get_connection();
+            $stmt = $con->prepare(
+                "SELECT count(*) FROM consulting_schedules cs
+                WHERE cs.consulting_id IN
+                (SELECT c.consulting_id FROM consulting c WHERE c.adm_user_id = ?)
+                AND cs.read = 0"
+            );
+            $stmt->execute([$user["user_id"]]);
+            $notifications_qnt = $stmt->fetch()[0];
     
             $this->render('index', 'default', [
                 'user' => $user,
                 'consultings' => $consultingRecords,
-                'isProfessional' => $user['professional'] == 1
+                'isProfessional' => $user['professional'] == 1,
+                'notifications_qnt' => $notifications_qnt
             ]);
         } else {
             header('Location: /sign_in');
@@ -40,23 +51,27 @@ class ProfileController extends ApplicationController {
     }
     
 
-    // public function schedules()
-    // {
-    //     $userId = $this->logged_user(true); 
+    public function schedules()
+    {
+        $userId = User::logged_user(true);
+        $con = User::get_connection();
 
-    //     $stmt = $this->db->prepare("
-    //         SELECT cs.*, u.user_name, u.phone 
-    //         FROM contact_schedules cs
-    //         INNER JOIN user u ON cs.user_id = u.user_id
-    //         INNER JOIN consulting c ON cs.consulting_id = c.consulting_id
-    //         WHERE cs.user_id = ?  -- Aqui estamos filtrando pelo ID do usuário
-    //         ORDER BY cs.contact_date
-    //     ");
-    //     $stmt->execute([$userId]);
+        $stmt = $con->prepare("
+            SELECT cs.*, u.user_name, u.phone, u.profile_photo
+            FROM consulting_schedules cs
+            INNER JOIN user u ON cs.user_id = u.user_id
+            INNER JOIN consulting c ON cs.consulting_id = c.consulting_id
+            WHERE c.consulting_id IN 
+            (SELECT c2.consulting_id FROM consulting c2 WHERE c2.adm_user_id = ?)
+            AND cs.dismiss = 0
+            ORDER BY cs.contact_date
+        ");
+        $stmt->execute([$userId]);
 
-    //     $schedules = $stmt->fetchAll();
+        $schedules = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $this->view->schedules = $schedules;
 
-    //     $this->render('schedules', ['schedules' => $schedules]);
-    // }
+        $this->render('schedules', "");
+    }
 
 }

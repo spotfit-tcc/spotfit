@@ -58,3 +58,38 @@ i{
     height: 200px;
     object-fit: cover; 
 }
+
+.notification{
+    background: #4b4b4b;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#show_schedules_content{
+    padding: 40px;
+}
+
+.notification{
+    margin-bottom: 10px;
+}
+
+.notification-image{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.notification-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification-buttons-container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+}
