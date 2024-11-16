@@ -26,7 +26,6 @@ class ConsultingController extends ApplicationController{
         $parametros = $this->get_consulting($search);
         $this->view->parametros = json_decode(json_encode($parametros), true);
 
-
         $this->render('index');
 
     }
@@ -101,7 +100,7 @@ class ConsultingController extends ApplicationController{
         $consulting_form->validate_record();
 
         if($consulting_form->create_record()){
-            header('Location: /consulting?prof=' . $consulting_form->__get('consulting_id'));
+            header('Location: /consulting?created_msg=1');
         } else {
             $this->view->consulting_form = $consulting_form;
             $this->view->action = "Nova";
@@ -137,20 +136,8 @@ class ConsultingController extends ApplicationController{
         $consulting_form = new ConsultingForm($_POST, $_FILES);
         $consulting_form->validate_record();
 
-        // echo("<pre>");
-        // print_r($consulting_form);
-        // echo("</pre>");
-
-        // echo("<pre>");
-        // print_r($_POST);
-        // echo("</pre>");
-
-        // echo("<pre>");
-        // print_r($_FILES);
-        // echo("</pre>");
-
         if($consulting_form->update_record()){
-            header('Location: /consulting?prof=' . $consulting_form->__get('consulting_id'));
+            header('Location: /consulting?created_msg=1');
         } else {
             $this->view->consulting_form = $consulting_form;
             $this->view->action = "Editar";
@@ -160,37 +147,6 @@ class ConsultingController extends ApplicationController{
 
             $this->render('form');
         }
-    }
-
-    public function pending_consultings(){
-        $this->authenticate();
-
-        if(!self::logged_as_admin() ){
-            header('Location: /consulting');
-            return;
-        }
-
-        $this->view->pending_consultings = Consulting::list_all_pending_consultings();
-        $this->render('pending_consultings');
-    }
-
-    public function change_consulting_status(){
-        $this->authenticate();
-
-        if(!self::logged_as_admin() ){
-            header('Location: /consulting');
-            return;
-        }
-
-        $updateStmt = $con->prepare(
-            'UPDATE consulting SET status = :status WHERE adm_user_id = :user_id'
-        );
-        $updateStmt->execute([
-            ':status' => $_GET["status"],
-            ':user_id' => Consulting::logged_user()
-        ]);
-
-        header('Location: /pending_consultings');
     }
 
     private function get_consulting ($search) {

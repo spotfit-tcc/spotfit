@@ -31,7 +31,7 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                         <div class="swiper-wrapper">
                             <?php foreach ($dados['consulting_images'] as $img) { ?>
                                 <div class="swiper-slide professional-service-slider--item">
-                                    <img src="<?=$img['db_saved_name']?>" alt="">
+                                    <img src="image_uploads/<?= $img['db_saved_name'] ?>" alt="">
                                 </div>
                             <?php } ?>
                         </div>
@@ -115,14 +115,19 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                 </div>
 
                 <div class="professional-service-info--contact-container">
-                    <div class="professional-service-info--contact-item">
-                        <i class="fas fa-phone gray-icon"></i>
-                        <p class="professional-service-info--contact-text"> <?= $dados["consulting"]["contact_phone"]?></p>
-                    </div>
-                    <div class="professional-service-info--contact-item">
-                        <i class="fas fa-envelope gray-icon"></i>
-                        <p class="professional-service-info--contact-text"><?= $dados["consulting"]["contact_email"]?></p>
-                    </div>
+                    <?php if($dados["consulting"]["contact_phone"]) { ?>
+                        <div class="professional-service-info--contact-item">
+                            <i class="fas fa-phone gray-icon"></i>
+                            <p class="professional-service-info--contact-text"> <?= $dados["consulting"]["contact_phone"]?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php if($dados["consulting"]["contact_email"]) { ?>
+                        <div class="professional-service-info--contact-item">
+                            <i class="fas fa-envelope gray-icon"></i>
+                            <p class="professional-service-info--contact-text"><?= $dados["consulting"]["contact_email"]?></p>
+                        </div>
+                    <?php } ?>
                 </div>
 
                 <div class="professional-service-info--chat-action-container">
@@ -197,7 +202,7 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                                 <h6 class="mt-2 p-1 text-center">Benefícios inclusos</h6>
                                 <ul class="list-group list-group-flush">
                                     <?php foreach ($plans["benefits"] as $benefits) {?>
-                                        <li class="list-group-item"><?=$benefits["icon"] ? $benefits["icon"] : '<i class="fas fa-person"></i>' ?> <?=$benefits["benefit_name"] ?></li>
+                                        <li class="list-group-item"><?=$benefits["icon"] ? '<i class=" ' . $benefits["icon"] . '"></i>' : '<i class="fas fa-person"></i>' ?> <?=$benefits["benefit_name"] ?></li>
                                     <?php } ?>
                                 </ul>
                             </div>
@@ -231,9 +236,17 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                             <h5 class="card-title"><?=$professional["consulting_professional"]["name"]?></h5>
                             <div class="card-text">
                                 <h6>Contato</h6>
-                                <div><i class="fab fa-instagram"></i> <a href=""><?=$professional["consulting_professional"]["instagram"]?></a></div>
-                                <div><i class="fas fa-envelope"></i> <a href=""><?=$professional["consulting_professional"]["email"]?></a></div>
-                                <div><i class="fab fa-whatsapp"></i> <a href=""><?=$professional["consulting_professional"]["phone"]?></a></div>
+                                <?php if($professional["consulting_professional"]["instagram"]) { ?>
+                                    <div><i class="fab fa-instagram"></i> <a href=""><?=$professional["consulting_professional"]["instagram"]?></a></div>
+                                <?php } ?>
+
+                                <?php if($professional["consulting_professional"]["email"]) { ?>
+                                    <div><i class="fas fa-envelope"></i> <a href=""><?=$professional["consulting_professional"]["email"]?></a></div>
+                                <?php } ?>
+
+                                <?php if($professional["consulting_professional"]["phone"]) { ?>
+                                    <div><i class="fab fa-whatsapp"></i> <a href=""><?=$professional["consulting_professional"]["phone"]?></a></div>
+                                <?php } ?>
                             </div>
                             <p class="card-text"><small class="text-body-secondary">CFN: 123456</small></p>
                         </div>
