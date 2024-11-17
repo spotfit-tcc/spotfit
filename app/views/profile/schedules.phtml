@@ -1,9 +1,5 @@
-<pre>
-    <?= print_r($this->view->schedules) ?>
-</pre>
-
 <?php foreach ($this->view->schedules as $schedule) { ?>
-    <div class="notification row">
+    <div class="notification row" id="notification-<?= $schedule['schedule_id'] ?>">
         <div class="col-2 notification-image-container">
             <?php if($schedule["profile_photo"] == "no_image_profile.jpg") { ?>
                 <img src="/assets/img/no_image_profile.jpg" alt="" class="notification-image">
@@ -25,8 +21,66 @@
         </div>
 
         <div class="col-4 text-end notification-buttons-container">
-            <button class="btn btn-primary" title="Marcar visto"><i class="fa-solid fa-check"></i></button>
-            <button class="btn btn-success" title="Entrar em contato"><i class="fa-brands fa-whatsapp"></i></button>
+            <?php if(!$this->view->read) { ?>
+                <button class="btn btn-primary set-read-btn" title="Marcar visto" onclick="set_read(<?= $schedule['schedule_id'] ?>, this)"><i class="fa-solid fa-check"></i></button>
+            <?php } ?>
+            <button class="btn btn-danger" title="Descartar agendamento" onclick="set_dismiss(<?= $schedule['schedule_id'] ?>, this)"><i class="fa-solid fa-trash"></i></button>
+            <a href="https://wa.me/55<?= $schedule['phone'] ?>" target="_blank" class="btn btn-success" title="Entrar em contato"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </div>
 <?php } ?>
+
+<script>
+    function set_read(schedule_id, button){
+        if(confirm("Deseja marcar esse agendamento como lido?")) {
+            button.setAttribute("disabled", "true")
+            button.innerHTML = `
+                <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            `;
+
+            $.ajax({
+                url: `/profile/schedules/set_read`,
+                type: "GET",
+                data: {schedule: schedule_id},
+                success: function(response){
+                    let parsed_response = JSON.parse(response)
+
+                    if(parsed_response.result == "true"){
+                        $(`#notification-${schedule_id}`).remove();
+                    } else {
+                        alert("Erro ao marcar como lida. Tente novamente mais tarde")
+                    }
+                }
+            });
+        }
+    }
+
+    function set_dismiss(schedule_id, button){
+        if(confirm("Tem certeza que deseja apagar esse agendamento?")) {
+            button.setAttribute("disabled", "true")
+            button.innerHTML = `
+                <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            `;
+
+            $.ajax({
+                url: `/profile/schedules/dismiss`,
+                type: "GET",
+                data: {schedule: schedule_id},
+                success: function(response){
+                    let parsed_response = JSON.parse(response)
+
+                    if(parsed_response.result == "true"){
+                        $(`#notification-${schedule_id}`).remove();
+                    } else {
+                        console.log(parsed_response)
+                        alert("Erro ao marcar como lida. Tente novamente mais tarde")
+                    }
+                }
+            });
+        }
+    }
+</script>

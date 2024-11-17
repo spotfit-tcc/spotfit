@@ -1,3 +1,18 @@
+<?php
+    use \App\models\BaseModel;
+
+    $con = BaseModel::get_connection();
+    $stmt = $con->prepare(
+        "SELECT count(*) FROM consulting_schedules cs
+        WHERE cs.consulting_id IN
+        (SELECT c.consulting_id FROM consulting c WHERE c.adm_user_id = ?)
+        AND cs.read = 0 AND cs.dismiss = 0"
+    );
+    $user_id = BaseModel::logged_user();
+    $stmt->execute([$user_id]);
+    $notifications_qnt = $stmt->fetch()[0];
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -60,7 +75,16 @@
 				</ul>
 
 				<?php if(isset($_SESSION['auth']) && $_SESSION['auth']) { ?>
-					<a href="/profile" class="btn btn-primary"><i class="fas fa-user"></i> Meu perfil</a>
+					<a href="/profile" class="btn btn-primary position-relative">
+						<?php if($notifications_qnt > 0) { ?>
+							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+								<?= $notifications_qnt ?>
+								<span class="visually-hidden">Agendamentos não lidos</span>
+							</span>
+						<?php } ?>
+
+						<i class="fas fa-user"></i> Meu perfil
+					</a>
 					<a href="/sign_in/logout" class="btn btn-danger ms-3"><i class="fas fa-sign-out-alt"></i></a>
 				<?php } else { ?>
 					<button class="btn btn-sm btn-outline-light" type="button"><a href="/sign_in" class="nav-link active">Login</a></button>

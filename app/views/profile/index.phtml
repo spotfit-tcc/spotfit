@@ -97,6 +97,12 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Agendamentos</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-form p-3">
+            <select name="schedules_mode" id="schedules_mode" class="form-select sm-select">
+                    <option value="new">Novos</option>
+                    <option value="read">Já vistos</option>
+                </select>
+            </div>
             <div class="modal-body" id="show_schedules_content"></div>
         </div>
     </div>
@@ -107,7 +113,18 @@
 
     myModal.addEventListener('shown.bs.modal', () => {
         $.ajax({
-            url: "/profile/schedules",
+            url: "/profile/schedules?list_mode=new",
+            success: function(result){
+                $("#show_schedules_content").html(result);
+            }
+        });
+    })
+
+    document.getElementById("schedules_mode").addEventListener("change", e =>{
+        let list_mode = e.target.value
+
+        $.ajax({
+            url: `/profile/schedules?list_mode=${list_mode}`,
             success: function(result){
                 $("#show_schedules_content").html(result);
             }

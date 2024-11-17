@@ -33,7 +33,7 @@ class ProfileController extends ApplicationController {
                 "SELECT count(*) FROM consulting_schedules cs
                 WHERE cs.consulting_id IN
                 (SELECT c.consulting_id FROM consulting c WHERE c.adm_user_id = ?)
-                AND cs.read = 0"
+                AND cs.read = 0 AND cs.dismiss = 0"
             );
             $stmt->execute([$user["user_id"]]);
             $notifications_qnt = $stmt->fetch()[0];
@@ -53,6 +53,8 @@ class ProfileController extends ApplicationController {
 
     public function schedules()
     {
+        $read = $_GET['list_mode'] == "read" ? true : false ;
+
         $userId = User::logged_user(true);
         $con = User::get_connection();
 
@@ -62,16 +64,71 @@ class ProfileController extends ApplicationController {
             INNER JOIN user u ON cs.user_id = u.user_id
             INNER JOIN consulting c ON cs.consulting_id = c.consulting_id
             WHERE c.consulting_id IN 
-            (SELECT c2.consulting_id FROM consulting c2 WHERE c2.adm_user_id = ?)
-            AND cs.dismiss = 0
+            (SELECT c2.consulting_id FROM consulting c2 WHERE c2.adm_user_id = :user_id)
+            AND cs.dismiss = 0 AND cs.read = :read
             ORDER BY cs.contact_date
         ");
-        $stmt->execute([$userId]);
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':read' => $read
+        ]);
 
         $schedules = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $this->view->schedules = $schedules;
+        $this->view->read = $read;
 
         $this->render('schedules', "");
     }
 
+    public function set_read(){
+        $schedule = $_GET["schedule"];
+
+        try{
+            $con = User::get_connection();
+            $stmt = $con->prepare("
+                UPDATE consulting_schedules cs SET
+                cs.read = 1 WHERE cs.schedule_id = :schedule_id
+                AND cs.consulting_id IN 
+                (SELECT c.consulting_id FROM consulting c WHERE c.adm_user_id = :user_id)
+            ");
+            $stmt->execute([
+                ':schedule_id' => $schedule,
+                ':user_id' => User::logged_user()
+            ]);
+
+            
+            $data = array("result" => "true");
+        } catch(Exception $e){
+            $data = $e;
+        }
+
+        $json_data = json_encode($data);
+        echo $json_data;
+    }
+
+    public function dismiss(){
+        $schedule = $_GET["schedule"];
+
+        try{
+            $con = User::get_connection();
+            $stmt = $con->prepare("
+                UPDATE consulting_schedules cs SET
+                cs.dismiss = 1 WHERE cs.schedule_id = :schedule_id
+                AND cs.consulting_id IN 
+                (SELECT c.consulting_id FROM consulting c WHERE c.adm_user_id = :user_id)
+            ");
+            $stmt->execute([
+                ':schedule_id' => $schedule,
+                ':user_id' => User::logged_user()
+            ]);
+
+            
+            $data = array("result" => "true");
+        } catch(Exception $e){
+            $data = $e;
+        }
+
+        $json_data = json_encode($data);
+        echo $json_data;
+    }
 }

@@ -78,6 +78,18 @@ class Route extends Bootstrap {
 			'action' => 'schedules'
 		);
 
+		$routes['/profile/schedules/set_read'] = array(
+			'route' => '/profile/schedules/set_read',
+			'controller' => 'ProfileController',
+			'action' => 'set_read'
+		);
+
+		$routes['/profile/schedules/dismiss'] = array(
+			'route' => '/profile/schedules/dismiss',
+			'controller' => 'ProfileController',
+			'action' => 'dismiss'
+		);
+
 		$routes['/sign_up'] = array(
 			'route' => '/sign_up',
 			'controller' => 'SignUpController',
