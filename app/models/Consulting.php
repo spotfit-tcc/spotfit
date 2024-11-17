@@ -87,7 +87,9 @@ class Consulting extends BaseModel {
             if ($search) {
                 $query .= ' WHERE con.consulting_name LIKE :search';
             }
-    
+
+            $query .= " GROUP BY con.consulting_id";
+                
             $stmt = $con->prepare($query);
     
             if ($search) {
