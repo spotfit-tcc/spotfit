@@ -31,11 +31,6 @@ class User extends BaseModel {
         return $this->$attr;
     }
 
-    public function getProfessional(){
-        if(is_null($this->professional)) return true;
-        return (bool)$this->professional;
-    }
-
     public function setFileParams($file_params){
         $this->file_params = $file_params;
     }
@@ -102,7 +97,7 @@ class User extends BaseModel {
                         $this->user_password, PASSWORD_DEFAULT
                     ),
                     ':cpf_or_cnpj' => $this->cpf_or_cnpj,
-                    ':professional' => $this->getProfessional(),
+                    ':professional' => $this->__get('professional'),
                     ':phone' => $this->phone,
                     ':profile_photo' => $this->profile_photo
                 ));
