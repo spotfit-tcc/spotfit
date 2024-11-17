@@ -1,3 +1,12 @@
+<?php
+// echo "<pre>";
+
+// print_r($this->view->comentarios); die;
+$comentarios = $this->view->comentarios;
+// $dados = $this->view->consultingData;
+
+?>
+
 <section class="lp-landing-section container mb-5">
     <div class="lp-water-mark-floatting-container">
         <p class="lp-watter-mark--fitness">
@@ -188,132 +197,37 @@
         <div class="row lp-testemonial-slider-row">
             <div class="swiper lp-testemonial-swiper">
                 <div class="swiper-wrapper">
+                <?php foreach ($comentarios as $comentatio): ?>
                     <div class="swiper-slide lp-testemonial-swiper--item">
                         <div class="container lp-testemonial-card--container">
+                            <!-- Stars Section -->
                             <div class="row lp-testemonial-card--stars">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
+                                <?php for ($i = 0; $i < 5; $i++): ?>
+                                    <img 
+                                        src="/assets/icons/<?= $i < $comentatio["rating"] ? 'star-filled' : 'star-empty' ?>.svg" 
+                                        alt="Star <?= $i < $comentatio["rating"] ? 'Filled' : 'Empty' ?>">
+                                <?php endfor; ?>
                             </div>
 
+                            <!-- Testimonial Text Section -->
                             <div class="row lp-testemonial-card--text">
-                                <p>Junte-se a este membro fitness, a melhor escolha que já fiz. Eles são muito profissionais e oferecem sugestões sobre quais alimentos e nutrição você pode consumir.</p>
+                                <p><?= htmlspecialchars($comentatio["comment_text"]) ?></p>
                             </div>
 
+                            <!-- User Section -->
                             <div class="row lp-testemonial-card--user">
-                                <img class="lp-testimonial-card--user-image" src="/assets/img/devs/Natan.jpg" alt="">
-                                <h3 class="lp-testimonial-card--user-name">Jonathan Edward</h3>
-                                <p class="lp-testimonial-card--user-description">Office Worker</p>
+                                <?php 
+                                $profilePhoto = !empty($comentatio["profile_photo"]) 
+                                                ? $comentatio["profile_photo"] 
+                                                : "/assets/img/default-user.jpg"; 
+                                ?>
+                                <img class="lp-testimonial-card--user-image" src="<?= htmlspecialchars($profilePhoto) ?>" alt="User Image">
+                                <h3 class="lp-testimonial-card--user-name"><?= htmlspecialchars($comentatio["user_name"]) ?></h3>
+                                <p class="lp-testimonial-card--user-description">Usuário da plataforma</p>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide lp-testemonial-swiper--item">
-                        <div class="container lp-testemonial-card--container">
-                            <div class="row lp-testemonial-card--stars">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                            </div>
-
-                            <div class="row lp-testemonial-card--text">
-                                <p>Junte-se a este membro fitness, a melhor escolha que já fiz. Eles são muito profissionais e oferecem sugestões sobre quais alimentos e nutrição você pode consumir.</p>
-                            </div>
-
-                            <div class="row lp-testemonial-card--user">
-                                <img class="lp-testimonial-card--user-image" src="/assets/img/devs/Natan.jpg" alt="">
-                                <h3 class="lp-testimonial-card--user-name">Jonathan Edward</h3>
-                                <p class="lp-testimonial-card--user-description">Office Worker</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide lp-testemonial-swiper--item">
-                        <div class="container lp-testemonial-card--container">
-                            <div class="row lp-testemonial-card--stars">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                            </div>
-
-                            <div class="row lp-testemonial-card--text">
-                                <p>Junte-se a este membro fitness, a melhor escolha que já fiz. Eles são muito profissionais e oferecem sugestões sobre quais alimentos e nutrição você pode consumir.</p>
-                            </div>
-
-                            <div class="row lp-testemonial-card--user">
-                                <img class="lp-testimonial-card--user-image" src="/assets/img/devs/Natan.jpg" alt="">
-                                <h3 class="lp-testimonial-card--user-name">Jonathan Edward</h3>
-                                <p class="lp-testimonial-card--user-description">Office Worker</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide lp-testemonial-swiper--item">
-                        <div class="container lp-testemonial-card--container">
-                            <div class="row lp-testemonial-card--stars">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                            </div>
-
-                            <div class="row lp-testemonial-card--text">
-                                <p>Junte-se a este membro fitness, a melhor escolha que já fiz. Eles são muito profissionais e oferecem sugestões sobre quais alimentos e nutrição você pode consumir.</p>
-                            </div>
-
-                            <div class="row lp-testemonial-card--user">
-                                <img class="lp-testimonial-card--user-image" src="/assets/img/devs/Natan.jpg" alt="">
-                                <h3 class="lp-testimonial-card--user-name">Jonathan Edward</h3>
-                                <p class="lp-testimonial-card--user-description">Office Worker</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide lp-testemonial-swiper--item">
-                        <div class="container lp-testemonial-card--container">
-                            <div class="row lp-testemonial-card--stars">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                            </div>
-
-                            <div class="row lp-testemonial-card--text">
-                                <p>Junte-se a este membro fitness, a melhor escolha que já fiz. Eles são muito profissionais e oferecem sugestões sobre quais alimentos e nutrição você pode consumir.</p>
-                            </div>
-
-                            <div class="row lp-testemonial-card--user">
-                                <img class="lp-testimonial-card--user-image" src="/assets/img/devs/Natan.jpg" alt="">
-                                <h3 class="lp-testimonial-card--user-name">Jonathan Edward</h3>
-                                <p class="lp-testimonial-card--user-description">Office Worker</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide lp-testemonial-swiper--item">
-                        <div class="container lp-testemonial-card--container">
-                            <div class="row lp-testemonial-card--stars">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                                <img src="/assets/icons/star-filled.svg" alt="">
-                            </div>
-
-                            <div class="row lp-testemonial-card--text">
-                                <p>Junte-se a este membro fitness, a melhor escolha que já fiz. Eles são muito profissionais e oferecem sugestões sobre quais alimentos e nutrição você pode consumir.</p>
-                            </div>
-
-                            <div class="row lp-testemonial-card--user">
-                                <img class="lp-testimonial-card--user-image" src="/assets/img/devs/Natan.jpg" alt="">
-                                <h3 class="lp-testimonial-card--user-name">Jonathan Edward</h3>
-                                <p class="lp-testimonial-card--user-description">Office Worker</p>
-                            </div>
-                        </div>
-                    </div>
+                <?php endforeach; ?>
                  
                 </div>
                 <div class="lp-control-swiper-testemonial-button lp-control-swiper-testemonial-button-next">
