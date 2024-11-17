@@ -23,7 +23,19 @@ class ConsultingController extends ApplicationController{
             $search = $_GET["search"];
         }
 
-        $parametros = $this->get_consulting($search);
+        if (empty($_GET["sort"])) {
+            $_GET["sort"] = 2;
+        }
+
+        $filters = [
+           1 => "mais_curtidas",
+           2 => "mais_vistas",
+           3 => "mais_novas",
+        ];
+
+        $filtro = $filters[$_GET["sort"]];
+
+        $parametros = $this->get_consulting($search, $filtro);
         $this->view->parametros = json_decode(json_encode($parametros), true);
 
         $this->render('index');
@@ -149,9 +161,9 @@ class ConsultingController extends ApplicationController{
         }
     }
 
-    private function get_consulting ($search) {
+    private function get_consulting ($search, $filtro = null) {
         $consulting = new Consulting([]);
-        return $consulting->list_records($search);
+        return $consulting->list_records($search, $filtro);
     }
 }
 
