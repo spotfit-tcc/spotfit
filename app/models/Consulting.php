@@ -161,30 +161,6 @@ class Consulting extends BaseModel {
         }
     }
 
-    public function schedules(){
-        if (!$this->valid_record()) return false;
-
-        $con = self::get_connection();
-
-        try {
-            $stmt = $con->prepare(
-                'INSERT INTO consulting_schedules(user_id, consulting_id, reason, contact_date)' .
-                'VALUES (:user_id, :consulting_id, :reason, :contact_date)'
-            );
-            $stmt->execute(array(
-                ':user_id' => $this->user_id,
-                ':consulting_id' => $this->consulting_id,
-                ':reason' => $this->reason,
-                ':contact_date' => $this->contact_date
-            ));
-            return true;
-        } catch (PDOException $e) {
-            $this->errors[] = $e->getMessage();
-            return false;
-        }
-    }
-
-
 }
 
 ?>
