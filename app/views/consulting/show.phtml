@@ -11,6 +11,43 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 
 // print_r($_POST); die;
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $consulting_id = $_POST['consulting_id'];
+    $reason = $_POST['reason'];
+    $contact_date = $_POST['contact_date'];
+    $user_id = $_SESSION['user_id'] ?? null;  
+
+    $scheduleModel = new \App\Models\Schedule();
+    $scheduleData = [
+        'user_id' => $user_id,
+        'consulting_id' => $consulting_id,
+        'reason' => $reason,
+        'contact_date' => $contact_date
+    ];
+
+    if ($scheduleModel->create_record($scheduleData)) {
+        $message = 'Agendamento realizado com sucesso! 🎉';
+        $alert_type = 'success';
+    } else {
+        $message = 'Ocorreu um erro ao realizar o agendamento. 🙁';
+        $alert_type = 'error';
+    }
+
+    // Passando a mensagem e o tipo de alerta para o JavaScript
+    echo "<script>
+            var message = '$message';
+            var alertType = '$alert_type';
+            window.onload = function() {
+                if (alertType === 'success') {
+                    alert(message); 
+                } else {
+                    alert(message); 
+                }
+            }
+          </script>";
+}
+
+
 ?>
 
 <section id="ServiceHeadingSection">
@@ -166,7 +203,11 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
                                             <label for="contact_date" class="form-label">Data e horário preferido:</label>
                                             <input type="datetime-local" id="contact_date" name="contact_date" class="form-control" required />
                                         </div>
-                                        <button type="submit" class="btn btn-danger">Enviar</button>
+                                        <?php if (!empty($_SESSION["user_id"])): ?>
+                                            <button type="submit" id="btnSchedule" class="btn btn-danger">Enviar</button>
+                                        <?php else: ?>
+                                            <button type="button" id="btnRedirect" class="btn btn-danger" onclick="window.location.href='/sign_in'">Enviar</button>
+                                        <?php endif; ?>
                                     </form>
                                     <div id="response-message"></div>
                             
@@ -359,6 +400,9 @@ if (!empty($_POST["comment_description"]) && !empty($_POST["comment_rating"])) {
 <script src="/assets/javascripts/consulting/specificProfessionalPage.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 <script>
