@@ -11,13 +11,13 @@
                     <h1 class="card-title pricing-card-title">R$0,00 <small class="text-muted">/ mês</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>Selo de Verificação</li>
-                        <li>Seção Exclusiva nas Pesquisas</li>
+                        <li class="bloq"><s>Seção Exclusiva nas Pesquisas</s></li>
                         <li class="bloq"><s>Criar até 3 consultorias</s></li>
                         <li class="bloq"><s>Quem viu seu Perfil</s></li>
                     </ul>
                     <form action="/planRedirect" method="post">
                         <input type="hidden" name="plan" value="free">
-                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary btn-free">Conhecer</button>
+                        <a href="/sign_up" class="btn btn-lg btn-block btn-outline-primary btn-free">Conhecer</a>
                     </form>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     </ul>
                     <form action="/planRedirect" method="post">
                         <input type="hidden" name="plan" value="pro">
-                        <button type="submit" class="btn btn-lg btn-block btn-primary btn-pro">Contratar</button>
+                        <button type="submit" disabled class="btn btn-lg btn-block btn-primary btn-pro">Em breve...</button>
                     </form>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     </ul>
                     <form action="/planRedirect" method="post">
                         <input type="hidden" name="plan" value="premium">
-                        <button type="submit" class="btn btn-lg btn-block btn-primary btn-premium">Assinar</button>
+                        <button type="submit" disabled class="btn btn-lg btn-block btn-primary btn-premium">Em breve...</button>
                     </form>
                 </div>
             </div>

@@ -69,12 +69,27 @@ class Consulting extends BaseModel {
             return false;
         }
     }
-    public function list_records($search = null)
+    public function list_records($search = null, $filtro = null)
     {
         $con = self::get_connection();
+
+        // visualizacao
+        $subQuery = 'SELECT COUNT(*) 
+        FROM consulting_view  cacc
+        WHERE cacc.consulting_id = con.consulting_id';
+
+        if ($filtro == "mais_curtidas") {
+            $subQuery = "SELECT COUNT(*) 
+                        FROM consulting_access cacc
+                        WHERE cacc.consulting_id = con.consulting_id";
+        } else if ($filtro == "mais_novas") {
+            $subQuery = "con.consulting_id";
+        }
     
         try {
-            $query = 'SELECT * FROM consulting con
+            $query = "SELECT *,  (
+                        $subQuery
+                    ) AS ordenacao FROM consulting con
                      INNER JOIN consulting_image ci 
                         ON ci.consulting_id = con.consulting_id
                      INNER JOIN consulting_professional cp 
@@ -82,14 +97,16 @@ class Consulting extends BaseModel {
                      INNER JOIN consulting_category cc 
                         ON cc.consulting_id = con.consulting_id
                      INNER JOIN category cat
-                        ON cat.category_id = cc.category_id';
+                        ON cat.category_id = cc.category_id
+                     WHERE con.status = 'accepted'";
     
             if ($search) {
-                $query .= ' WHERE con.consulting_name LIKE :search';
+                $query .= ' AND con.consulting_name LIKE :search';
             }
 
-            $query .= " GROUP BY con.consulting_id";
-                
+            $query .= " GROUP BY con.consulting_id 
+                        ORDER BY ordenacao DESC";
+
             $stmt = $con->prepare($query);
     
             if ($search) {

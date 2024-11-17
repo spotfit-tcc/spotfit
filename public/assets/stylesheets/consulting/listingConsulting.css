@@ -1,5 +1,11 @@
 .fp-search-container {
     height: 100%;
+    display: flex;
+}
+
+.fp-search-fields {
+    display: flex;
+    width: 80%;
 }
 
 .fp-professional-card--container {

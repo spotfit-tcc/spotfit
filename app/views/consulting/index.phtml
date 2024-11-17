@@ -26,27 +26,30 @@ $parametros = $this->view->parametros;
         <hr>
 
         <div class="row search-filters-container">
-            <div class="col-12 col-md-2">
-                <div class="form-floating spot-bt-selector">
-                    <select class="form-select">
-                        <option value="1" selected>Mais Novo</option>
-                        <option value="2">Mais Antigo</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ms-auto me-auto">
-                <form class="d-flex fp-search-container">
-                    <div class="input-group ">
-                        <form action="" method="GET">
-                            <input type="search" name="search" class="form-control" placeholder="O que você procura ?" aria-label="Search" aria-describedby="basic-addon1" value="<?=!empty($_GET['search']) ? $_GET['search'] : '' ?>">
-                            <button type="submit" class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
+            <form method="GET" style="display:flex" id="filterForm">
+                <div class="col-12 col-md-2">
+                    <div class="form-floating spot-bt-selector">
+                        <select name="sort" class="form-select" onchange="document.getElementById('filterForm').submit();">
+                            <option value="1" <?= isset($_GET['sort']) && $_GET['sort'] == '1' ? 'selected' : '' ?>>Mais Cutidas</option>
+                            <option value="2" <?= isset($_GET['sort']) && $_GET['sort'] == '2' ? 'selected' : '' ?>>Mais Vistas</option>
+                            <option value="3" <?= isset($_GET['sort']) && $_GET['sort'] == '3' ? 'selected' : '' ?>>Mais Novas</option>
+                        </select>
                     </div>
-                </form>
-            </div>
+                </div>
+    
+                <div class="col-12 col-md-6 ms-auto me-auto">
+                    <div class="d-flex fp-search-container">
+                        <div class="input-group ">
+                            <div action="" method="GET" class="fp-search-fields">
+                                <input type="search" name="search" class="form-control" placeholder="O que você procura ?" aria-label="Search" aria-describedby="basic-addon1" value="<?=!empty($_GET['search']) ? $_GET['search'] : '' ?>">
+                                <button type="submit" class="input-group-text" id="basic-addon1">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <hr>
     </div>
@@ -69,11 +72,11 @@ $parametros = $this->view->parametros;
                         <label class="fp-professional-card--label-new">NOVO</label>
                         <p class="fp-professional-card--text"><?= $record['name']; ?></p>
                     </div>
-                    <hr>
+                    <!-- <hr>
                     <div class="fp-professional-card--heart-container">
                         <img src="assets/icons/solar_heart-broken.svg" alt="">
                         <p class="fp-professional-card--heart-count">Saúde</p>
-                    </div>
+                    </div> -->
                 </div>
             </a>
         </div>
