@@ -59,6 +59,10 @@ class ApplicationController extends BaseController {
     }
 
     public static function logged_as_admin(){
+        if (empty($_SESSION["auth"])) {
+            return;
+        }
+
         $user = BaseModel::logged_user(false)[0];
 
         return $user["email"] == __ADMIN_LOGIN__ &&

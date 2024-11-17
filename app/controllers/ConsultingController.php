@@ -89,7 +89,16 @@ class ConsultingController extends ApplicationController{
             $prof = $_GET["prof"];
         }
 
-        $this->view->consultingData = $consulting->build_form_from_id($prof);
+        $dadosConsultoria = $consulting->build_form_from_id($prof);
+        $usuarioADM = self::logged_as_admin();
+
+        if ($dadosConsultoria["consulting"]["status"] != "accepted" && !$usuarioADM) {
+            header("Location: /consulting");
+            return;
+        }
+
+        $this->view->consultingData = $dadosConsultoria;
+
         $this->render('show');
     }
 

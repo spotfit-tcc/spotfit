@@ -78,11 +78,18 @@ class ConsultingForm extends BaseModel {
         $user_id = self::logged_user(true);
 
         $con = self::get_connection();
-        $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id AND adm_user_id = :user_id");
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->execute();
-        $params = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $params = [];
+        if (!empty($_SESSION["auth"])) {
+            $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id AND adm_user_id = :user_id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            $params = $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+
+        if (empty($params) || !$params) {
+            $params = [];
+        }
 
         $stmt = $con->prepare("SELECT * FROM consulting WHERE consulting_id = :id");
         $stmt->bindParam(':id', $id);
