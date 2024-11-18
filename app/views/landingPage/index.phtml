@@ -217,9 +217,10 @@ $comentarios = $this->view->comentarios;
                             <!-- User Section -->
                             <div class="row lp-testemonial-card--user">
                                 <?php 
-                                $profilePhoto = !empty($comentatio["profile_photo"]) 
-                                                ? $comentatio["profile_photo"] 
-                                                : "/assets/img/default-user.jpg"; 
+                                    $profilePhoto = !empty($comentatio["profile_photo"]) 
+                                    ? "/image_uploads/" . $comentatio["profile_photo"] 
+                                    : "/assets/img/default-profile.jpg";
+                
                                 ?>
                                 <img class="lp-testimonial-card--user-image" src="<?= htmlspecialchars($profilePhoto) ?>" alt="User Image">
                                 <h3 class="lp-testimonial-card--user-name"><?= htmlspecialchars($comentatio["user_name"]) ?></h3>

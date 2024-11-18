@@ -340,9 +340,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div>
 
                 <?php if (!empty($_SESSION["user_id"])): ?>
-                    <button type="submit" id="submitBtn">Enviar</button>
+                    <button type="submit" class="btn btn-danger mt-3" id="submitBtn">Enviar</button>
                 <?php else: ?>
-                    <button type="button" id="redirectBtn" onclick="window.location.href='/sign_in'">Enviar</button>
+                    <button type="button" class="btn btn-danger mt-3" id="redirectBtn" onclick="window.location.href='/sign_in'">Enviar</button>
                 <?php endif; ?>
             </form>
         </div>

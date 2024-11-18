@@ -64,9 +64,10 @@
                     <?php foreach ($consultings as $consulting): ?>
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="card">
-                                <img class="card-img-top img-fluid"
-                                    src="/image_uploads/<?= htmlspecialchars($consulting['image_path']); ?>"
-                                    alt="Imagem de capa do card">
+                            <img class="card-img-top img-fluid"
+                                src="/image_uploads/<?= htmlspecialchars(explode(',', $consulting['image_paths'])[0]); ?>"
+                                alt="Imagem de capa do card">
+
                                 <div class="card-body">
                                     <h5 class="card-title text-center"><?= htmlspecialchars($consulting['consulting_name']); ?></h5>
                                     <p class="card-text text-center"><?= htmlspecialchars($consulting['description']); ?></p>
@@ -77,7 +78,7 @@
                                         </div>
                                         <div class="col">
                                             <a href="/consulting/edit?id=<?= htmlspecialchars($consulting['consulting_id']); ?>"
-                                                class="btn btn-primary btn-block btn-edit-profile">Editar Conta</a>
+                                                class="btn btn-primary btn-block btn-edit-profile">Editar</a>
                                         </div>
                                     </div>
                                 </div>

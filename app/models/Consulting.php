@@ -128,11 +128,12 @@ class Consulting extends BaseModel {
         $con = self::get_connection();
 
         try {
-            $query = 'SELECT con.*, ci.image_dir AS image_path
+            $query = 'SELECT con.*, GROUP_CONCAT(ci.image_dir) AS image_paths
                     FROM consulting con
                     LEFT JOIN consulting_image ci 
                     ON ci.consulting_id = con.consulting_id
-                    WHERE con.adm_user_id = :user_id';
+                    WHERE con.adm_user_id = :user_id
+                    GROUP BY con.consulting_id';  // Agrupar por consultoria
             $stmt = $con->prepare($query);
             $stmt->bindParam(':user_id', $user_id, \PDO::PARAM_INT);
             $stmt->execute();
@@ -143,6 +144,7 @@ class Consulting extends BaseModel {
             return false;
         }
     }
+
 
     public static function list_all_pending_consultings()
     {
