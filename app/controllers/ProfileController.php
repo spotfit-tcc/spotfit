@@ -38,6 +38,9 @@ class ProfileController extends ApplicationController {
             $stmt->execute([$user["user_id"]]);
             $notifications_qnt = $stmt->fetch()[0];
     
+            $this->view->user = $user;
+            $this->view->isProfessional = $user['professional'] == 1;
+            $this->view->notifications_qnt = $notifications_qnt;
             $this->render('index', 'default', [
                 'user' => $user,
                 'consultings' => $consultingRecords,
