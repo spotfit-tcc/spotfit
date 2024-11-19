@@ -36,7 +36,10 @@ class ConsultingController extends ApplicationController{
         $filtro = $filters[$_GET["sort"]];
 
         $parametros = $this->get_consulting($search, $filtro);
-        $this->view->parametros = json_decode(json_encode($parametros), true);
+        // echo "mysql ú"; die;
+        $this->view->parametros =  $parametros ;
+        // $this->view->parametros = json_decode(json_encode($parametros), true);
+        // echo($parametros[3]["consulting_name"]); die;
 
         $this->render('index');
 

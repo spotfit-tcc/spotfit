@@ -13,8 +13,10 @@ class DbConnection {
 			return new \PDO(
 				"mysql:host=$host;dbname=$db_name;",
 				$user,
-				$password 
+				$password,
+				[\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
 			);
+			
 		} catch (\PDOException $e) {
 			echo("<pre>");
 			print_r($e);

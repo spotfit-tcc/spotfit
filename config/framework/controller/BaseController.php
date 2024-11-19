@@ -10,40 +10,40 @@ abstract class BaseController {
         $this->view = new \stdClass();
     }
 
-    /**
-     * @param string $view Nome da view (sem a extensão .phtml).
-     * @param string $layout Nome do layout a ser usado (default se não especificado).
-     * @param array $data Dados a serem passados para a view.
-     */
-    protected function render($view, $layout = "default", $data = []) {
-        $this->view->data = $data; 
+	protected function render($view, $layout = "default") {
+		$this->view->page = $view;
+	
+		$baseDir = dirname(__DIR__, 3);
+	
+		$layoutPath = $baseDir . "/app/views/layouts/" . $layout . ".phtml";
+		
+		if (file_exists($layoutPath)) {
+			require_once $layoutPath;
+		} else {
+			$this->content();
+		}
+	}
+	
 
-        $this->view->page = $view;
+	protected function content() {
+		$classAtual = get_class($this);
+	
+		$classAtual = str_replace('\\', '/', $classAtual);
+	
+		$classAtual = str_replace('App/controllers/', '', $classAtual);
+		$classAtual = lcfirst(str_replace('Controller', '', $classAtual));
+	
+		$baseDir = dirname(__DIR__, 3);
+	
+		$pathToView = $baseDir . "/app/views/" . $classAtual . "/" . $this->view->page . ".phtml";
 
-        if(file_exists("../app/views/layouts/".$layout.".phtml")) {
-            require_once "../app/views/layouts/".$layout.".phtml";
-        } else {
-            $this->content();
-        }
-    }
-
-    protected function content() {
-        $classAtual = get_class($this);
-
-        $classAtual = str_replace('App\\controllers\\', '', $classAtual);
-
-        $classAtual = lcfirst(str_replace('Controller', '', $classAtual));
-
-        $viewFile = "../app/views/".$classAtual."/".$this->view->page.".phtml";
-        if (file_exists($viewFile)) {
-            extract($this->view->data);
-
-            require_once $viewFile;
-        } else {
-            echo "Erro: A view não foi encontrada!";
-        }
-    }
+		if (file_exists($pathToView)) {
+			require_once $pathToView;
+		} else {
+			echo 'View file not found: ' . $pathToView . '<br>';
+		}
+	}
+	
 }
-
 
 ?>
