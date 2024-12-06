@@ -2,6 +2,8 @@
 
 > Plataforma Integrada para Consultoria Fitness 📲💪
 
+Desenvolvida para o **Trabalho de Conclusão de Curso (TCC)** do curso Tecnólogo em Informática para Negócios, da Faculdade de Tecnologia Adib Moisés Dib, 2024.
+
 Através desta plataforma intuitiva, é possível conectar profissionais de saúde, como nutricionistas e educadores físicos, aos seus clientes, oferecendo confiabilidade e validação desses profissionais. Isso garante um acompanhamento seguro e personalizado, promovendo saúde e bem-estar de forma eficaz e acessível.
 
 ## Tecnologias Utilizadas
